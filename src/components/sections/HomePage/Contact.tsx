@@ -24,6 +24,7 @@ const Contact: FC = () => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -80,11 +81,35 @@ const Contact: FC = () => {
         .required("Message is required"),
     }),
 
-    onSubmit: async (values, { resetForm }) => {
-      console.log(values); // API later
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
+      setSubmitError("");
 
-      setSubmitted(true);
-      resetForm();
+      try {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        });
+
+        const data = (await response.json()) as { error?: string };
+
+        if (!response.ok) {
+          throw new Error(data.error || "Failed to send message");
+        }
+
+        setSubmitted(true);
+        resetForm();
+      } catch (error) {
+        setSubmitError(
+          error instanceof Error
+            ? error.message
+            : "Something went wrong. Please try again.",
+        );
+      } finally {
+        setSubmitting(false);
+      }
     },
   });
 
@@ -118,7 +143,7 @@ const Contact: FC = () => {
               variant="body1"
               sx={{ mt: 2, color: theme.palette.text.secondary }}
             >
-              Have a project in mind? Let's work together!
+              Have a project in mind? Let&apos;s work together!
             </Typography>
           </Box>
         </Fade>
@@ -156,7 +181,7 @@ const Contact: FC = () => {
                       variant="body1"
                       sx={{ color: theme.palette.text.secondary }}
                     >
-                      I’ll get back to you shortly.
+                      I&apos;ll get back to you shortly.
                     </Typography>
                   </Fade>
                 </Box>
@@ -249,9 +274,16 @@ const Contact: FC = () => {
                     />
                   </Grid>
                   <Grid size={{ xs: 12 }}>
+                    {submitError ? (
+                      <Typography color="error" sx={{ mb: 1 }}>
+                        {submitError}
+                      </Typography>
+                    ) : null}
+
                     <Button
                       type="submit"
                       fullWidth
+                      disabled={formik.isSubmitting}
                       endIcon={<Send />}
                       variant="contained"
                       sx={{
@@ -263,7 +295,7 @@ const Contact: FC = () => {
                         },
                       }}
                     >
-                      Send Message
+                      {formik.isSubmitting ? "Sending..." : "Send Message"}
                     </Button>
                   </Grid>
                 </Grid>

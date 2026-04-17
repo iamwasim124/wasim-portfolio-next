@@ -10,15 +10,62 @@ import Experience from "@/components/sections/HomePage/Experience";
 import Projects from "@/components/sections/HomePage/Project";
 import Services from "@/components/sections/HomePage/Services";
 import Contact from "@/components/sections/HomePage/Contact";
+import Faq from "@/components/sections/HomePage/Faq";
 import { heroData } from "@/data/hero";
 import { aboutData } from "@/data/about";
 import { skillsData } from "@/data/skills";
 import { experienceData, achievementsData } from "@/data/experience";
 import { projectsData } from "@/data/projects";
 import { servicesData } from "@/data/services";
+import { faqData } from "@/data/faq";
 
 export default function Home() {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Mohammed Wasim",
+    url: "https://iamwasim.in",
+    image: "https://iamwasim.in/assets/images-videos/wasim.png",
+    jobTitle: "React and Next.js Frontend Developer",
+    description:
+      "React.js and Next.js freelancer building modern web applications, landing pages, and performant frontend experiences.",
+    email: "mailto:iamwasim124@gmail.com",
+    telephone: "+91 8123833968",
+    sameAs: ["https://linkedin.com/in/iamwasim124"],
+    knowsAbout: [
+      "React.js",
+      "Next.js",
+      "TypeScript",
+      "Frontend Development",
+      "SEO",
+      "Responsive Web Design",
+    ],
+  };
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Mohammed Wasim Portfolio",
+    url: "https://iamwasim.in",
+    description:
+      "Portfolio website of Mohammed Wasim, a React.js and Next.js freelancer.",
+    inLanguage: "en",
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqData.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
   return (
     <Box
       sx={{
@@ -28,6 +75,19 @@ export default function Home() {
         overflow: "hidden",
       }}
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       {/* Animated Background */}
       <Box
         sx={{
@@ -79,6 +139,7 @@ export default function Home() {
 
       <Projects projects={projectsData} />
       <Services data={servicesData} />
+      <Faq items={faqData} />
 
       {/* Contact Section */}
       <Contact />

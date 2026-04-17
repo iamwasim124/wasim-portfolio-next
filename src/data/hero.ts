@@ -5,10 +5,10 @@ export const heroData = {
 
   name: "Mohammed Wasim",
 
-  role: "Frontend Developer",
+  role: "React & Next.js Frontend Developer",
 
   description:
-    "React.js & Next.js Specialist with 4.5 years of experience building scalable, user-centric applications. Passionate about creating exceptional digital experiences.",
+    "Freelance React.js and Next.js developer with 4.5 years of experience building scalable web applications, landing pages, and SEO-friendly frontend experiences for modern businesses.",
 
   resumeUrl: "/assets/files/resume.pdf",
 

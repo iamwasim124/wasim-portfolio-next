@@ -1,8 +1,7 @@
-// src/app/layout.tsx
-
 import LayoutClient from "@/components/layouts/LayoutClient";
 import Providers from "./providers";
 import { Montserrat } from "next/font/google";
+import type { Metadata } from "next";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -10,27 +9,72 @@ const montserrat = Montserrat({
   variable: "--font-montserrat",
 });
 
-export const metadata = {
-  title: "Mohammed Wasim - Frontend Developer",
+const siteUrl = "https://iamwasim.in";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Mohammed Wasim | React & Next.js Freelancer Portfolio",
+    template: "%s | Mohammed Wasim",
+  },
   description:
-    "React.js & Next.js Specialist with 4.5 years of experience building scalable, user-centric applications.",
+    "Mohammed Wasim is a React.js and Next.js freelancer building modern frontend applications, business websites, landing pages, and scalable web experiences.",
   keywords: [
-    "React",
-    "Next.js",
-    "Frontend Developer",
-    "TypeScript",
-    "Material-UI",
-    "Web Development",
+    "Mohammed Wasim",
+    "iamwasim",
+    "Mohammed Wasim portfolio",
+    "React freelancer",
+    "Next.js freelancer",
+    "React developer portfolio",
+    "Next.js developer portfolio",
+    "Frontend Developer India",
+    "Freelance frontend developer",
+    "Freelance web developer",
+    "React.js developer",
+    "Next.js developer",
+    "TypeScript frontend developer",
+    "Portfolio website",
   ],
   authors: [{ name: "Mohammed Wasim" }],
+  creator: "Mohammed Wasim",
+  publisher: "Mohammed Wasim",
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
-    title: "Mohammed Wasim - Frontend Developer",
+    title: "Mohammed Wasim | React & Next.js Freelancer Portfolio",
     description:
-      "React.js & Next.js Specialist building exceptional digital experiences",
-    url: "https://iamwasim.in",
+      "Portfolio of Mohammed Wasim, a React.js and Next.js freelancer focused on performance, SEO, scalable UI, and frontend development.",
+    url: siteUrl,
     siteName: "Mohammed Wasim Portfolio",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/assets/images-videos/wasim.png",
+        width: 1200,
+        height: 1200,
+        alt: "Mohammed Wasim - React and Next.js Freelancer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mohammed Wasim | React & Next.js Freelancer Portfolio",
+    description:
+      "React.js and Next.js freelancer portfolio featuring frontend projects, services, and contact details.",
+    images: ["/assets/images-videos/wasim.png"],
   },
 };
 

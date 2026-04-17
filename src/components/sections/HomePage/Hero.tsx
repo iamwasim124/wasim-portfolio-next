@@ -8,7 +8,6 @@ import {
   Typography,
   IconButton,
   Tooltip,
-  useMediaQuery,
 } from "@mui/material";
 import {
   Download,
@@ -39,7 +38,6 @@ interface HeroProps {
   };
 }
 const Hero: FC<HeroProps> = ({ data }) => {
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const scrollToSection = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
   };
@@ -89,7 +87,21 @@ const Hero: FC<HeroProps> = ({ data }) => {
       <Container maxWidth="lg">
         <Grid container spacing={4} alignItems="center">
           <Grid size={{ xs: 12, md: 7 }}>
-            <Box>
+            <Box
+              sx={{
+                animation: "heroTextReveal 900ms ease-out both",
+                "@keyframes heroTextReveal": {
+                  "0%": {
+                    opacity: 0,
+                    transform: "translateY(28px)",
+                  },
+                  "100%": {
+                    opacity: 1,
+                    transform: "translateY(0)",
+                  },
+                },
+              }}
+            >
               <Typography
                 variant="h6"
                 component="p"
@@ -223,6 +235,7 @@ const Hero: FC<HeroProps> = ({ data }) => {
             <Box
               sx={{
                 position: "relative",
+                animation: "heroImageReveal 1100ms ease-out both",
                 "&::before": {
                   content: '""',
                   position: "absolute",
@@ -232,7 +245,17 @@ const Hero: FC<HeroProps> = ({ data }) => {
                   bottom: 20,
                   border: `3px solid ${theme.palette.primary.main}`,
                   borderRadius: "30% 70% 70% 30% / 30% 30% 70% 70%",
-                  animation: isMobile ? "none" : "morphing 8s ease-in-out infinite",
+                  animation: "morphing 8s ease-in-out infinite",
+                },
+                "@keyframes heroImageReveal": {
+                  "0%": {
+                    opacity: 0,
+                    transform: "translateY(34px) scale(0.96)",
+                  },
+                  "100%": {
+                    opacity: 1,
+                    transform: "translateY(0) scale(1)",
+                  },
                 },
                 "@keyframes morphing": {
                   "0%, 100%": {

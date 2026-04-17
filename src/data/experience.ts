@@ -46,6 +46,13 @@ export const experienceData = [
 ];
 export const achievementsData = [
   {
+    title: "Hexaware Appreciation",
+    description:
+      "Received client appreciation for strong support and team dedication in successfully rolling out the Hexaware project within highly challenging timelines, with special recognition for the partnership and collaborative delivery.",
+    date: "Apr 03, 2026",
+    pdfUrl: "/assets/files/hexaware.pdf",
+  },
+  {
     title: "GTC Commendation Award",
     description:
       "Recognized by Collabera Marketing team for leading and delivering the complete website backend within 45 days, showcasing strong ownership, technical execution, and project management.",

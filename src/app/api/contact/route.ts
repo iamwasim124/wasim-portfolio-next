@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
+export const runtime = "nodejs";
+
 type ContactRequestBody = {
   firstName?: string;
   lastName?: string;
@@ -9,9 +11,12 @@ type ContactRequestBody = {
   message?: string;
 };
 
+const MAX_FILE_SIZE = 10 * 1024 * 1024;
 const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 const namePattern = /^[A-Za-z\s]+$/;
 const phonePattern = /^[6-9]\d{9}$/;
+const acceptedFileTypePrefixes = ["image/", "video/"];
+const acceptedFileTypes = ["application/pdf"];
 
 const formatText = (value: string) => value.replace(/\r?\n/g, "\n").trim();
 const escapeHtml = (value: string) =>
@@ -72,11 +77,46 @@ const validateBody = (body: ContactRequestBody) => {
 
 export async function POST(request: Request) {
   try {
-    const body = (await request.json()) as ContactRequestBody;
+    const formData = await request.formData();
+    const body = {
+      firstName: formData.get("firstName")?.toString(),
+      lastName: formData.get("lastName")?.toString(),
+      phone: formData.get("phone")?.toString(),
+      email: formData.get("email")?.toString(),
+      message: formData.get("message")?.toString(),
+    } satisfies ContactRequestBody;
     const validated = validateBody(body);
 
     if ("error" in validated) {
       return NextResponse.json({ error: validated.error }, { status: 400 });
+    }
+
+    const attachmentEntry = formData.get("attachment");
+    const attachment =
+      attachmentEntry instanceof File && attachmentEntry.size > 0
+        ? attachmentEntry
+        : null;
+
+    if (attachment) {
+      const isAcceptedType =
+        acceptedFileTypes.includes(attachment.type) ||
+        acceptedFileTypePrefixes.some((prefix) =>
+          attachment.type.startsWith(prefix),
+        );
+
+      if (!isAcceptedType) {
+        return NextResponse.json(
+          { error: "Only images, videos, or PDF files are allowed." },
+          { status: 400 },
+        );
+      }
+
+      if (attachment.size > MAX_FILE_SIZE) {
+        return NextResponse.json(
+          { error: "Attachment size must be 10 MB or less." },
+          { status: 400 },
+        );
+      }
     }
 
     const {
@@ -115,6 +155,15 @@ export async function POST(request: Request) {
     const safeMessage = formatText(message);
     const fromAddress = CONTACT_EMAIL_FROM || SMTP_USER;
     const fullName = `${firstName} ${lastName}`;
+    const attachments = attachment
+      ? [
+          {
+            filename: attachment.name,
+            content: Buffer.from(await attachment.arrayBuffer()),
+            contentType: attachment.type,
+          },
+        ]
+      : [];
 
     await transporter.sendMail({
       from: fromAddress,
@@ -125,6 +174,7 @@ export async function POST(request: Request) {
         `Name: ${fullName}`,
         `Email: ${email}`,
         `Phone: ${phone}`,
+        ...(attachment ? [`Attachment: ${attachment.name}`] : []),
         "",
         "Message:",
         safeMessage,
@@ -134,9 +184,15 @@ export async function POST(request: Request) {
         <p><strong>Name:</strong> ${escapeHtml(fullName)}</p>
         <p><strong>Email:</strong> ${escapeHtml(email)}</p>
         <p><strong>Phone:</strong> ${escapeHtml(phone)}</p>
+        ${
+          attachment
+            ? `<p><strong>Attachment:</strong> ${escapeHtml(attachment.name)}</p>`
+            : ""
+        }
         <p><strong>Message:</strong></p>
         <p>${escapeHtml(safeMessage).replace(/\n/g, "<br />")}</p>
       `,
+      attachments,
     });
 
     return NextResponse.json({ success: true });

@@ -42,11 +42,17 @@ const FooterComponent = () => {
         <Box sx={{ display: "flex", justifyContent: "center", gap: 2, mb: 2 }}>
           {SOCIALS.map((item) => (
             <Tooltip key={item.label} title={item.label} arrow>
-              <span>
+              {item.href ? (
                 <IconButton
-                  component={item.href ? "a" : "button"}
-                  href={item.href ?? undefined}
-                  target="_blank"
+                  aria-label={item.label}
+                  component="a"
+                  href={item.href}
+                  target={item.href.startsWith("http") ? "_blank" : undefined}
+                  rel={
+                    item.href.startsWith("http")
+                      ? "noopener noreferrer"
+                      : undefined
+                  }
                   sx={{
                     color: theme.palette.primary.main,
                     transition: "all .3s ease",
@@ -58,7 +64,19 @@ const FooterComponent = () => {
                 >
                   {item.icon}
                 </IconButton>
-              </span>
+              ) : (
+                <Box component="span" sx={{ display: "inline-flex" }}>
+                  <IconButton
+                    disabled
+                    aria-label={item.label}
+                    sx={{
+                      color: theme.palette.primary.main,
+                    }}
+                  >
+                    {item.icon}
+                  </IconButton>
+                </Box>
+              )}
             </Tooltip>
           ))}
         </Box>

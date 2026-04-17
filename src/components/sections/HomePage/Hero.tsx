@@ -22,11 +22,24 @@ import {
   GitHub,
 } from "@mui/icons-material";
 import profilePicture from "../../../../public/assets/images-videos/wasim.png";
+import type { StaticImageData } from "next/image";
 import { FC } from "react";
 import theme from "@/theme/theme";
 
 interface HeroProps {
-  data: any;
+  data: {
+    greeting: string;
+    name: string;
+    role: string;
+    description: string;
+    resumeUrl: string;
+    socials: {
+      linkedin: string;
+      email: string;
+      phone: string;
+    };
+    image: StaticImageData;
+  };
 }
 const Hero: FC<HeroProps> = ({ data }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -83,6 +96,7 @@ const Hero: FC<HeroProps> = ({ data }) => {
               <Box>
                 <Typography
                   variant="h6"
+                  component="p"
                   sx={{
                     color: theme.palette.primary.main,
                     mb: 2,
@@ -104,8 +118,9 @@ const Hero: FC<HeroProps> = ({ data }) => {
                 </Typography>
                 <Typography
                   variant="h4"
+                  component="h2"
                   sx={{
-                    color: theme.palette.secondary.main,
+                    color: "#d7a9ff",
                     mb: 3,
                   }}
                 >
@@ -114,7 +129,7 @@ const Hero: FC<HeroProps> = ({ data }) => {
                 <Typography
                   variant="body1"
                   sx={{
-                    color: theme.palette.text.primary,
+                    color: "rgba(255,255,255,0.92)",
                     mb: 4,
                     maxWidth: 600,
                   }}
@@ -146,14 +161,16 @@ const Hero: FC<HeroProps> = ({ data }) => {
                   <Button
                     variant="outlined"
                     onClick={() => scrollToSection("contact")}
+                    aria-label="Go to contact section"
                     sx={{
-                      borderColor: theme.palette.secondary.main,
-                      color: theme.palette.secondary.main,
+                      borderColor: "#d7a9ff",
+                      color: "#ffffff",
+                      bgcolor: "rgba(147, 51, 234, 0.22)",
                       px: "24px",
                       py: "12px",
                       "&:hover": {
-                        borderColor: theme.palette.secondary.main,
-                        bgcolor: "rgba(147, 51, 234, 0.1)",
+                        borderColor: "#e4c6ff",
+                        bgcolor: "rgba(147, 51, 234, 0.35)",
                         transform: "translateY(-2px)",
                       },
                       transition: "all 0.3s ease",
@@ -164,15 +181,27 @@ const Hero: FC<HeroProps> = ({ data }) => {
                 </Box>
                 <Box sx={{ display: "flex", gap: 2 }}>
                   {socials.map((item) => (
-                    <Tooltip
-                      key={item.label}
-                      title={item.tooltip || item.label}
-                      arrow
-                    >
-                      <span>
+                    <Tooltip key={item.label} title={item.tooltip || item.label} arrow>
+                      {item.disabled ? (
+                        <Box component="span" sx={{ display: "inline-flex" }}>
+                          <IconButton
+                            disabled
+                            aria-label={item.tooltip || item.label}
+                            sx={{
+                              color: item.color,
+                              border: `2px solid ${item.color}`,
+                            }}
+                          >
+                            {item.icon}
+                          </IconButton>
+                        </Box>
+                      ) : (
                         <IconButton
+                          aria-label={item.label}
+                          component="a"
                           href={item.href || undefined}
-                          target="_blank"
+                          target={item.href?.startsWith("http") ? "_blank" : undefined}
+                          rel={item.href?.startsWith("http") ? "noopener noreferrer" : undefined}
                           sx={{
                             color: item.color,
                             border: `2px solid ${item.color}`,
@@ -188,7 +217,7 @@ const Hero: FC<HeroProps> = ({ data }) => {
                         >
                           {item.icon}
                         </IconButton>
-                      </span>
+                      )}
                     </Tooltip>
                   ))}
                 </Box>
@@ -257,6 +286,7 @@ const Hero: FC<HeroProps> = ({ data }) => {
         >
           <IconButton
             onClick={() => scrollToSection("about")}
+            aria-label="Scroll to about section"
             sx={{ color: "#00d8e9" }}
           >
             <KeyboardArrowDown fontSize="large" />

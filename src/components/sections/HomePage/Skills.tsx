@@ -42,7 +42,7 @@ const Skills: FC<SkillsProps> = ({ skills }) => {
       ref={ref}
       id="skills"
       sx={{
-        py: { xs: 6, md: 12 },
+        py: { xs: 9, md: 12 },
         position: "relative",
         bgcolor: "rgba(0,0,0,.3)",
       }}

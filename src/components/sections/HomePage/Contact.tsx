@@ -151,7 +151,7 @@ const Contact: FC = () => {
     <Box
       ref={ref}
       id="contact"
-      sx={{ py: { xs: 6, md: 12 }, bgcolor: "rgba(0, 0, 0, 0.3)" }}
+      sx={{ py: { xs: 9, md: 12 }, bgcolor: "rgba(0, 0, 0, 0.3)" }}
     >
       <Container maxWidth="md">
         <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>

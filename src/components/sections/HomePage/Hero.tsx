@@ -21,7 +21,7 @@ import {
   KeyboardArrowDown,
   GitHub,
 } from "@mui/icons-material";
-import profilePicture from "../../../../public/assets/images-videos/wasim.webp";
+import profilePicture from "../../../../public/assets/images-videos/wasim.png";
 import { FC } from "react";
 import theme from "@/theme/theme";
 

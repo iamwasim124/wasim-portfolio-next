@@ -38,7 +38,7 @@ const Services: FC<Props> = ({ data }) => {
   }, []);
 
   return (
-    <Box ref={ref} id="services" sx={{ py: { xs: 6, md: 12 } }}>
+    <Box ref={ref} id="services" sx={{ py: { xs: 9, md: 12 } }}>
       <Container maxWidth="lg">
         {/* Title */}
         <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>

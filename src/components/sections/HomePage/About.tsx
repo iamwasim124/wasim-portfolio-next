@@ -41,7 +41,7 @@ const About: FC<AboutProps> = ({ data }) => {
     <Box
       ref={sectionRef}
       id="about"
-      sx={{ py: { xs: 6, md: 12 }, position: "relative" }}
+      sx={{ py: { xs: 9, md: 12 }, position: "relative" }}
     >
       <Container maxWidth="lg">
         {/* Title */}

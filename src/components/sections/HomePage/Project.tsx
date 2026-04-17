@@ -44,7 +44,7 @@ const Projects: FC<Props> = ({ projects }) => {
     <Box
       id="projects"
       sx={{
-        py: { xs: 6, md: 12 },
+        py: { xs: 9, md: 12 },
         position: "relative",
         bgcolor: "rgba(0, 0, 0, 0.3)",
       }}

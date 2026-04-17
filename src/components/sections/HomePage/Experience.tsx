@@ -41,7 +41,7 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
     <Box
       ref={ref}
       id="experience"
-      sx={{ py: { xs: 6, md: 12 }, position: "relative" }}
+      sx={{ py: { xs: 8, md: 12 }, position: "relative" }}
     >
       <Container maxWidth="lg">
         <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>
@@ -232,7 +232,7 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
         </Box>
 
         {/* Achievements */}
-        <Box sx={{ mt: { xs: 6, md: 12 } }}>
+        <Box sx={{ mt: { xs: 9, md: 12 } }}>
           <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>
             <Box sx={{ textAlign: "center", mb: 6 }}>
               <Typography

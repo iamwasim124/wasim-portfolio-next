@@ -14,8 +14,29 @@ import {
 } from "@mui/material";
 import { Code, Speed, School } from "@mui/icons-material";
 import theme from "@/theme/theme";
+
+type AboutData = {
+  title?: string;
+  journey?: {
+    heading?: string;
+    paragraphs?: string[];
+  };
+  skills?: {
+    heading?: string;
+    items: string[];
+  };
+  education: {
+    heading?: string;
+    items: {
+      degree: string;
+      institute: string;
+      year: string;
+    }[];
+  };
+};
+
 interface AboutProps {
-  data: any;
+  data: AboutData;
 }
 
 const About: FC<AboutProps> = ({ data }) => {
@@ -101,7 +122,11 @@ const About: FC<AboutProps> = ({ data }) => {
                       alignSelf: "center",
                     }}
                   />
-                  <Typography variant="h5" color={theme.palette.text.primary}>
+                  <Typography
+                    variant="h5"
+                    component="h3"
+                    color={theme.palette.text.primary}
+                  >
                     {data?.journey?.heading || "Professional Journey"}
                   </Typography>
                 </Box>
@@ -129,7 +154,7 @@ const About: FC<AboutProps> = ({ data }) => {
                       key={index}
                       variant="body2"
                       sx={{
-                        color: theme.palette.text.secondary,
+                        color: "rgba(255,255,255,0.9)",
                         mb: 2,
                       }}
                     >
@@ -183,7 +208,11 @@ const About: FC<AboutProps> = ({ data }) => {
                       alignSelf: "center",
                     }}
                   />
-                  <Typography variant="h5" color={theme.palette.text.primary}>
+                  <Typography
+                    variant="h5"
+                    component="h3"
+                    color={theme.palette.text.primary}
+                  >
                     {data?.skills?.heading || "What I Do Best"}
                   </Typography>
                 </Box>
@@ -202,7 +231,7 @@ const About: FC<AboutProps> = ({ data }) => {
                     />
                     <Typography
                       variant="body1"
-                      sx={{ color: theme.palette.text.secondary }}
+                      sx={{ color: "rgba(255,255,255,0.9)" }}
                     >
                       {item}
                     </Typography>
@@ -236,12 +265,16 @@ const About: FC<AboutProps> = ({ data }) => {
                       alignSelf: "center",
                     }}
                   />
-                  <Typography variant="h5" color={theme.palette.text.primary}>
-                    {data.education.degree || "Education"}
+                  <Typography
+                    variant="h5"
+                    component="h3"
+                    color={theme.palette.text.primary}
+                  >
+                    {data.education.heading || "Education"}
                   </Typography>
                 </Box>
 
-                {data.education.items.map((edu: any, i: number) => (
+                {data.education.items.map((edu, i: number) => (
                   <Box key={i} sx={{ mb: 2 }}>
                     <Typography
                       variant="body1"
@@ -255,7 +288,7 @@ const About: FC<AboutProps> = ({ data }) => {
 
                     <Typography
                       variant="body2"
-                      sx={{ color: theme.palette.text.secondary }}
+                      sx={{ color: "rgba(255,255,255,0.88)" }}
                     >
                       {edu.institute} | {edu.year}
                     </Typography>

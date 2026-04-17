@@ -161,6 +161,7 @@ const HeaderComponent: FC<HeaderComponentProps> = ({ scrollY = 0 }) => {
           {/* Mobile Toggle */}
           {isMobile && (
             <IconButton
+              aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               sx={{ color: theme.palette.text.primary }}
             >

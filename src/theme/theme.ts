@@ -109,7 +109,6 @@ const theme = createTheme({
     body2: {
       fontWeight: 400,
       lineHeight: 1.6,
-      opacity: 0.8,
       fontSize: "clamp(0.9rem, 1vw, 1rem)",
       letterSpacing: "0.01em",
     },

@@ -17,9 +17,24 @@ import {
 import { WorkHistory, EmojiEvents } from "@mui/icons-material";
 import theme from "@/theme/theme";
 
+type ExperienceItem = {
+  title: string;
+  company: string;
+  period: string;
+  location: string;
+  highlights: string[];
+};
+
+type AchievementItem = {
+  title: string;
+  description: string;
+  date: string;
+  pdfUrl: string;
+};
+
 interface Props {
-  experience: any[];
-  achievements: any[];
+  experience: ExperienceItem[];
+  achievements: AchievementItem[];
 }
 
 const Experience: FC<Props> = ({ experience, achievements }) => {
@@ -166,11 +181,12 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
                         />
                         <Typography
                           variant="h5"
+                          component="h3"
                           sx={{
                             color:
                               index % 2 === 0
-                                ? theme.palette.primary.main
-                                : theme.palette.secondary.main,
+                                ? "#8ef3ff"
+                                : "#e6c3ff",
                           }}
                         >
                           {job.title}
@@ -192,7 +208,7 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
                         sx={{ my: 2, bgcolor: "rgba(255, 255, 255, 0.1)" }}
                       />
                       <Box sx={{ textAlign: "left" }}>
-                        {job.highlights.map((highlight: any, hIndex: any) => (
+                        {job.highlights.map((highlight, hIndex: number) => (
                           <Box key={hIndex} sx={{ display: "flex", mb: 1.5 }}>
                             <Box
                               sx={{
@@ -211,7 +227,7 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
                             <Typography
                               variant="body2"
                               sx={{
-                                color: theme.palette.text.secondary,
+                                color: "rgba(255,255,255,0.9)",
                               }}
                             >
                               {highlight}
@@ -286,6 +302,7 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
                       />
                       <Typography
                         variant="h6"
+                        component="h4"
                         color={theme.palette.primary.main}
                       >
                         {achievement.title}
@@ -293,7 +310,7 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
                     </Box>
                     <Typography
                       variant="body1"
-                      sx={{ color: theme.palette.text.secondary, mb: 2 }}
+                      sx={{ color: "rgba(255,255,255,0.9)", mb: 2 }}
                     >
                       {achievement.description}
                     </Typography>

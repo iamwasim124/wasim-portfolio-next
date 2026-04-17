@@ -107,11 +107,12 @@ const Skills: FC<SkillsProps> = ({ skills }) => {
                     <CardContent sx={{ p: 3 }}>
                       <Typography
                         variant="h6"
+                        component="h3"
                         sx={{
                           mb: 3,
                           color: isGreen
-                            ? theme.palette.primary.main
-                            : theme.palette.secondary.main,
+                            ? "#8ef3ff"
+                            : "#e6c3ff",
                           textTransform: "capitalize",
                         }}
                       >

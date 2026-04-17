@@ -123,6 +123,7 @@ const Projects: FC<Props> = ({ projects }) => {
                     />
                     <Typography
                       variant="h6"
+                      component="h3"
                       sx={{
                         fontWeight: 700,
                         color: theme.palette.text.primary,
@@ -164,7 +165,11 @@ const Projects: FC<Props> = ({ projects }) => {
 
         <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1600}>
           <Box sx={{ textAlign: "center", mt: 6 }}>
-            <Typography variant="h6" sx={{ color: theme.palette.text.primary }}>
+            <Typography
+              variant="h6"
+              component="p"
+              sx={{ color: theme.palette.text.primary }}
+            >
               + Multiple other projects including maintenance and client support
               work
             </Typography>

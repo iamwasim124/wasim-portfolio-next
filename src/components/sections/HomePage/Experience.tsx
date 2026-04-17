@@ -195,6 +195,7 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
                       <Typography
                         color={theme.palette.text.primary}
                         variant="h6"
+                        component="p"
                         sx={{ mb: 1 }}
                       >
                         {job.company}

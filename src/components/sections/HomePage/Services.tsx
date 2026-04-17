@@ -16,11 +16,28 @@ import {
 import { Web, Speed, Code } from "@mui/icons-material";
 import theme from "@/theme/theme";
 
+type ServiceItem = {
+  title: string;
+  description: string;
+};
+
+type ServicesData = {
+  heading: string;
+  subHeading: string;
+  intro?: string;
+  services: ServiceItem[];
+  whyChoose: string[];
+};
+
 interface Props {
-  data: any;
+  data: ServicesData;
 }
 
-const icons = [<Web />, <Code />, <Speed />];
+const icons = [
+  <Web key="web" />,
+  <Code key="code" />,
+  <Speed key="speed" />,
+];
 
 const Services: FC<Props> = ({ data }) => {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -74,7 +91,7 @@ const Services: FC<Props> = ({ data }) => {
 
         {/* Services Cards */}
         <Grid container spacing={3}>
-          {data.services.map((service: any, index: number) => (
+          {data.services.map((service, index: number) => (
             <Grid key={index} size={{ xs: 12, md: 4 }}>
               <Zoom
                 in={isMobile ? true : visible}
@@ -112,7 +129,7 @@ const Services: FC<Props> = ({ data }) => {
                       {icons[index % icons.length]}
                     </Box>
 
-                    <Typography variant="h6" mb={1}>
+                    <Typography variant="h6" component="h3" mb={1}>
                       {service.title}
                     </Typography>
 
@@ -141,7 +158,7 @@ const Services: FC<Props> = ({ data }) => {
               border: "1px solid rgba(255,255,255,.1)",
             }}
           >
-            <Typography variant="h5" mb={3}>
+            <Typography variant="h5" component="h3" mb={3}>
               Why Choose Me?
             </Typography>
 

@@ -11,6 +11,7 @@ import {
   Card,
   CardContent,
   Chip,
+  useMediaQuery,
 } from "@mui/material";
 import { Web, Speed, Code } from "@mui/icons-material";
 import theme from "@/theme/theme";
@@ -24,6 +25,7 @@ const icons = [<Web />, <Code />, <Speed />];
 const Services: FC<Props> = ({ data }) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -36,10 +38,10 @@ const Services: FC<Props> = ({ data }) => {
   }, []);
 
   return (
-    <Box ref={ref} id="services" sx={{ py: 12 }}>
+    <Box ref={ref} id="services" sx={{ py: { xs: 6, md: 12 } }}>
       <Container maxWidth="lg">
         {/* Title */}
-        <Fade in={visible} timeout={1000}>
+        <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>
           <Box textAlign="center" mb={5}>
             <Typography
               variant="h2"
@@ -74,7 +76,10 @@ const Services: FC<Props> = ({ data }) => {
         <Grid container spacing={3}>
           {data.services.map((service: any, index: number) => (
             <Grid key={index} size={{ xs: 12, md: 4 }}>
-              <Zoom in={visible} timeout={900 + index * 200}>
+              <Zoom
+                in={isMobile ? true : visible}
+                timeout={isMobile ? 0 : 900 + index * 200}
+              >
                 <Card
                   sx={{
                     bgcolor: "rgba(255,255,255,.05)",
@@ -125,7 +130,7 @@ const Services: FC<Props> = ({ data }) => {
         </Grid>
 
         {/* Why Choose */}
-        <Fade in={visible} timeout={1400}>
+        <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1400}>
           <Box
             sx={{
               mt: 5,

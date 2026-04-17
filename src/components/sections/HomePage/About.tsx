@@ -10,6 +10,7 @@ import {
   Slide,
   Paper,
   Button,
+  useMediaQuery,
 } from "@mui/material";
 import { Code, Speed, School } from "@mui/icons-material";
 import theme from "@/theme/theme";
@@ -21,6 +22,7 @@ const About: FC<AboutProps> = ({ data }) => {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
   const [showAll, setShowAll] = useState(false);
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -36,10 +38,14 @@ const About: FC<AboutProps> = ({ data }) => {
   }, []);
 
   return (
-    <Box ref={sectionRef} id="about" sx={{ py: 12, position: "relative" }}>
+    <Box
+      ref={sectionRef}
+      id="about"
+      sx={{ py: { xs: 6, md: 12 }, position: "relative" }}
+    >
       <Container maxWidth="lg">
         {/* Title */}
-        <Fade in={visible} timeout={1000}>
+        <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>
           <Box sx={{ textAlign: "center", mb: 8 }}>
             <Typography
               variant="h2"
@@ -68,7 +74,11 @@ const About: FC<AboutProps> = ({ data }) => {
         <Grid container spacing={4} alignItems="stretch">
           {/* Left */}
           <Grid size={{ xs: 12 }}>
-            <Slide direction="right" in={visible} timeout={1000}>
+            <Slide
+              direction="right"
+              in={isMobile ? true : visible}
+              timeout={isMobile ? 0 : 1000}
+            >
               <Paper
                 elevation={0}
                 sx={{
@@ -149,7 +159,11 @@ const About: FC<AboutProps> = ({ data }) => {
 
           {/* Right */}
           <Grid size={{ xs: 12, md: 6 }}>
-            <Slide direction="up" in={visible} timeout={1200}>
+            <Slide
+              direction="up"
+              in={isMobile ? true : visible}
+              timeout={isMobile ? 0 : 1200}
+            >
               <Paper
                 elevation={0}
                 sx={{
@@ -198,7 +212,11 @@ const About: FC<AboutProps> = ({ data }) => {
             </Slide>
           </Grid>
           <Grid size={{ xs: 12, md: 6 }}>
-            <Slide direction="left" in={visible} timeout={1200}>
+            <Slide
+              direction="left"
+              in={isMobile ? true : visible}
+              timeout={isMobile ? 0 : 1200}
+            >
               <Paper
                 elevation={0}
                 sx={{

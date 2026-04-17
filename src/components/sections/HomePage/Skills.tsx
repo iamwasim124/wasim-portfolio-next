@@ -11,6 +11,7 @@ import {
   Card,
   CardContent,
   Chip,
+  useMediaQuery,
 } from "@mui/material";
 import theme from "@/theme/theme";
 
@@ -21,6 +22,7 @@ interface SkillsProps {
 const Skills: FC<SkillsProps> = ({ skills }) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -39,11 +41,15 @@ const Skills: FC<SkillsProps> = ({ skills }) => {
     <Box
       ref={ref}
       id="skills"
-      sx={{ py: 12, position: "relative", bgcolor: "rgba(0,0,0,.3)" }}
+      sx={{
+        py: { xs: 6, md: 12 },
+        position: "relative",
+        bgcolor: "rgba(0,0,0,.3)",
+      }}
     >
       <Container maxWidth="lg">
         {/* Title */}
-        <Fade in={visible} timeout={1000}>
+        <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>
           <Box sx={{ textAlign: "center", mb: 8 }}>
             <Typography
               variant="h2"
@@ -75,7 +81,10 @@ const Skills: FC<SkillsProps> = ({ skills }) => {
 
             return (
               <Grid key={category} size={{ xs: 12, md: 6 }}>
-                <Zoom in={visible} timeout={900 + index * 200}>
+                <Zoom
+                  in={isMobile ? true : visible}
+                  timeout={isMobile ? 0 : 900 + index * 200}
+                >
                   <Card
                     sx={{
                       bgcolor: "rgba(255,255,255,.05)",

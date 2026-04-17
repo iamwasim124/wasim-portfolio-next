@@ -1,6 +1,7 @@
 "use client";
 
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
+import theme from "@/theme/theme";
 
 import Hero from "@/components/sections/HomePage/Hero";
 import About from "@/components/sections/HomePage/About";
@@ -17,6 +18,7 @@ import { projectsData } from "@/data/projects";
 import { servicesData } from "@/data/services";
 
 export default function Home() {
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Box
       sx={{
@@ -52,7 +54,7 @@ export default function Home() {
               linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)
             `,
             backgroundSize: "50px 50px",
-            animation: "gridMove 20s linear infinite",
+            animation: isMobile ? "none" : "gridMove 20s linear infinite",
           },
           "@keyframes gridMove": {
             "0%": { transform: "translate(0, 0)" },

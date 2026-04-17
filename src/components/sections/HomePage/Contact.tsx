@@ -14,6 +14,7 @@ import {
   Button,
   Link,
   Zoom,
+  useMediaQuery,
 } from "@mui/material";
 import { Email, Phone, Send } from "@mui/icons-material";
 import { useFormik } from "formik";
@@ -25,6 +26,7 @@ const Contact: FC = () => {
   const [visible, setVisible] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -35,6 +37,38 @@ const Contact: FC = () => {
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
+
+  const textFieldSx = {
+    "& .MuiInputLabel-root": {
+      color: "rgba(255,255,255,0.65)",
+    },
+    "& .MuiOutlinedInput-root": {
+      color: theme.palette.text.primary,
+      "& fieldset": {
+        borderColor: "rgba(255,255,255,0.25)",
+      },
+      "&:hover fieldset": {
+        borderColor: "rgba(255,255,255,0.45)",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: theme.palette.primary.main,
+      },
+      "& input:-webkit-autofill": {
+        WebkitBoxShadow: "0 0 0 100px rgba(255,255,255,0.02) inset",
+        WebkitTextFillColor: theme.palette.text.primary,
+        caretColor: theme.palette.text.primary,
+        transition: "background-color 9999s ease-out 0s",
+        borderRadius: "inherit",
+      },
+      "& textarea:-webkit-autofill": {
+        WebkitBoxShadow: "0 0 0 100px rgba(255,255,255,0.02) inset",
+        WebkitTextFillColor: theme.palette.text.primary,
+      },
+    },
+    "& .MuiFormHelperText-root": {
+      marginLeft: 0,
+    },
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -114,9 +148,13 @@ const Contact: FC = () => {
   });
 
   return (
-    <Box ref={ref} id="contact" sx={{ py: 12, bgcolor: "rgba(0, 0, 0, 0.3)" }}>
+    <Box
+      ref={ref}
+      id="contact"
+      sx={{ py: { xs: 6, md: 12 }, bgcolor: "rgba(0, 0, 0, 0.3)" }}
+    >
       <Container maxWidth="md">
-        <Fade in={visible} timeout={1000}>
+        <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>
           <Box sx={{ textAlign: "center", mb: 8 }}>
             <Typography
               variant="h2"
@@ -148,7 +186,11 @@ const Contact: FC = () => {
           </Box>
         </Fade>
 
-        <Slide direction="up" in={visible} timeout={1200}>
+        <Slide
+          direction="up"
+          in={isMobile ? true : visible}
+          timeout={isMobile ? 0 : 1200}
+        >
           <Paper
             elevation={0}
             sx={{
@@ -160,9 +202,9 @@ const Contact: FC = () => {
             }}
           >
             {submitted ? (
-              <Fade in timeout={600}>
+              <Fade in timeout={isMobile ? 0 : 600}>
                 <Box sx={{ textAlign: "center", py: 6 }}>
-                  <Zoom in timeout={800}>
+                  <Zoom in timeout={isMobile ? 0 : 800}>
                     <Typography
                       variant="h4"
                       sx={{
@@ -176,7 +218,7 @@ const Contact: FC = () => {
                     </Typography>
                   </Zoom>
 
-                  <Fade in timeout={1000}>
+                  <Fade in timeout={isMobile ? 0 : 1000}>
                     <Typography
                       variant="body1"
                       sx={{ color: theme.palette.text.secondary }}
@@ -187,16 +229,23 @@ const Contact: FC = () => {
                 </Box>
               </Fade>
             ) : (
-              <form onSubmit={formik.handleSubmit}>
+              <form onSubmit={formik.handleSubmit} autoComplete="off">
                 <Grid container spacing={3}>
                   <Grid size={{ xs: 12, sm: 6 }}>
                     <TextField
                       fullWidth
                       name="firstName"
                       label="First Name"
+                      autoComplete="off"
+                      sx={textFieldSx}
                       value={formik.values.firstName}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
+                      slotProps={{
+                        htmlInput: {
+                          autoComplete: "off",
+                        },
+                      }}
                       error={
                         formik.touched.firstName &&
                         Boolean(formik.errors.firstName)
@@ -212,9 +261,16 @@ const Contact: FC = () => {
                       fullWidth
                       name="lastName"
                       label="Last Name"
+                      autoComplete="off"
+                      sx={textFieldSx}
                       value={formik.values.lastName}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
+                      slotProps={{
+                        htmlInput: {
+                          autoComplete: "off",
+                        },
+                      }}
                       error={
                         formik.touched.lastName &&
                         Boolean(formik.errors.lastName)
@@ -230,9 +286,16 @@ const Contact: FC = () => {
                       fullWidth
                       name="phone"
                       label="Phone Number"
+                      autoComplete="off"
+                      sx={textFieldSx}
                       value={formik.values.phone}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
+                      slotProps={{
+                        htmlInput: {
+                          autoComplete: "new-password",
+                        },
+                      }}
                       error={
                         formik.touched.phone && Boolean(formik.errors.phone)
                       }
@@ -245,9 +308,16 @@ const Contact: FC = () => {
                       fullWidth
                       name="email"
                       label="Email"
+                      autoComplete="off"
+                      sx={textFieldSx}
                       value={formik.values.email}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
+                      slotProps={{
+                        htmlInput: {
+                          autoComplete: "new-password",
+                        },
+                      }}
                       error={
                         formik.touched.email && Boolean(formik.errors.email)
                       }
@@ -262,9 +332,16 @@ const Contact: FC = () => {
                       rows={4}
                       name="message"
                       label="Message"
+                      autoComplete="off"
+                      sx={textFieldSx}
                       value={formik.values.message}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
+                      slotProps={{
+                        htmlInput: {
+                          autoComplete: "off",
+                        },
+                      }}
                       error={
                         formik.touched.message && Boolean(formik.errors.message)
                       }

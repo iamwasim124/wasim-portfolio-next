@@ -11,6 +11,7 @@ import {
   Zoom,
   Fade,
   Tooltip,
+  useMediaQuery,
 } from "@mui/material";
 import {
   Download,
@@ -28,6 +29,7 @@ interface HeroProps {
   data: any;
 }
 const Hero: FC<HeroProps> = ({ data }) => {
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const scrollToSection = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
   };
@@ -77,7 +79,7 @@ const Hero: FC<HeroProps> = ({ data }) => {
       <Container maxWidth="lg">
         <Grid container spacing={4} alignItems="center">
           <Grid size={{ xs: 12, md: 7 }}>
-            <Fade in timeout={1000}>
+            <Fade in timeout={isMobile ? 0 : 1000}>
               <Box>
                 <Typography
                   variant="h6"
@@ -194,7 +196,7 @@ const Hero: FC<HeroProps> = ({ data }) => {
             </Fade>
           </Grid>
           <Grid size={{ xs: 12, md: 5 }}>
-            <Zoom in timeout={1200}>
+            <Zoom in timeout={isMobile ? 0 : 1200}>
               <Box
                 sx={{
                   position: "relative",

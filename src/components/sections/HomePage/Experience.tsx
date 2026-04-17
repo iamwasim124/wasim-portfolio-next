@@ -12,6 +12,7 @@ import {
   Divider,
   Zoom,
   Card,
+  useMediaQuery,
 } from "@mui/material";
 import { WorkHistory, EmojiEvents } from "@mui/icons-material";
 import theme from "@/theme/theme";
@@ -24,6 +25,7 @@ interface Props {
 const Experience: FC<Props> = ({ experience, achievements }) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -36,9 +38,13 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
   }, []);
 
   return (
-    <Box ref={ref} id="experience" sx={{ py: 12, position: "relative" }}>
+    <Box
+      ref={ref}
+      id="experience"
+      sx={{ py: { xs: 6, md: 12 }, position: "relative" }}
+    >
       <Container maxWidth="lg">
-        <Fade in timeout={1000}>
+        <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>
           <Box sx={{ textAlign: "center", mb: 8 }}>
             <Typography
               variant="h2"
@@ -72,6 +78,7 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
               top: 0,
               bottom: 0,
               width: 2,
+              display: { xs: "none", md: "block" },
               bgcolor: "rgba(0, 216, 233, 0.3)",
               transform: { md: "translateX(-50%)" },
             }}
@@ -81,14 +88,14 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
             <Slide
               key={index}
               direction={index % 2 === 0 ? "left" : "right"}
-              in={visible}
-              timeout={800 + index * 200}
+              in={isMobile ? true : visible}
+              timeout={isMobile ? 0 : 800 + index * 200}
             >
               <Box
                 sx={{
                   position: "relative",
-                  mb: 6,
-                  ml: { xs: 6, md: 0 },
+                  mb: { xs: 0, md: 6 },
+                  // ml: { xs: 6, md: 0 },
                 }}
               >
                 {/* Timeline Dot */}
@@ -99,6 +106,7 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
                     top: 0,
                     width: 16,
                     height: 16,
+                    display: { xs: "none", md: "block" },
                     borderRadius: "50%",
                     bgcolor:
                       index % 2 === 0
@@ -224,8 +232,8 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
         </Box>
 
         {/* Achievements */}
-        <Box sx={{ mt: 12 }}>
-          <Fade in timeout={1000}>
+        <Box sx={{ mt: { xs: 6, md: 12 } }}>
+          <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>
             <Box sx={{ textAlign: "center", mb: 6 }}>
               <Typography
                 variant="h3"
@@ -244,7 +252,10 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
           <Grid container spacing={3} justifyContent="center">
             {achievements.map((achievement, index) => (
               <Grid key={index} size={{ xs: 12, sm: 6, md: 4 }}>
-                <Zoom in timeout={1200 + index * 200}>
+                <Zoom
+                  in={isMobile ? true : visible}
+                  timeout={isMobile ? 0 : 1200 + index * 200}
+                >
                   <Card
                     component="a"
                     href={achievement.pdfUrl}

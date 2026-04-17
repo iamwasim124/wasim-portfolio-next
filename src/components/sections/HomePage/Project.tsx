@@ -10,6 +10,7 @@ import {
   Zoom,
   Card,
   Chip,
+  useMediaQuery,
 } from "@mui/material";
 import { Web } from "@mui/icons-material";
 import theme from "@/theme/theme";
@@ -27,6 +28,7 @@ interface Props {
 const Projects: FC<Props> = ({ projects }) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -41,10 +43,14 @@ const Projects: FC<Props> = ({ projects }) => {
   return (
     <Box
       id="projects"
-      sx={{ py: 12, position: "relative", bgcolor: "rgba(0, 0, 0, 0.3)" }}
+      sx={{
+        py: { xs: 6, md: 12 },
+        position: "relative",
+        bgcolor: "rgba(0, 0, 0, 0.3)",
+      }}
     >
       <Container maxWidth="lg">
-        <Fade in timeout={1000}>
+        <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>
           <Box sx={{ textAlign: "center", mb: 8 }}>
             <Typography
               variant="h2"
@@ -72,7 +78,10 @@ const Projects: FC<Props> = ({ projects }) => {
         <Grid container spacing={3} sx={{ justifyContent: "center" }}>
           {projects.map((project, index) => (
             <Grid key={index} size={{ xs: 12, sm: 6, md: 4 }}>
-              <Zoom in timeout={1000 + index * 100}>
+              <Zoom
+                in={isMobile ? true : visible}
+                timeout={isMobile ? 0 : 1000 + index * 100}
+              >
                 <Card
                   component="a"
                   href={project.url}
@@ -153,7 +162,7 @@ const Projects: FC<Props> = ({ projects }) => {
           ))}
         </Grid>
 
-        <Fade in timeout={1600}>
+        <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1600}>
           <Box sx={{ textAlign: "center", mt: 6 }}>
             <Typography variant="h6" sx={{ color: theme.palette.text.primary }}>
               + Multiple other projects including maintenance and client support

@@ -62,6 +62,19 @@ const HeaderComponent: FC<HeaderComponentProps> = ({ scrollY = 0 }) => {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!isMobile) {
+      document.body.style.overflow = "";
+      return;
+    }
+
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobile, mobileMenuOpen]);
+
   return (
     <Box
       component="nav"

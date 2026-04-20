@@ -22,21 +22,21 @@ import Testimonials from "@/components/sections/HomePage/Testimonials";
 
 export default function Home() {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const [heroData, setHeroData] = useState(null);
+  // const [heroData, setHeroData] = useState(null);
 
-  useEffect(() => {
-    const fetchHeroData = async () => {
-      try {
-        const res = await fetch("http://localhost:4005/api/hero");
-        const data = await res.json();
-        setHeroData(data);
-      } catch (error) {
-        console.error("Error fetching hero data:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchHeroData = async () => {
+  //     try {
+  //       const res = await fetch("http://localhost:4005/api/hero");
+  //       const data = await res.json();
+  //       setHeroData(data);
+  //     } catch (error) {
+  //       console.error("Error fetching hero data:", error);
+  //     }
+  //   };
 
-    fetchHeroData();
-  }, []);
+  //   fetchHeroData();
+  // }, []);
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -140,7 +140,9 @@ export default function Home() {
       />
 
       {/* Hero Section */}
-      {heroData && <Hero data={heroData} />}
+      {/* {heroData &&  */}
+      <Hero data={heroData} />
+      {/* } */}
 
       {/* About Section */}
       <About data={aboutData} />

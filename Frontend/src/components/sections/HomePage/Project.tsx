@@ -42,6 +42,7 @@ const Projects: FC<Props> = ({ projects }) => {
 
   return (
     <Box
+      ref={ref}
       id="projects"
       sx={{
         py: { xs: 9, md: 12 },
@@ -49,7 +50,7 @@ const Projects: FC<Props> = ({ projects }) => {
         bgcolor: "rgba(0, 0, 0, 0.3)",
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>
           <Box sx={{ textAlign: "center", mb: 8 }}>
             <Typography

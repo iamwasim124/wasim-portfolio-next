@@ -84,7 +84,7 @@ const Hero: FC<HeroProps> = ({ data }) => {
         pt: { xs: "80px", md: 0 },
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Grid container spacing={4} alignItems="center">
           <Grid size={{ xs: 12, md: 7 }}>
             <Box
@@ -110,14 +110,13 @@ const Hero: FC<HeroProps> = ({ data }) => {
                   mb: 2,
                 }}
               >
-                {data?.greeting || "Hello, I'm"}
+                {data?.greeting || "lll"}
               </Typography>
               <Typography
                 variant="h1"
                 sx={{
                   mb: 2,
-                  background:
-                    "linear-gradient(135deg, #fff 0%, #00d8e9 100%)",
+                  background: "linear-gradient(135deg, #fff 0%, #00d8e9 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                 }}
@@ -189,7 +188,11 @@ const Hero: FC<HeroProps> = ({ data }) => {
               </Box>
               <Box sx={{ display: "flex", gap: 2 }}>
                 {socials.map((item) => (
-                  <Tooltip key={item.label} title={item.tooltip || item.label} arrow>
+                  <Tooltip
+                    key={item.label}
+                    title={item.tooltip || item.label}
+                    arrow
+                  >
                     {item.disabled ? (
                       <Box component="span" sx={{ display: "inline-flex" }}>
                         <IconButton
@@ -208,8 +211,14 @@ const Hero: FC<HeroProps> = ({ data }) => {
                         aria-label={item.label}
                         component="a"
                         href={item.href || undefined}
-                        target={item.href?.startsWith("http") ? "_blank" : undefined}
-                        rel={item.href?.startsWith("http") ? "noopener noreferrer" : undefined}
+                        target={
+                          item.href?.startsWith("http") ? "_blank" : undefined
+                        }
+                        rel={
+                          item.href?.startsWith("http")
+                            ? "noopener noreferrer"
+                            : undefined
+                        }
                         sx={{
                           color: item.color,
                           border: `2px solid ${item.color}`,

@@ -58,7 +58,7 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
       id="experience"
       sx={{ py: { xs: 8, md: 12 }, position: "relative" }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>
           <Box sx={{ textAlign: "center", mb: 8 }}>
             <Typography
@@ -183,10 +183,7 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
                           variant="h5"
                           component="h3"
                           sx={{
-                            color:
-                              index % 2 === 0
-                                ? "#8ef3ff"
-                                : "#e6c3ff",
+                            color: index % 2 === 0 ? "#8ef3ff" : "#e6c3ff",
                           }}
                         >
                           {job.title}
@@ -249,7 +246,7 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
         </Box>
 
         {/* Achievements */}
-        <Box sx={{ mt: { xs: 9, md: 12 } }}>
+        <Box sx={{ mt: { xs: 9, md: 12 }, overflow: "hidden" }}>
           <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>
             <Box sx={{ textAlign: "center", mb: 6 }}>
               <Typography
@@ -266,69 +263,105 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
             </Box>
           </Fade>
 
-          <Grid container spacing={3} justifyContent="center">
-            {achievements.map((achievement, index) => (
-              <Grid key={index} size={{ xs: 12, sm: 6, md: 4 }}>
-                <Zoom
-                  in={isMobile ? true : visible}
-                  timeout={isMobile ? 0 : 1200 + index * 200}
+          <Box
+            sx={{
+              overflow: "hidden",
+              width: "100%",
+              position: "relative",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                gap: 3,
+                width: "max-content",
+                animation: "marquee 30s linear infinite",
+
+                "@keyframes marquee": {
+                  "0%": {
+                    transform: "translateX(0)",
+                  },
+                  "100%": {
+                    transform: "translateX(-50%)",
+                  },
+                },
+
+                "&:hover": {
+                  animationPlayState: "paused",
+                },
+              }}
+            >
+              {[...achievements, ...achievements].map((achievement, index) => (
+                <Card
+                  key={index}
+                  component="a"
+                  href={achievement.pdfUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{
+                    minWidth: 350,
+                    maxWidth: 350,
+                    height: "auto",
+
+                    textDecorationLine: "none",
+                    bgcolor: "rgba(255,255,255,0.05)",
+                    backdropFilter: "blur(10px)",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    borderRadius: 4,
+                    p: 3,
+                    flexShrink: 0,
+                    display: "flex",
+                    flexDirection: "column",
+                    transition: "all .3s ease",
+
+                    "&:hover": {
+                      boxShadow: "0 10px 40px rgba(147,51,234,.3)",
+                      borderColor: theme.palette.secondary.main,
+                    },
+                  }}
                 >
-                  <Card
-                    component="a"
-                    href={achievement.pdfUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+                    <EmojiEvents
+                      sx={{
+                        color: "#FFD700",
+                        fontSize: 40,
+                        mr: 2,
+                      }}
+                    />
+
+                    <Typography
+                      variant="h6"
+                      component="h4"
+                      color={theme.palette.primary.main}
+                    >
+                      {achievement.title}
+                    </Typography>
+                  </Box>
+
+                  <Typography
+                    variant="body1"
                     sx={{
-                      textDecorationLine: "none",
-                      bgcolor: "rgba(255, 255, 255, 0.05)",
-                      backdropFilter: "blur(10px)",
-                      border: "1px solid rgba(255, 255, 255, 0.1)",
-                      borderRadius: 4,
-                      p: 3,
-                      height: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                      transition: "all 0.3s ease",
-                      cursor: "pointer",
-                      "&:hover": {
-                        transform: "translateY(-8px)",
-                        boxShadow: "0 10px 40px rgba(147, 51, 234, 0.3)",
-                        borderColor: theme.palette.secondary.main,
-                      },
+                      color: "rgba(255,255,255,0.9)",
+                      mb: 2,
                     }}
                   >
-                    <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-                      <EmojiEvents
-                        sx={{ color: "#FFD700", fontSize: 40, mr: 2 }}
-                      />
-                      <Typography
-                        variant="h6"
-                        component="h4"
-                        color={theme.palette.primary.main}
-                      >
-                        {achievement.title}
-                      </Typography>
-                    </Box>
-                    <Typography
-                      variant="body1"
-                      sx={{ color: "rgba(255,255,255,0.9)", mb: 2 }}
-                    >
-                      {achievement.description}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        color: theme.palette.primary.main,
-                        mt: "auto",
-                      }}
-                    >
-                      {achievement.date}
-                    </Typography>
-                  </Card>
-                </Zoom>
-              </Grid>
-            ))}
-          </Grid>
+                    {achievement.description}
+                  </Typography>
+
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: theme.palette.primary.main,
+                      mt: "auto",
+                      pt: 2,
+                    }}
+                  >
+                    {achievement.date}
+                  </Typography>
+                </Card>
+              ))}
+            </Box>
+          </Box>
         </Box>
       </Container>
     </Box>

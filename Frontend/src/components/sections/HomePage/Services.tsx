@@ -33,11 +33,7 @@ interface Props {
   data: ServicesData;
 }
 
-const icons = [
-  <Web key="web" />,
-  <Code key="code" />,
-  <Speed key="speed" />,
-];
+const icons = [<Web key="web" />, <Code key="code" />, <Speed key="speed" />];
 
 const Services: FC<Props> = ({ data }) => {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -56,7 +52,7 @@ const Services: FC<Props> = ({ data }) => {
 
   return (
     <Box ref={ref} id="services" sx={{ py: { xs: 9, md: 12 } }}>
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         {/* Title */}
         <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>
           <Box textAlign="center" mb={5}>

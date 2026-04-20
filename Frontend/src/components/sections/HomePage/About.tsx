@@ -64,7 +64,7 @@ const About: FC<AboutProps> = ({ data }) => {
       id="about"
       sx={{ py: { xs: 9, md: 12 }, position: "relative" }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         {/* Title */}
         <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>
           <Box sx={{ textAlign: "center", mb: 8 }}>

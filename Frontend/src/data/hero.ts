@@ -1,7 +1,7 @@
 import profilePicture from "../../public/assets/images-videos/wasim.png";
 
 export const heroData = {
-  greeting: "Hello, I'm",
+  greeting: "Hello, I'm fghjkl",
 
   name: "Mohammed Wasim",
 

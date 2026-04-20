@@ -211,7 +211,7 @@ const Contact: FC = () => {
       id="contact"
       sx={{ py: { xs: 9, md: 12 }, bgcolor: "rgba(0, 0, 0, 0.3)" }}
     >
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>
           <Box sx={{ textAlign: "center", mb: 8 }}>
             <Typography
@@ -482,7 +482,11 @@ const Contact: FC = () => {
                     {fileError ? (
                       <Typography
                         color="error"
-                        sx={{ mt: "3px", fontSize: "0.75rem", lineHeight: 1.66 }}
+                        sx={{
+                          mt: "3px",
+                          fontSize: "0.75rem",
+                          lineHeight: 1.66,
+                        }}
                       >
                         {fileError}
                       </Typography>

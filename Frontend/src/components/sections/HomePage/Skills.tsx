@@ -47,7 +47,7 @@ const Skills: FC<SkillsProps> = ({ skills }) => {
         bgcolor: "rgba(0,0,0,.3)",
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         {/* Title */}
         <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>
           <Box sx={{ textAlign: "center", mb: 8 }}>
@@ -110,9 +110,7 @@ const Skills: FC<SkillsProps> = ({ skills }) => {
                         component="h3"
                         sx={{
                           mb: 3,
-                          color: isGreen
-                            ? "#8ef3ff"
-                            : "#e6c3ff",
+                          color: isGreen ? "#8ef3ff" : "#e6c3ff",
                           textTransform: "capitalize",
                         }}
                       >

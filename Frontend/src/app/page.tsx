@@ -2,7 +2,7 @@
 
 import { Box, useMediaQuery } from "@mui/material";
 import theme from "@/theme/theme";
-
+import { useEffect, useState } from "react";
 import Hero from "@/components/sections/HomePage/Hero";
 import About from "@/components/sections/HomePage/About";
 import Skills from "@/components/sections/HomePage/Skills";
@@ -18,9 +18,25 @@ import { experienceData, achievementsData } from "@/data/experience";
 import { projectsData } from "@/data/projects";
 import { servicesData } from "@/data/services";
 import { faqData } from "@/data/faq";
+import Testimonials from "@/components/sections/HomePage/Testimonials";
 
 export default function Home() {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const [heroData, setHeroData] = useState(null);
+
+  useEffect(() => {
+    const fetchHeroData = async () => {
+      try {
+        const res = await fetch("http://localhost:4005/api/hero");
+        const data = await res.json();
+        setHeroData(data);
+      } catch (error) {
+        console.error("Error fetching hero data:", error);
+      }
+    };
+
+    fetchHeroData();
+  }, []);
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -124,7 +140,7 @@ export default function Home() {
       />
 
       {/* Hero Section */}
-      <Hero data={heroData} />
+      {heroData && <Hero data={heroData} />}
 
       {/* About Section */}
       <About data={aboutData} />
@@ -140,6 +156,7 @@ export default function Home() {
       <Projects projects={projectsData} />
       <Services data={servicesData} />
       <Faq items={faqData} />
+      <Testimonials />
 
       {/* Contact Section */}
       <Contact />

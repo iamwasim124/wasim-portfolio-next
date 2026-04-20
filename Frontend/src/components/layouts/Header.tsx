@@ -20,6 +20,8 @@ const HEADER_DATA = {
     { label: "Experience", id: "experience" },
     { label: "Projects", id: "projects" },
     { label: "Services", id: "services" },
+    { label: "FAQ", id: "faq" },
+    { label: "Testimonials", id: "testimonials" },
     { label: "Contact", id: "contact" },
   ],
 };
@@ -30,7 +32,7 @@ interface HeaderComponentProps {
 
 const HeaderComponent: FC<HeaderComponentProps> = ({ scrollY = 0 }) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
 
@@ -95,7 +97,7 @@ const HeaderComponent: FC<HeaderComponentProps> = ({ scrollY = 0 }) => {
         height: mobileMenuOpen ? "100vh" : "auto",
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Box display="flex" justifyContent="space-between" alignItems="center">
           {/* Logo */}
           <Typography
@@ -161,7 +163,11 @@ const HeaderComponent: FC<HeaderComponentProps> = ({ scrollY = 0 }) => {
           {/* Mobile Toggle */}
           {isMobile && (
             <IconButton
-              aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-label={
+                mobileMenuOpen
+                  ? "Close navigation menu"
+                  : "Open navigation menu"
+              }
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               sx={{ color: theme.palette.text.primary }}
             >

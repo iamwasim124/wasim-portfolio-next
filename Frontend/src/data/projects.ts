@@ -87,6 +87,19 @@ export const projectsData = [
     tech: ["react.js", "material-ui", "gsap animations"],
   },
   {
+    name: "Infakt",
+    url: "https://infakt.co.in/",
+    tech: [
+      "Html5",
+      "CSS3",
+      "JavaScript",
+      "jQuery",
+      "Bootstrap",
+      "WordPress",
+      "php",
+    ],
+  },
+  {
     name: "Actualized",
     url: "https://actualized.ai/",
     tech: ["react.js", "Next.js", "gsap animations", "swiper.js"],

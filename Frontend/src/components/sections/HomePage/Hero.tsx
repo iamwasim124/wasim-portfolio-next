@@ -85,8 +85,13 @@ const Hero: FC<HeroProps> = ({ data }) => {
       }}
     >
       <Container maxWidth="xl">
-        <Grid container spacing={4} alignItems="center">
-          <Grid size={{ xs: 12, md: 7 }}>
+        <Grid
+          container
+          spacing={4}
+          alignItems="center"
+          justifyContent={"space-between"}
+        >
+          <Grid size={{ xs: 12, md: 6 }}>
             <Box
               sx={{
                 animation: "heroTextReveal 900ms ease-out both",

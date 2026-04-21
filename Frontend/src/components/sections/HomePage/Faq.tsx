@@ -38,6 +38,15 @@ const Faq: FC<FaqProps> = ({ items }) => {
             >
               React & Next.js Freelancer FAQ
             </Typography>
+            <Box
+              sx={{
+                width: 100,
+                height: 4,
+                bgcolor: theme.palette.primary.main,
+                margin: "0 auto",
+                borderRadius: 2,
+              }}
+            />
             <Typography
               variant="body1"
               sx={{

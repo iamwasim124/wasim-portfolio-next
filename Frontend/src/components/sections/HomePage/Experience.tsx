@@ -260,6 +260,15 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
               >
                 Achievements & Awards
               </Typography>
+              <Box
+                sx={{
+                  width: 100,
+                  height: 4,
+                  bgcolor: theme.palette.primary.main,
+                  margin: "0 auto",
+                  borderRadius: 2,
+                }}
+              />
             </Box>
           </Fade>
 

@@ -1,4 +1,4 @@
-import profilePicture from "../../public/assets/images-videos/wasim.png";
+import profilePicture from "../../public/assets/images-videos/wasim-3.png";
 
 export const heroData = {
   greeting: "Hello, I'm",

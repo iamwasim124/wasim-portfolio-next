@@ -17,7 +17,7 @@ import {
   KeyboardArrowDown,
   GitHub,
 } from "@mui/icons-material";
-import profilePicture from "../../../../public/assets/images-videos/wasim.webp";
+import profilePicture from "../../../../public/assets/images-videos/wasim-3.png";
 import Image, { type StaticImageData } from "next/image";
 import { FC } from "react";
 import theme from "@/theme/theme";
@@ -158,7 +158,8 @@ const Hero: FC<HeroProps> = ({ data }) => {
                     "&:hover": {
                       bgcolor: theme.palette.primary.light,
                       transform: "translateY(-2px)",
-                      boxShadow: "0 10px 30px rgba(0, 216, 233, 0.3)",
+                      // boxShadow: "0 10px 30px rgba(0, 216, 233, 0.3)",
+                      boxShadow: "0 20px 60px #00d8e9",
                     },
                     transition: "all 0.3s ease",
                   }}

@@ -53,6 +53,7 @@ const Faq: FC<FaqProps> = ({ items }) => {
                 color: "rgba(255,255,255,0.88)",
                 maxWidth: 720,
                 mx: "auto",
+                marginTop: "16px",
               }}
             >
               Answers to common questions about my React.js, Next.js, frontend

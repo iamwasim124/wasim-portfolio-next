@@ -11,9 +11,11 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { Menu, Close } from "@mui/icons-material";
+import Image from "next/image";
 
 const HEADER_DATA = {
-  logo: "Mohammed Wasim",
+  logoText: "Mohammed Wasim",
+  logoSrc: "/assets/images-videos/logo.png",
   menu: [
     { label: "About", id: "about" },
     { label: "Skills", id: "skills" },
@@ -35,6 +37,9 @@ const HeaderComponent: FC<HeaderComponentProps> = ({ scrollY = 0 }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
+  const [showLogoImage, setShowLogoImage] = useState(
+    Boolean(HEADER_DATA.logoSrc),
+  );
 
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -100,18 +105,39 @@ const HeaderComponent: FC<HeaderComponentProps> = ({ scrollY = 0 }) => {
       <Container maxWidth="xl">
         <Box display="flex" justifyContent="space-between" alignItems="center">
           {/* Logo */}
-          <Typography
-            variant="h5"
-            onClick={() => scrollToSection("hero")}
-            sx={{
-              cursor: "pointer",
-              background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-            {HEADER_DATA.logo}
-          </Typography>
+          {showLogoImage ? (
+            <Box
+              onClick={() => scrollToSection("hero")}
+              sx={{
+                cursor: "pointer",
+                display: "inline-flex",
+                marginLeft: "-40px",
+              }}
+            >
+              <Image
+                src={HEADER_DATA.logoSrc}
+                alt={HEADER_DATA.logoText}
+                width={180}
+                height={60}
+                priority
+                onError={() => setShowLogoImage(false)}
+                style={{ objectFit: "contain" }}
+              />
+            </Box>
+          ) : (
+            <Typography
+              variant="h5"
+              onClick={() => scrollToSection("hero")}
+              sx={{
+                cursor: "pointer",
+                background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              {HEADER_DATA.logoText}
+            </Typography>
+          )}
 
           {/* Desktop Menu */}
           {!isMobile && (

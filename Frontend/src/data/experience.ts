@@ -83,4 +83,11 @@ export const achievementsData = [
     date: "Apr 19, 2023",
     pdfUrl: "/assets/files/client-excellence.pdf",
   },
+  {
+    title: "Best Performer Award",
+    description:
+      "Awarded for consistently demonstrating exceptional performance, dedication, and significant contributions to project success.",
+    date: "Jan 15, 2026",
+    pdfUrl: "/assets/files/wasim-award-zyptr.pdf",
+  },
 ];

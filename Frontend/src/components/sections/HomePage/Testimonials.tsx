@@ -148,7 +148,11 @@ const Testimonials = () => {
                     pt: 3,
                   }}
                 >
-                  <Typography variant="h6" color={theme.palette.primary.main}>
+                  <Typography
+                    variant="h6"
+                    component="p"
+                    color={theme.palette.primary.main}
+                  >
                     {item.name}
                   </Typography>
 

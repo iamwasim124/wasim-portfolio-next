@@ -11,7 +11,6 @@ import {
 } from "@mui/icons-material";
 import { QRCodeSVG } from "qrcode.react";
 import { toPng } from "html-to-image";
-import Image from "next/image";
 import theme from "@/theme/theme";
 
 const CARD = {
@@ -208,20 +207,22 @@ export default function VisitingCardPage() {
               ref={frontRef}
               sx={{ ...faceSx, bgcolor: C.background.default }}
             >
-              <Image
-                src={CARD.banner}
-                alt="Mohammed Wasim — React & Next.js freelancer"
-                fill
-                sizes="400px"
-                style={{
-                  objectFit: "cover",
-                  objectPosition: "top center",
+              {/* CSS background image — captures reliably with html-to-image.
+                  Offset to the right (left: 85px) to match the modal framing. */}
+              <Box
+                role="img"
+                aria-label="Mohammed Wasim — React & Next.js freelancer"
+                sx={{
+                  position: "absolute",
                   top: "-40px",
-                  minHeight: "fit-content",
                   left: "85px",
+                  width: W,
+                  bottom: 0,
+                  backgroundImage: `url(${CARD.banner})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "top center",
+                  backgroundRepeat: "no-repeat",
                 }}
-                priority
-                unoptimized
               />
               <Box
                 sx={{

@@ -254,6 +254,7 @@ const Contact: FC = () => {
                   <Zoom in timeout={isMobile ? 0 : 800}>
                     <Typography
                       variant="h4"
+                      component="p"
                       sx={{
                         mb: 2,
                         background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,

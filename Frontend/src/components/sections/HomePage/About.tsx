@@ -90,7 +90,7 @@ const About: FC<AboutProps> = ({ data }) => {
                   backdropFilter: "blur(10px)",
                   borderRadius: 4,
                   border: "1px solid rgba(255,255,255,.1)",
-                  height: showAll ? 430 : "auto",
+                  height: "auto",
                   display: "flex",
                   flexDirection: "column",
                 }}
@@ -114,10 +114,19 @@ const About: FC<AboutProps> = ({ data }) => {
 
                 <Box
                   sx={{
-                    flex: 1,
+                    maxHeight: showAll ? 430 : 220,
                     overflowY: showAll ? "auto" : "hidden",
-                    pr: 1,
-
+                    transition: "max-height 0.45s ease",
+                    pr: showAll ? 1 : 0,
+                    // soft fade at the bottom while collapsed
+                    ...(showAll
+                      ? {}
+                      : {
+                          WebkitMaskImage:
+                            "linear-gradient(to bottom, #000 70%, transparent 100%)",
+                          maskImage:
+                            "linear-gradient(to bottom, #000 70%, transparent 100%)",
+                        }),
                     "&::-webkit-scrollbar": {
                       width: 6,
                     },
@@ -127,21 +136,20 @@ const About: FC<AboutProps> = ({ data }) => {
                     },
                   }}
                 >
-                  {(showAll
-                    ? data?.journey?.paragraphs
-                    : data?.journey?.paragraphs?.slice(0, 2)
-                  )?.map((text: string, index: number) => (
-                    <Typography
-                      key={index}
-                      variant="body2"
-                      sx={{
-                        color: "rgba(255,255,255,0.9)",
-                        mb: 2,
-                      }}
-                    >
-                      {text}
-                    </Typography>
-                  ))}
+                  {data?.journey?.paragraphs?.map(
+                    (text: string, index: number) => (
+                      <Typography
+                        key={index}
+                        variant="body2"
+                        sx={{
+                          color: "rgba(255,255,255,0.9)",
+                          mb: 2,
+                        }}
+                      >
+                        {text}
+                      </Typography>
+                    ),
+                  )}
                 </Box>
 
                 <Box textAlign="center" mt={2}>

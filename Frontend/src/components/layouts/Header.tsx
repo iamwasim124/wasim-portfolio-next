@@ -120,7 +120,7 @@ const HeaderComponent: FC<HeaderComponentProps> = ({ scrollY = 0 }) => {
               sx={{
                 cursor: "pointer",
                 display: "inline-flex",
-                marginLeft: "-40px",
+                marginLeft: "-60px",
               }}
             >
               <Image

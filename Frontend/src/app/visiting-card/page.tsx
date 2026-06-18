@@ -19,7 +19,7 @@ const CARD = {
   role: "React & Next.js Developer",
   website: "iamwasim.in",
   websiteUrl: "https://iamwasim.in",
-  banner: "/assets/images-videos/wasim-3.png",
+  banner: "/assets/images-videos/wasim-3.webp",
   cta: "Have a project in mind?",
   ctaSub:
     "Helping Businesses, Startups & Students Bring Their Ideas to Life Online",

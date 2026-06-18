@@ -31,7 +31,7 @@ const CARD = {
   role: "React & Next.js Developer",
   website: "iamwasim.in",
   websiteUrl: "https://iamwasim.in",
-  banner: "/assets/images-videos/wasim-3.png",
+  banner: "/assets/images-videos/wasim-3.webp",
   cta: "Have a project in mind?",
   ctaSub:
     "Helping Businesses, Startups & Students Bring Their Ideas to Life Online",
@@ -69,7 +69,11 @@ const ACCENT = `linear-gradient(135deg, ${C.primary.main}, ${C.secondary.main})`
 const DESIGN_W = 400;
 const DESIGN_H = DESIGN_W / 1.62;
 
-export default function BusinessCardModal() {
+export default function BusinessCardModal({
+  triggerSx,
+}: {
+  triggerSx?: object;
+}) {
   const [open, setOpen] = useState(false);
   const [flipped, setFlipped] = useState(false);
   const [scale, setScale] = useState(1);
@@ -111,6 +115,7 @@ export default function BusinessCardModal() {
             color: C.primary.main,
             transition: "all .3s ease",
             "&:hover": { transform: "translateY(-3px)" },
+            ...triggerSx,
           }}
         >
           <BadgeOutlined />
@@ -122,6 +127,9 @@ export default function BusinessCardModal() {
         onClose={handleClose}
         maxWidth="xs"
         slotProps={{
+          backdrop: {
+            sx: { backgroundColor: "rgba(0, 0, 0, 0.8)" },
+          },
           paper: {
             sx: {
               bgcolor: "transparent",

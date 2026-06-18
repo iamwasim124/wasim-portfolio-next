@@ -17,11 +17,12 @@ import {
   KeyboardArrowDown,
   GitHub,
 } from "@mui/icons-material";
-import profilePicture from "../../../../public/assets/images-videos/wasim-3.png";
+import profilePicture from "../../../../public/assets/images-videos/wasim-3.webp";
 import Image, { type StaticImageData } from "next/image";
 import { FC } from "react";
 import theme from "@/theme/theme";
 import Reveal from "@/components/motion/Reveal";
+import BusinessCardModal from "@/components/layouts/BusinessCardModal";
 
 interface HeroProps {
   data: {
@@ -233,6 +234,20 @@ const Hero: FC<HeroProps> = ({ data }) => {
                     )}
                   </Tooltip>
                 ))}
+
+                {/* Visiting card */}
+                <BusinessCardModal
+                  triggerSx={{
+                    color: theme.palette.primary.main,
+                    border: `2px solid ${theme.palette.primary.main}`,
+                    "&:hover": {
+                      color: theme.palette.background.default,
+                      bgcolor: theme.palette.primary.main,
+                      transform: "translateY(-2px)",
+                    },
+                    transition: "all .3s ease",
+                  }}
+                />
               </Box>
             </Reveal>
           </Grid>

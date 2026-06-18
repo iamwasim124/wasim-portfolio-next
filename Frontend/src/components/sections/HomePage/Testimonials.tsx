@@ -4,6 +4,7 @@ import { Box, Typography, Card, Container } from "@mui/material";
 
 import theme from "@/theme/theme";
 import Reveal from "@/components/motion/Reveal";
+import AutoScroller from "@/components/motion/AutoScroller";
 
 const testimonials = [
   {
@@ -80,33 +81,7 @@ const Testimonials = () => {
           />
         </Reveal>
 
-        <Box
-          sx={{
-            overflow: "hidden",
-            width: "100%",
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              gap: 3,
-              width: "max-content",
-              animation: "marquee 30s linear infinite",
-
-              "@keyframes marquee": {
-                "0%": {
-                  transform: "translateX(0)",
-                },
-                "100%": {
-                  transform: "translateX(-50%)",
-                },
-              },
-
-              "&:hover": {
-                animationPlayState: "paused",
-              },
-            }}
-          >
+        <AutoScroller>
             {[...testimonials, ...testimonials].map((item, index) => (
               <Card
                 key={index}
@@ -167,8 +142,7 @@ const Testimonials = () => {
                 </Box>
               </Card>
             ))}
-          </Box>
-        </Box>
+        </AutoScroller>
       </Container>
     </Box>
   );

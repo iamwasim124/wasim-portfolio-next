@@ -41,7 +41,7 @@ export default function Home() {
     "@type": "Person",
     name: "Mohammed Wasim",
     url: "https://iamwasim.in",
-    image: "https://iamwasim.in/assets/images-videos/wasim.png",
+    image: "https://iamwasim.in/assets/images-videos/wasim-3.webp",
     jobTitle: "React and Next.js Frontend Developer",
     description:
       "React.js and Next.js freelancer building modern web applications, landing pages, and performant frontend experiences.",

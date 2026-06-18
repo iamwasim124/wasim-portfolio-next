@@ -16,7 +16,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 const HEADER_DATA = {
   logoText: "Mohammed Wasim",
-  logoSrc: "/assets/images-videos/logo.png",
+  logoSrc: "/assets/images-videos/logo-transparent.png",
   menu: [
     { label: "About", id: "about" },
     { label: "Skills", id: "skills" },
@@ -107,7 +107,7 @@ const HeaderComponent: FC<HeaderComponentProps> = ({ scrollY = 0 }) => {
         backdropFilter: mobileMenuOpen || scrollY > 0 ? "blur(10px)" : "none",
         borderBottom:
           scrollY > 0 ? `1px solid ${theme.palette.divider}` : "none",
-        py: { xs: 1, md: 2 },
+        py: 1,
         height: mobileMenuOpen ? "100vh" : "auto",
       }}
     >

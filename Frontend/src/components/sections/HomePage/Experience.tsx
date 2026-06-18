@@ -13,6 +13,7 @@ import {
 import { WorkHistory, EmojiEvents } from "@mui/icons-material";
 import theme from "@/theme/theme";
 import Reveal from "@/components/motion/Reveal";
+import AutoScroller from "@/components/motion/AutoScroller";
 
 type ExperienceItem = {
   title: string;
@@ -254,34 +255,7 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
             </Box>
           </Reveal>
 
-          <Box
-            sx={{
-              overflow: "hidden",
-              width: "100%",
-              position: "relative",
-            }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                gap: 3,
-                width: "max-content",
-                animation: "marquee 30s linear infinite",
-
-                "@keyframes marquee": {
-                  "0%": {
-                    transform: "translateX(0)",
-                  },
-                  "100%": {
-                    transform: "translateX(-50%)",
-                  },
-                },
-
-                "&:hover": {
-                  animationPlayState: "paused",
-                },
-              }}
-            >
+          <AutoScroller>
               {[...achievements, ...achievements].map((achievement, index) => (
                 <Card
                   key={index}
@@ -351,8 +325,7 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
                   </Typography>
                 </Card>
               ))}
-            </Box>
-          </Box>
+          </AutoScroller>
         </Box>
       </Container>
     </Box>

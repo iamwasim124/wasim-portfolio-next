@@ -64,9 +64,9 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/assets/images-videos/wasim.png",
-        width: 1200,
-        height: 1200,
+        url: "/assets/images-videos/wasim-3.webp",
+        width: 928,
+        height: 1138,
         alt: "Mohammed Wasim - React and Next.js Freelancer",
       },
     ],
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     title: "Mohammed Wasim | React & Next.js Freelancer Portfolio",
     description:
       "React.js and Next.js freelancer portfolio featuring frontend projects, services, and contact details.",
-    images: ["/assets/images-videos/wasim.png"],
+    images: ["/assets/images-videos/wasim-3.webp"],
   },
 };
 

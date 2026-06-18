@@ -114,7 +114,7 @@ const getHeroData = () => {
   return {
     greeting: "Hello, I'm",
     name: "Mohammed Wasim",
-    role: "React & Next.js Frontend Developer",
+    role: "React & Next.js Developer",
     description: "Freelance React.js and Next.js developer",
     resumeUrl: "/assets/files/resume.pdf",
     socials: {

@@ -1,13 +1,12 @@
 "use client";
 
-import { ChangeEvent, FC, useEffect, useRef, useState } from "react";
+import { ChangeEvent, FC, useRef, useState } from "react";
 import {
   Box,
   Container,
   Typography,
   Grid,
   Fade,
-  Slide,
   Paper,
   Divider,
   TextField,
@@ -21,29 +20,18 @@ import { AttachFile, Close, Email, Phone, Send } from "@mui/icons-material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import theme from "@/theme/theme";
+import Reveal from "@/components/motion/Reveal";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 const ACCEPTED_FILE_TYPES = ["application/pdf", "image/", "video/"];
 
 const Contact: FC = () => {
-  const ref = useRef<HTMLDivElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [visible, setVisible] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [fileError, setFileError] = useState("");
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => entry.isIntersecting && setVisible(true),
-      { threshold: 0.2 },
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
 
   const textFieldSx = {
     "& .MuiInputLabel-root": {
@@ -207,13 +195,18 @@ const Contact: FC = () => {
 
   return (
     <Box
-      ref={ref}
+      component="section"
       id="contact"
-      sx={{ py: { xs: 9, md: 12 }, bgcolor: "rgba(0, 0, 0, 0.3)" }}
+      aria-label="Contact Mohammed Wasim"
+      sx={{
+        pt: { xs: "92px", md: 12 },
+        pb: { xs: 9, md: 12 },
+        bgcolor: "rgba(0, 0, 0, 0.3)",
+      }}
     >
       <Container maxWidth="lg">
-        <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>
-          <Box sx={{ textAlign: "center", mb: 8 }}>
+        <Reveal sx={{ textAlign: "center", mb: 8 }}>
+          <Box sx={{ display: "contents" }}>
             <Typography
               variant="h2"
               sx={{
@@ -242,13 +235,9 @@ const Contact: FC = () => {
               Have a project in mind? Let&apos;s work together!
             </Typography>
           </Box>
-        </Fade>
+        </Reveal>
 
-        <Slide
-          direction="up"
-          in={isMobile ? true : visible}
-          timeout={isMobile ? 0 : 1200}
-        >
+        <Reveal delay={0.1}>
           <Paper
             elevation={0}
             sx={{
@@ -566,7 +555,7 @@ const Contact: FC = () => {
               </Box>
             </Box>
           </Paper>
-        </Slide>
+        </Reveal>
       </Container>
     </Box>
   );

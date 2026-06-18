@@ -1,9 +1,9 @@
 "use client";
 
-import React from "react";
 import { Box, Typography, Card, Container } from "@mui/material";
 
 import theme from "@/theme/theme";
+import Reveal from "@/components/motion/Reveal";
 
 const testimonials = [
   {
@@ -46,14 +46,17 @@ const testimonials = [
 const Testimonials = () => {
   return (
     <Box
+      component="section"
       id="testimonials"
+      aria-label="Client testimonials"
       sx={{
-        py: { xs: 9, md: 12 },
+        pt: { xs: "92px", md: 12 },
+        pb: { xs: 9, md: 12 },
         overflow: "hidden",
       }}
     >
       <Container maxWidth="xl">
-        <Box sx={{ textAlign: "center", mb: 6 }}>
+        <Reveal sx={{ textAlign: "center", mb: 6 }}>
           <Typography
             variant="h2"
             sx={{
@@ -75,7 +78,7 @@ const Testimonials = () => {
               borderRadius: 2,
             }}
           />
-        </Box>
+        </Reveal>
 
         <Box
           sx={{

@@ -21,6 +21,7 @@ import profilePicture from "../../../../public/assets/images-videos/wasim-3.png"
 import Image, { type StaticImageData } from "next/image";
 import { FC } from "react";
 import theme from "@/theme/theme";
+import Reveal from "@/components/motion/Reveal";
 
 interface HeroProps {
   data: {
@@ -75,13 +76,16 @@ const Hero: FC<HeroProps> = ({ data }) => {
 
   return (
     <Box
+      component="section"
       id="hero"
+      aria-label="Introduction"
       sx={{
         position: "relative",
         minHeight: "100vh",
         display: "flex",
         alignItems: "center",
-        pt: { xs: "80px", md: 0 },
+        pt: { xs: "110px", md: "120px" },
+        pb: { xs: "40px", md: "60px" },
       }}
     >
       <Container maxWidth="xl">
@@ -92,21 +96,7 @@ const Hero: FC<HeroProps> = ({ data }) => {
           justifyContent={"space-between"}
         >
           <Grid size={{ xs: 12, md: 6 }}>
-            <Box
-              sx={{
-                animation: "heroTextReveal 900ms ease-out both",
-                "@keyframes heroTextReveal": {
-                  "0%": {
-                    opacity: 0,
-                    transform: "translateY(28px)",
-                  },
-                  "100%": {
-                    opacity: 1,
-                    transform: "translateY(0)",
-                  },
-                },
-              }}
-            >
+            <Reveal immediate y={28}>
               <Typography
                 variant="h6"
                 component="p"
@@ -244,14 +234,14 @@ const Hero: FC<HeroProps> = ({ data }) => {
                   </Tooltip>
                 ))}
               </Box>
-            </Box>
+            </Reveal>
           </Grid>
           <Grid size={{ xs: 12, md: 5 }}>
-            <Box
-              sx={{
-                position: "relative",
-                animation: "heroImageReveal 1100ms ease-out both",
-                "&::before": {
+            <Reveal immediate y={34} delay={0.15}>
+              <Box
+                sx={{
+                  position: "relative",
+                  "&::before": {
                   content: '""',
                   position: "absolute",
                   top: -20,
@@ -261,16 +251,6 @@ const Hero: FC<HeroProps> = ({ data }) => {
                   border: `3px solid ${theme.palette.primary.main}`,
                   borderRadius: "30% 70% 70% 30% / 30% 30% 70% 70%",
                   animation: "morphing 8s ease-in-out infinite",
-                },
-                "@keyframes heroImageReveal": {
-                  "0%": {
-                    opacity: 0,
-                    transform: "translateY(34px) scale(0.96)",
-                  },
-                  "100%": {
-                    opacity: 1,
-                    transform: "translateY(0) scale(1)",
-                  },
                 },
                 "@keyframes morphing": {
                   "0%, 100%": {
@@ -300,7 +280,7 @@ const Hero: FC<HeroProps> = ({ data }) => {
               >
                 <Image
                   src={data?.image || profilePicture}
-                  alt="Mohammed Wasim"
+                  alt="Mohammed Wasim — React and Next.js freelance frontend developer"
                   fill
                   priority
                   fetchPriority="high"
@@ -308,7 +288,8 @@ const Hero: FC<HeroProps> = ({ data }) => {
                   style={{ objectFit: "cover" }}
                 />
               </Box>
-            </Box>
+              </Box>
+            </Reveal>
           </Grid>
         </Grid>
         <Box

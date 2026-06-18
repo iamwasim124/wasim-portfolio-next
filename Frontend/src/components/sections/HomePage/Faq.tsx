@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
 import theme from "@/theme/theme";
+import Reveal from "@/components/motion/Reveal";
 
 type FaqItem = {
   question: string;
@@ -24,9 +25,18 @@ interface FaqProps {
 const Faq: FC<FaqProps> = ({ items }) => {
   return (
     <>
-      <Box id="faq" sx={{ py: { xs: 9, md: 12 }, bgcolor: "rgba(0,0,0,0.3)" }}>
+      <Box
+        component="section"
+        id="faq"
+        aria-label="Frequently asked questions"
+        sx={{
+          pt: { xs: "92px", md: 12 },
+          pb: { xs: 9, md: 12 },
+          bgcolor: "rgba(0,0,0,0.3)",
+        }}
+      >
         <Container maxWidth="xl">
-          <Box sx={{ textAlign: "center", mb: 6 }}>
+          <Reveal sx={{ textAlign: "center", mb: 6 }}>
             <Typography
               variant="h2"
               sx={{
@@ -59,23 +69,23 @@ const Faq: FC<FaqProps> = ({ items }) => {
               Answers to common questions about my React.js, Next.js, frontend
               development, SEO, and freelance web development services.
             </Typography>
-          </Box>
+          </Reveal>
 
           <Box sx={{ display: "grid", gap: 2 }}>
-            {items.map((item) => (
-              <Accordion
-                key={item.question}
-                disableGutters
-                elevation={0}
-                sx={{
-                  bgcolor: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  borderRadius: "16px !important",
-                  "&:before": {
-                    display: "none",
-                  },
-                }}
-              >
+            {items.map((item, index) => (
+              <Reveal key={item.question} delay={index * 0.06} y={24}>
+                <Accordion
+                  disableGutters
+                  elevation={0}
+                  sx={{
+                    bgcolor: "rgba(255,255,255,0.05)",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    borderRadius: "16px !important",
+                    "&:before": {
+                      display: "none",
+                    },
+                  }}
+                >
                 <AccordionSummary
                   expandIcon={
                     <ExpandMore sx={{ color: theme.palette.primary.main }} />
@@ -85,12 +95,13 @@ const Faq: FC<FaqProps> = ({ items }) => {
                     {item.question}
                   </Typography>
                 </AccordionSummary>
-                <AccordionDetails>
-                  <Typography sx={{ color: "rgba(255,255,255,0.88)" }}>
-                    {item.answer}
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
+                  <AccordionDetails>
+                    <Typography sx={{ color: "rgba(255,255,255,0.88)" }}>
+                      {item.answer}
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
+              </Reveal>
             ))}
           </Box>
         </Container>

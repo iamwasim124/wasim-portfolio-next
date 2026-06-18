@@ -1,79 +1,60 @@
 "use client";
 
-import { FC, useEffect, useRef, useState } from "react";
+import { FC } from "react";
 import {
   Box,
   Container,
   Typography,
   Grid,
-  Fade,
-  Zoom,
   Card,
   CardContent,
   Chip,
-  useMediaQuery,
 } from "@mui/material";
 import theme from "@/theme/theme";
+import Reveal from "@/components/motion/Reveal";
 
 interface SkillsProps {
   skills: Record<string, string[]>;
 }
 
 const Skills: FC<SkillsProps> = ({ skills }) => {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [visible, setVisible] = useState(false);
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setVisible(true);
-      },
-      { threshold: 0.25 },
-    );
-
-    if (ref.current) observer.observe(ref.current);
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <Box
-      ref={ref}
+      component="section"
       id="skills"
+      aria-label="Technical skills"
       sx={{
-        py: { xs: 9, md: 12 },
+        pt: { xs: "92px", md: 12 },
+        pb: { xs: 9, md: 12 },
         position: "relative",
         bgcolor: "rgba(0,0,0,.3)",
       }}
     >
       <Container maxWidth="xl">
         {/* Title */}
-        <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>
-          <Box sx={{ textAlign: "center", mb: 8 }}>
-            <Typography
-              variant="h2"
-              sx={{
-                mb: 2,
-                background: `linear-gradient(135deg, ${theme.palette.secondary.main}, ${theme.palette.primary.main})`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              Technical Skills
-            </Typography>
+        <Reveal sx={{ textAlign: "center", mb: 8 }}>
+          <Typography
+            variant="h2"
+            sx={{
+              mb: 2,
+              background: `linear-gradient(135deg, ${theme.palette.secondary.main}, ${theme.palette.primary.main})`,
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            Technical Skills
+          </Typography>
 
-            <Box
-              sx={{
-                width: 100,
-                height: 4,
-                bgcolor: theme.palette.primary.main,
-                mx: "auto",
-                borderRadius: 2,
-              }}
-            />
-          </Box>
-        </Fade>
+          <Box
+            sx={{
+              width: 100,
+              height: 4,
+              bgcolor: theme.palette.primary.main,
+              mx: "auto",
+              borderRadius: 2,
+            }}
+          />
+        </Reveal>
 
         <Grid container spacing={3}>
           {Object.entries(skills).map(([category, items], index) => {
@@ -81,10 +62,7 @@ const Skills: FC<SkillsProps> = ({ skills }) => {
 
             return (
               <Grid key={category} size={{ xs: 12, md: 6 }}>
-                <Zoom
-                  in={isMobile ? true : visible}
-                  timeout={isMobile ? 0 : 900 + index * 200}
-                >
+                <Reveal delay={index * 0.1} sx={{ height: "100%" }}>
                   <Card
                     sx={{
                       bgcolor: "rgba(255,255,255,.05)",
@@ -140,7 +118,7 @@ const Skills: FC<SkillsProps> = ({ skills }) => {
                       </Box>
                     </CardContent>
                   </Card>
-                </Zoom>
+                </Reveal>
               </Grid>
             );
           })}

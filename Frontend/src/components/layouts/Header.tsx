@@ -91,14 +91,13 @@ const HeaderComponent: FC<HeaderComponentProps> = ({ scrollY = 0 }) => {
         bottom: "auto",
         zIndex: 1000,
         bgcolor:
-          mobileMenuOpen || scrollY > 100
+          mobileMenuOpen || scrollY > 0
             ? theme.palette.background.default
             : "transparent",
-        backdropFilter: mobileMenuOpen || scrollY > 100 ? "blur(10px)" : "none",
+        backdropFilter: mobileMenuOpen || scrollY > 0 ? "blur(10px)" : "none",
         borderBottom:
-          scrollY > 100 ? `1px solid ${theme.palette.divider}` : "none",
-        transition: "all .3s ease",
-        py: 2,
+          scrollY > 0 ? `1px solid ${theme.palette.divider}` : "none",
+        py: { xs: 1, md: 2 },
         height: mobileMenuOpen ? "100vh" : "auto",
       }}
     >

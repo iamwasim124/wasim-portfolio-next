@@ -1,19 +1,10 @@
 "use client";
 
-import { FC, useEffect, useRef, useState } from "react";
-import {
-  Box,
-  Container,
-  Typography,
-  Grid,
-  Fade,
-  Zoom,
-  Card,
-  Chip,
-  useMediaQuery,
-} from "@mui/material";
+import { FC } from "react";
+import { Box, Container, Typography, Grid, Card, Chip } from "@mui/material";
 import { Web } from "@mui/icons-material";
 import theme from "@/theme/theme";
+import Reveal from "@/components/motion/Reveal";
 
 interface Project {
   name: string;
@@ -26,67 +17,52 @@ interface Props {
 }
 
 const Projects: FC<Props> = ({ projects }) => {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [visible, setVisible] = useState(false);
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => entry.isIntersecting && setVisible(true),
-      { threshold: 0.2 },
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <Box
-      ref={ref}
+      component="section"
       id="projects"
+      aria-label="Featured projects"
       sx={{
-        py: { xs: 9, md: 12 },
+        pt: { xs: "92px", md: 12 },
+        pb: { xs: 9, md: 12 },
         position: "relative",
         bgcolor: "rgba(0, 0, 0, 0.3)",
       }}
     >
       <Container maxWidth="xl">
-        <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>
-          <Box sx={{ textAlign: "center", mb: 8 }}>
-            <Typography
-              variant="h2"
-              sx={{
-                mb: 2,
-                background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              Featured Projects
-            </Typography>
-            <Box
-              sx={{
-                width: 100,
-                height: 4,
-                bgcolor: theme.palette.primary.main,
-                margin: "0 auto",
-                borderRadius: 2,
-              }}
-            />
-          </Box>
-        </Fade>
+        <Reveal sx={{ textAlign: "center", mb: 8 }}>
+          <Typography
+            variant="h2"
+            sx={{
+              mb: 2,
+              background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            Featured Projects
+          </Typography>
+          <Box
+            sx={{
+              width: 100,
+              height: 4,
+              bgcolor: theme.palette.primary.main,
+              margin: "0 auto",
+              borderRadius: 2,
+            }}
+          />
+        </Reveal>
 
         <Grid container spacing={3} sx={{ justifyContent: "center" }}>
           {projects.map((project, index) => (
             <Grid key={index} size={{ xs: 12, sm: 6, md: 4 }}>
-              <Zoom
-                in={isMobile ? true : visible}
-                timeout={isMobile ? 0 : 1000 + index * 100}
-              >
+              <Reveal delay={index * 0.08} sx={{ height: "100%" }}>
                 <Card
                   component="a"
                   href={project.url}
                   target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Open project ${project.name} in a new tab`}
                   sx={{
                     textDecoration: "none",
                     bgcolor: "rgba(255, 255, 255, 0.05)",
@@ -159,23 +135,21 @@ const Projects: FC<Props> = ({ projects }) => {
                     ))}
                   </Box>
                 </Card>
-              </Zoom>
+              </Reveal>
             </Grid>
           ))}
         </Grid>
 
-        <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1600}>
-          <Box sx={{ textAlign: "center", mt: 6 }}>
-            <Typography
-              variant="h6"
-              component="p"
-              sx={{ color: theme.palette.text.primary }}
-            >
-              + Multiple other projects including maintenance and client support
-              work
-            </Typography>
-          </Box>
-        </Fade>
+        <Reveal sx={{ textAlign: "center", mt: 6 }}>
+          <Typography
+            variant="h6"
+            component="p"
+            sx={{ color: theme.palette.text.primary }}
+          >
+            + Multiple other projects including maintenance and client support
+            work
+          </Typography>
+        </Reveal>
       </Container>
     </Box>
   );

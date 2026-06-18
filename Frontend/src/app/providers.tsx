@@ -11,6 +11,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     <AppRouterCacheProvider>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+
         {children}
       </ThemeProvider>
     </AppRouterCacheProvider>

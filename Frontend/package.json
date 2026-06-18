@@ -17,9 +17,11 @@
     "@mui/material": "^7.3.8",
     "@mui/material-nextjs": "^7.3.8",
     "formik": "^2.4.9",
+    "framer-motion": "^12.40.0",
     "mui": "^0.0.1",
     "next": "16.1.6",
     "nodemailer": "^8.0.5",
+    "qrcode.react": "^4.2.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "yup": "^1.7.1"

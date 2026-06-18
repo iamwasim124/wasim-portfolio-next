@@ -2,7 +2,7 @@ const getHeroData = () => {
   return {
     greeting: "Hello, I'm",
     name: "Mohammed Wasim",
-    role: "React & Next.js Frontend Developer",
+    role: "React & Next.js Developer",
     description:
       "Freelance React.js and Next.js developer with 4.5 years of experience building scalable web applications, landing pages, and SEO-friendly frontend experiences for modern businesses.",
     resumeUrl: "/assets/files/resume.pdf",

@@ -1,21 +1,18 @@
 "use client";
 
-import { FC, useEffect, useRef, useState } from "react";
+import { FC } from "react";
 import {
   Box,
   Container,
   Typography,
   Grid,
-  Fade,
-  Slide,
   Paper,
   Divider,
-  Zoom,
   Card,
-  useMediaQuery,
 } from "@mui/material";
 import { WorkHistory, EmojiEvents } from "@mui/icons-material";
 import theme from "@/theme/theme";
+import Reveal from "@/components/motion/Reveal";
 
 type ExperienceItem = {
   title: string;
@@ -38,29 +35,20 @@ interface Props {
 }
 
 const Experience: FC<Props> = ({ experience, achievements }) => {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [visible, setVisible] = useState(false);
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => entry.isIntersecting && setVisible(true),
-      { threshold: 0.2 },
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <Box
-      ref={ref}
+      component="section"
       id="experience"
-      sx={{ py: { xs: 8, md: 12 }, position: "relative" }}
+      aria-label="Work experience and achievements"
+      sx={{
+        pt: { xs: "92px", md: 12 },
+        pb: { xs: 9, md: 12 },
+        position: "relative",
+      }}
     >
       <Container maxWidth="xl">
-        <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>
-          <Box sx={{ textAlign: "center", mb: 8 }}>
+        <Reveal sx={{ textAlign: "center", mb: 8 }}>
+          <Box sx={{ display: "contents" }}>
             <Typography
               variant="h2"
               sx={{
@@ -82,7 +70,7 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
               }}
             />
           </Box>
-        </Fade>
+        </Reveal>
 
         <Box sx={{ position: "relative" }}>
           {/* Timeline Line */}
@@ -100,19 +88,14 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
           />
 
           {experience.map((job, index) => (
-            <Slide
+            <Reveal
               key={index}
-              direction={index % 2 === 0 ? "left" : "right"}
-              in={isMobile ? true : visible}
-              timeout={isMobile ? 0 : 800 + index * 200}
+              delay={index * 0.12}
+              sx={{
+                position: "relative",
+                mb: { xs: 0, md: 6 },
+              }}
             >
-              <Box
-                sx={{
-                  position: "relative",
-                  mb: { xs: 0, md: 6 },
-                  // ml: { xs: 6, md: 0 },
-                }}
-              >
                 {/* Timeline Dot */}
                 <Box
                   sx={{
@@ -240,15 +223,14 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
                     sx={{ order: { md: index % 2 === 0 ? 2 : 1 } }}
                   />
                 </Grid>
-              </Box>
-            </Slide>
+            </Reveal>
           ))}
         </Box>
 
         {/* Achievements */}
         <Box sx={{ mt: { xs: 9, md: 12 }, overflow: "hidden" }}>
-          <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>
-            <Box sx={{ textAlign: "center", mb: 6 }}>
+          <Reveal sx={{ textAlign: "center", mb: 6 }}>
+            <Box sx={{ display: "contents" }}>
               <Typography
                 variant="h3"
                 sx={{
@@ -270,7 +252,7 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
                 }}
               />
             </Box>
-          </Fade>
+          </Reveal>
 
           <Box
             sx={{

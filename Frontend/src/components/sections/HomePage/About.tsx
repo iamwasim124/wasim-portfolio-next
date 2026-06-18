@@ -1,19 +1,17 @@
 "use client";
 
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useState } from "react";
 import {
   Box,
   Container,
   Typography,
   Grid,
-  Fade,
-  Slide,
   Paper,
   Button,
-  useMediaQuery,
 } from "@mui/material";
 import { Code, Speed, School } from "@mui/icons-material";
 import theme from "@/theme/theme";
+import Reveal from "@/components/motion/Reveal";
 
 type AboutData = {
   title?: string;
@@ -40,66 +38,49 @@ interface AboutProps {
 }
 
 const About: FC<AboutProps> = ({ data }) => {
-  const sectionRef = useRef<HTMLDivElement | null>(null);
-  const [visible, setVisible] = useState(false);
   const [showAll, setShowAll] = useState(false);
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setVisible(true);
-      },
-      { threshold: 0.25 },
-    );
-
-    if (sectionRef.current) observer.observe(sectionRef.current);
-
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <Box
-      ref={sectionRef}
+      component="section"
       id="about"
-      sx={{ py: { xs: 9, md: 12 }, position: "relative" }}
+      aria-label="About Mohammed Wasim"
+      sx={{
+        pt: { xs: "92px", md: 12 },
+        pb: { xs: 9, md: 12 },
+        position: "relative",
+      }}
     >
       <Container maxWidth="xl">
         {/* Title */}
-        <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>
-          <Box sx={{ textAlign: "center", mb: 8 }}>
-            <Typography
-              variant="h2"
-              sx={{
-                mb: 2,
-                background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              {data?.title || "About Me"}
-            </Typography>
+        <Reveal sx={{ textAlign: "center", mb: 8 }}>
+          <Typography
+            variant="h2"
+            sx={{
+              mb: 2,
+              background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            {data?.title || "About Me"}
+          </Typography>
 
-            <Box
-              sx={{
-                width: 100,
-                height: 4,
-                bgcolor: theme.palette.secondary.main,
-                mx: "auto",
-                borderRadius: 2,
-              }}
-            />
-          </Box>
-        </Fade>
+          <Box
+            sx={{
+              width: 100,
+              height: 4,
+              bgcolor: theme.palette.secondary.main,
+              mx: "auto",
+              borderRadius: 2,
+            }}
+          />
+        </Reveal>
 
         <Grid container spacing={4} alignItems="stretch">
           {/* Left */}
           <Grid size={{ xs: 12 }}>
-            <Slide
-              direction="right"
-              in={isMobile ? true : visible}
-              timeout={isMobile ? 0 : 1000}
-            >
+            <Reveal>
               <Paper
                 elevation={0}
                 sx={{
@@ -179,16 +160,12 @@ const About: FC<AboutProps> = ({ data }) => {
                   </Button>
                 </Box>
               </Paper>
-            </Slide>
+            </Reveal>
           </Grid>
 
           {/* Right */}
           <Grid size={{ xs: 12, md: 6 }}>
-            <Slide
-              direction="up"
-              in={isMobile ? true : visible}
-              timeout={isMobile ? 0 : 1200}
-            >
+            <Reveal delay={0.1} sx={{ height: "100%" }}>
               <Paper
                 elevation={0}
                 sx={{
@@ -238,14 +215,10 @@ const About: FC<AboutProps> = ({ data }) => {
                   </Box>
                 ))}
               </Paper>
-            </Slide>
+            </Reveal>
           </Grid>
           <Grid size={{ xs: 12, md: 6 }}>
-            <Slide
-              direction="left"
-              in={isMobile ? true : visible}
-              timeout={isMobile ? 0 : 1200}
-            >
+            <Reveal delay={0.2} sx={{ height: "100%" }}>
               <Paper
                 elevation={0}
                 sx={{
@@ -295,7 +268,7 @@ const About: FC<AboutProps> = ({ data }) => {
                   </Box>
                 ))}
               </Paper>
-            </Slide>
+            </Reveal>
           </Grid>
         </Grid>
       </Container>

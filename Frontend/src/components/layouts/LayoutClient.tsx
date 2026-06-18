@@ -27,7 +27,7 @@ export default function LayoutClient({
       }}
     >
       <HeaderComponent scrollY={scrollY} />
-      {children}
+      <Box component="main">{children}</Box>
       <FooterComponet />
     </Box>
   );

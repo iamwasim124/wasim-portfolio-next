@@ -1,20 +1,18 @@
 "use client";
 
-import { FC, useEffect, useRef, useState } from "react";
+import { FC } from "react";
 import {
   Box,
   Container,
   Typography,
   Grid,
-  Fade,
-  Zoom,
   Card,
   CardContent,
   Chip,
-  useMediaQuery,
 } from "@mui/material";
 import { Web, Speed, Code } from "@mui/icons-material";
 import theme from "@/theme/theme";
+import Reveal from "@/components/motion/Reveal";
 
 type ServiceItem = {
   title: string;
@@ -36,63 +34,49 @@ interface Props {
 const icons = [<Web key="web" />, <Code key="code" />, <Speed key="speed" />];
 
 const Services: FC<Props> = ({ data }) => {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [visible, setVisible] = useState(false);
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => entry.isIntersecting && setVisible(true),
-      { threshold: 0.25 },
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <Box ref={ref} id="services" sx={{ py: { xs: 9, md: 12 } }}>
+    <Box
+      component="section"
+      id="services"
+      aria-label="Freelance services"
+      sx={{ pt: { xs: "92px", md: 12 }, pb: { xs: 9, md: 12 } }}
+    >
       <Container maxWidth="xl">
         {/* Title */}
-        <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1000}>
-          <Box textAlign="center" mb={5}>
-            <Typography
-              variant="h2"
-              sx={{
-                mb: 2,
-                background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              {data.heading}
-            </Typography>
-            <Box
-              sx={{
-                width: 100,
-                height: 4,
-                bgcolor: theme.palette.secondary.main,
-                mx: "auto",
-                borderRadius: 2,
-              }}
-            />
-            <Typography
-              variant="body1"
-              sx={{ mt: 2, color: theme.palette.text.secondary }}
-            >
-              {data.subHeading}
-            </Typography>
-          </Box>
-        </Fade>
+        <Reveal sx={{ textAlign: "center", mb: 5 }}>
+          <Typography
+            variant="h2"
+            sx={{
+              mb: 2,
+              background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            {data.heading}
+          </Typography>
+          <Box
+            sx={{
+              width: 100,
+              height: 4,
+              bgcolor: theme.palette.secondary.main,
+              mx: "auto",
+              borderRadius: 2,
+            }}
+          />
+          <Typography
+            variant="body1"
+            sx={{ mt: 2, color: theme.palette.text.secondary }}
+          >
+            {data.subHeading}
+          </Typography>
+        </Reveal>
 
         {/* Services Cards */}
         <Grid container spacing={3}>
           {data.services.map((service, index: number) => (
             <Grid key={index} size={{ xs: 12, md: 4 }}>
-              <Zoom
-                in={isMobile ? true : visible}
-                timeout={isMobile ? 0 : 900 + index * 200}
-              >
+              <Reveal delay={index * 0.1} sx={{ height: "100%" }}>
                 <Card
                   sx={{
                     bgcolor: "rgba(255,255,255,.05)",
@@ -137,46 +121,45 @@ const Services: FC<Props> = ({ data }) => {
                     </Typography>
                   </CardContent>
                 </Card>
-              </Zoom>
+              </Reveal>
             </Grid>
           ))}
         </Grid>
 
         {/* Why Choose */}
-        <Fade in={isMobile ? true : visible} timeout={isMobile ? 0 : 1400}>
-          <Box
-            sx={{
-              mt: 5,
-              p: 4,
-              bgcolor: "rgba(255,255,255,.05)",
-              backdropFilter: "blur(10px)",
-              borderRadius: 4,
-              border: "1px solid rgba(255,255,255,.1)",
-            }}
-          >
-            <Typography variant="h5" component="h3" mb={3}>
-              Why Choose Me?
-            </Typography>
+        <Reveal
+          delay={0.1}
+          sx={{
+            mt: 5,
+            p: 4,
+            bgcolor: "rgba(255,255,255,.05)",
+            backdropFilter: "blur(10px)",
+            borderRadius: 4,
+            border: "1px solid rgba(255,255,255,.1)",
+          }}
+        >
+          <Typography variant="h5" component="h3" mb={3}>
+            Why Choose Me?
+          </Typography>
 
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-              {data.whyChoose.map((item: string, i: number) => (
-                <Chip
-                  key={i}
-                  label={item}
-                  sx={{
-                    bgcolor: "rgba(255,255,255,.08)",
-                    color: theme.palette.text.primary,
-                    "&:hover": {
-                      bgcolor: "rgba(0,216,233,.2)",
-                    },
-                    p: "8px",
-                    typography: "body1",
-                  }}
-                />
-              ))}
-            </Box>
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+            {data.whyChoose.map((item: string, i: number) => (
+              <Chip
+                key={i}
+                label={item}
+                sx={{
+                  bgcolor: "rgba(255,255,255,.08)",
+                  color: theme.palette.text.primary,
+                  "&:hover": {
+                    bgcolor: "rgba(0,216,233,.2)",
+                  },
+                  p: "8px",
+                  typography: "body1",
+                }}
+              />
+            ))}
           </Box>
-        </Fade>
+        </Reveal>
       </Container>
     </Box>
   );

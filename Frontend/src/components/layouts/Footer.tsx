@@ -3,6 +3,7 @@
 import { Box, Container, Typography, IconButton, Tooltip } from "@mui/material";
 import { GitHub, LinkedIn, Email, Phone } from "@mui/icons-material";
 import theme from "@/theme/theme";
+import BusinessCardModal from "./BusinessCardModal";
 
 const FooterComponent = () => {
   const SOCIALS = [
@@ -79,6 +80,9 @@ const FooterComponent = () => {
               )}
             </Tooltip>
           ))}
+
+          {/* Digital visiting card */}
+          <BusinessCardModal />
         </Box>
 
         {/* Copyright */}

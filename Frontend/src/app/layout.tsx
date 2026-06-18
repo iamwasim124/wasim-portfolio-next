@@ -1,7 +1,7 @@
 import LayoutClient from "@/components/layouts/LayoutClient";
 import Providers from "./providers";
 import { Montserrat } from "next/font/google";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -35,9 +35,11 @@ export const metadata: Metadata = {
     "TypeScript frontend developer",
     "Portfolio website",
   ],
-  authors: [{ name: "Mohammed Wasim" }],
+  authors: [{ name: "Mohammed Wasim", url: siteUrl }],
   creator: "Mohammed Wasim",
   publisher: "Mohammed Wasim",
+  applicationName: "Mohammed Wasim Portfolio",
+  category: "technology",
   alternates: {
     canonical: "/",
   },
@@ -76,6 +78,13 @@ export const metadata: Metadata = {
       "React.js and Next.js freelancer portfolio featuring frontend projects, services, and contact details.",
     images: ["/assets/images-videos/wasim.png"],
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  colorScheme: "dark",
+  themeColor: "#0a0e1a",
 };
 
 export default function RootLayout({

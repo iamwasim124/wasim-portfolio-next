@@ -2,7 +2,6 @@
 
 import { Box, useMediaQuery } from "@mui/material";
 import theme from "@/theme/theme";
-import { useEffect, useState } from "react";
 import Hero from "@/components/sections/HomePage/Hero";
 import About from "@/components/sections/HomePage/About";
 import Skills from "@/components/sections/HomePage/Skills";
@@ -49,6 +48,21 @@ export default function Home() {
     email: "mailto:iamwasim124@gmail.com",
     telephone: "+91 8123833968",
     sameAs: ["https://linkedin.com/in/iamwasim124"],
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "IN",
+    },
+    nationality: "Indian",
+    hasOccupation: {
+      "@type": "Occupation",
+      name: "Frontend Developer",
+      occupationLocation: {
+        "@type": "Country",
+        name: "India",
+      },
+      skills:
+        "React.js, Next.js, TypeScript, Frontend Development, SEO, Responsive Web Design",
+    },
     knowsAbout: [
       "React.js",
       "Next.js",

@@ -1,4 +1,28 @@
 import { createTheme } from "@mui/material/styles";
+import type { CSSProperties } from "react";
+
+// Register the custom body3/body4/body5 typography variants with the types,
+// so `variant="body5"` and `sx={{ typography: "body5" }}` are valid everywhere.
+declare module "@mui/material/styles" {
+  interface TypographyVariants {
+    body3: CSSProperties;
+    body4: CSSProperties;
+    body5: CSSProperties;
+  }
+  interface TypographyVariantsOptions {
+    body3?: CSSProperties;
+    body4?: CSSProperties;
+    body5?: CSSProperties;
+  }
+}
+
+declare module "@mui/material/Typography" {
+  interface TypographyPropsVariantOverrides {
+    body3: true;
+    body4: true;
+    body5: true;
+  }
+}
 
 const theme = createTheme({
   palette: {
@@ -112,9 +136,37 @@ const theme = createTheme({
       fontSize: "clamp(0.9rem, 1vw, 1rem)",
       letterSpacing: "0.01em",
     },
+    body3: {
+      fontWeight: 400,
+      lineHeight: 1.5,
+      fontSize: "clamp(0.7rem, 0.8vw, 0.8rem)",
+      letterSpacing: "0.01em",
+    },
+    body4: {
+      fontWeight: 400,
+      lineHeight: 1.4,
+      fontSize: "clamp(0.65rem, 0.6vw, 0.73rem)",
+      letterSpacing: "0.01em",
+    },
+    body5: {
+      fontWeight: 400,
+      lineHeight: 1.3,
+      fontSize: "clamp(0.5rem, 0.5vw, 0.6rem)",
+      letterSpacing: "0.01em",
+    },
   },
 
   components: {
+    MuiTypography: {
+      defaultProps: {
+        variantMapping: {
+          body3: "p",
+          body4: "p",
+          body5: "p",
+        },
+      },
+    },
+
     MuiButton: {
       styleOverrides: {
         root: {

@@ -101,7 +101,7 @@ const FooterComponent = () => {
               underline="none"
               sx={{
                 display: "inline-block",
-                typography: "h5",
+                typography: "h6",
                 fontWeight: 700,
                 background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
                 WebkitBackgroundClip: "text",

@@ -9,6 +9,7 @@ import {
   Link,
 } from "@mui/material";
 import { GitHub, LinkedIn, Email, Phone } from "@mui/icons-material";
+import { alpha } from "@mui/material/styles";
 import NextLink from "next/link";
 import theme from "@/theme/theme";
 import BusinessCardModal from "@/components/common/BusinessCardModal";
@@ -29,7 +30,7 @@ const FooterComponent = () => {
       component="footer"
       sx={{
         py: 4,
-        borderTop: "1px solid rgba(255,255,255,0.1)",
+        borderTop: `1px solid ${alpha(theme.palette.common.white, 0.1)}`,
         textAlign: "center",
       }}
     >
@@ -100,7 +101,7 @@ const FooterComponent = () => {
               underline="none"
               sx={{
                 display: "inline-block",
-                fontSize: "1.3rem",
+                typography: "h5",
                 fontWeight: 700,
                 background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
                 WebkitBackgroundClip: "text",

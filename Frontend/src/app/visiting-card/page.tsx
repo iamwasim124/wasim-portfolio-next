@@ -11,6 +11,7 @@ import {
 } from "@mui/icons-material";
 import { QRCodeSVG } from "qrcode.react";
 import { toPng } from "html-to-image";
+import { alpha } from "@mui/material/styles";
 import theme from "@/theme/theme";
 import { cardData as CARD, type CardContactIcon } from "@/data/card";
 
@@ -37,8 +38,8 @@ const faceSx = {
   height: H,
   borderRadius: "20px",
   overflow: "hidden",
-  border: "1px solid rgba(255,255,255,0.12)",
-  boxShadow: "0 24px 70px rgba(0,0,0,0.55)",
+  border: `1px solid ${alpha(C.common.white, 0.12)}`,
+  boxShadow: `0 24px 70px ${alpha(C.common.black, 0.55)}`,
   display: "flex",
 } as const;
 
@@ -96,7 +97,7 @@ export default function VisitingCardPage() {
     const dataUrl = await toPng(ref.current, {
       pixelRatio: 5, // 400px → 2000px wide ≈ print quality
       cacheBust: true,
-      backgroundColor: "#0a0e1a",
+      backgroundColor: C.background.default,
     });
     const link = document.createElement("a");
     link.download = filename;
@@ -108,8 +109,8 @@ export default function VisitingCardPage() {
     <Box
       sx={{
         flexGrow: 1,
-        bgcolor: "#070b14",
-        color: "#fff",
+        bgcolor: C.surface.dark1,
+        color: C.common.white,
         py: 10,
         px: 2,
         display: "flex",
@@ -124,7 +125,7 @@ export default function VisitingCardPage() {
         <Typography variant="h5" sx={{ fontWeight: 800, mb: 1 }}>
           Visiting Card — Download
         </Typography>
-        <Typography sx={{ color: "rgba(255,255,255,0.7)", mb: 3 }}>
+        <Typography sx={{ color: alpha(C.common.white, 0.7), mb: 3 }}>
           Download each side as a high-resolution PNG
         </Typography>
         <Stack
@@ -138,7 +139,7 @@ export default function VisitingCardPage() {
             variant="contained"
             startIcon={<Download />}
             onClick={() => downloadPng(frontRef, "visiting-card-front.png")}
-            sx={{ bgcolor: theme.palette.primary.main, color: "#0a0e1a" }}
+            sx={{ bgcolor: C.primary.main, color: C.background.default }}
           >
             Front PNG
           </Button>
@@ -146,7 +147,7 @@ export default function VisitingCardPage() {
             variant="contained"
             startIcon={<Download />}
             onClick={() => downloadPng(backRef, "visiting-card-back.png")}
-            sx={{ bgcolor: theme.palette.secondary.main, color: "#fff" }}
+            sx={{ bgcolor: C.secondary.main, color: C.common.white }}
           >
             Back PNG
           </Button>
@@ -170,8 +171,8 @@ export default function VisitingCardPage() {
             sx={{
               mb: 1,
               textAlign: "center",
-              color: "rgba(255,255,255,0.6)",
-              fontSize: "0.8rem",
+              color: alpha(C.common.white, 0.6),
+              typography: "body3",
             }}
           >
             Front
@@ -203,7 +204,7 @@ export default function VisitingCardPage() {
                   position: "absolute",
                   inset: 0,
                   background:
-                    "linear-gradient(180deg, rgba(10,14,26,0.15) 63%, rgba(10,14,26,0.55) 75%, rgba(10,14,26,0.96) 100%)",
+                    `linear-gradient(180deg, ${alpha(C.background.default, 0.15)} 63%, ${alpha(C.background.default, 0.55)} 75%, ${alpha(C.background.default, 0.96)} 100%)`,
                 }}
               />
               {/* Logo top-left */}
@@ -285,8 +286,8 @@ export default function VisitingCardPage() {
             sx={{
               mb: 1,
               textAlign: "center",
-              color: "rgba(255,255,255,0.6)",
-              fontSize: "0.8rem",
+              color: alpha(C.common.white, 0.6),
+              typography: "body3",
             }}
           >
             Back
@@ -299,7 +300,7 @@ export default function VisitingCardPage() {
                 flexDirection: "column",
                 p: 2.5,
                 background:
-                  "linear-gradient(135deg, #131a30 0%, #0a0e1a 55%, #0b1022 100%)",
+                  `linear-gradient(135deg, ${C.surface.dark3} 0%, ${C.background.default} 55%, ${C.surface.dark2} 100%)`,
               }}
             >
               <Box
@@ -311,7 +312,7 @@ export default function VisitingCardPage() {
                   height: 170,
                   borderRadius: "50%",
                   background:
-                    "radial-gradient(circle, rgba(0,216,233,0.2) 0%, transparent 70%)",
+                    `radial-gradient(circle, ${alpha(C.primary.main, 0.2)} 0%, transparent 70%)`,
                 }}
               />
               <Box sx={{ position: "relative", zIndex: 1 }}>
@@ -347,7 +348,7 @@ export default function VisitingCardPage() {
                         lineHeight: 1.4,
                         fontWeight: 600,
                         color: C.text.primary,
-                        border: "1px solid rgba(255,255,255,0.12)",
+                        border: `1px solid ${alpha(C.common.white, 0.12)}`,
                       }}
                     >
                       {s}
@@ -429,7 +430,7 @@ export default function VisitingCardPage() {
             display: none !important;
           }
           body {
-            background: #fff !important;
+            background: ${C.common.white} !important;
           }
           .print-area {
             gap: 24px !important;

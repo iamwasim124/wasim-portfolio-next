@@ -3,6 +3,21 @@ import type { CSSProperties } from "react";
 
 // Register the custom body3/body4/body5 typography variants with the types,
 // so `variant="body5"` and `sx={{ typography: "body5" }}` are valid everywhere.
+type BrandPalette = {
+  cyanSoft: string;
+  purpleSoft: string;
+  purpleBorder: string;
+  purpleBorderHover: string;
+  gold: string;
+  blue: string;
+};
+
+type SurfacePalette = {
+  dark1: string;
+  dark2: string;
+  dark3: string;
+};
+
 declare module "@mui/material/styles" {
   interface TypographyVariants {
     body3: CSSProperties;
@@ -13,6 +28,15 @@ declare module "@mui/material/styles" {
     body3?: CSSProperties;
     body4?: CSSProperties;
     body5?: CSSProperties;
+  }
+  // custom brand accents + dark surface shades that have no default palette slot
+  interface Palette {
+    brand: BrandPalette;
+    surface: SurfacePalette;
+  }
+  interface PaletteOptions {
+    brand?: BrandPalette;
+    surface?: SurfacePalette;
   }
 }
 
@@ -44,6 +68,19 @@ const theme = createTheme({
     text: {
       primary: "#ffffff",
       secondary: "#f6f6f6",
+    },
+    brand: {
+      cyanSoft: "#8ef3ff",
+      purpleSoft: "#e6c3ff",
+      purpleBorder: "#d7a9ff",
+      purpleBorderHover: "#e4c6ff",
+      gold: "#FFD700",
+      blue: "#3b82f6",
+    },
+    surface: {
+      dark1: "#070b14",
+      dark2: "#0b1022",
+      dark3: "#131a30",
     },
   },
 

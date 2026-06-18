@@ -17,6 +17,7 @@ import {
   KeyboardArrowDown,
   GitHub,
 } from "@mui/icons-material";
+import { alpha } from "@mui/material/styles";
 import profilePicture from "../../../../public/assets/images-videos/wasim-3.webp";
 import Image, { type StaticImageData } from "next/image";
 import { FC } from "react";
@@ -112,7 +113,7 @@ const Hero: FC<HeroProps> = ({ data }) => {
                 variant="h1"
                 sx={{
                   mb: 2,
-                  background: "linear-gradient(135deg, #fff 0%, #00d8e9 100%)",
+                  background: `linear-gradient(135deg, ${theme.palette.common.white} 0%, ${theme.palette.primary.main} 100%)`,
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                 }}
@@ -123,7 +124,7 @@ const Hero: FC<HeroProps> = ({ data }) => {
                 variant="h4"
                 component="h2"
                 sx={{
-                  color: "#d7a9ff",
+                  color: theme.palette.brand.purpleBorder,
                   mb: 3,
                 }}
               >
@@ -132,7 +133,7 @@ const Hero: FC<HeroProps> = ({ data }) => {
               <Typography
                 variant="body1"
                 sx={{
-                  color: "rgba(255,255,255,0.92)",
+                  color: alpha(theme.palette.common.white, 0.92),
                   mb: 4,
                   maxWidth: 600,
                 }}
@@ -155,7 +156,7 @@ const Hero: FC<HeroProps> = ({ data }) => {
                       bgcolor: theme.palette.primary.light,
                       transform: "translateY(-2px)",
                       // boxShadow: "0 10px 30px rgba(0, 216, 233, 0.3)",
-                      boxShadow: "0 20px 60px #00d8e9",
+                      boxShadow: `0 20px 60px ${theme.palette.primary.main}`,
                     },
                     transition: "all 0.3s ease",
                   }}
@@ -167,14 +168,14 @@ const Hero: FC<HeroProps> = ({ data }) => {
                   onClick={() => scrollToSection("contact")}
                   aria-label="Go to contact section"
                   sx={{
-                    borderColor: "#d7a9ff",
-                    color: "#ffffff",
-                    bgcolor: "rgba(147, 51, 234, 0.22)",
+                    borderColor: theme.palette.brand.purpleBorder,
+                    color: theme.palette.common.white,
+                    bgcolor: alpha(theme.palette.secondary.main, 0.22),
                     px: "24px",
                     py: "12px",
                     "&:hover": {
-                      borderColor: "#e4c6ff",
-                      bgcolor: "rgba(147, 51, 234, 0.35)",
+                      borderColor: theme.palette.brand.purpleBorderHover,
+                      bgcolor: alpha(theme.palette.secondary.main, 0.35),
                       transform: "translateY(-2px)",
                     },
                     transition: "all 0.3s ease",
@@ -290,7 +291,7 @@ const Hero: FC<HeroProps> = ({ data }) => {
                   aspectRatio: "1",
                   overflow: "hidden",
                   borderRadius: "30% 70% 70% 30% / 30% 30% 70% 70%",
-                  boxShadow: "0 20px 60px rgba(0, 216, 233, 0.3)",
+                  boxShadow: `0 20px 60px ${alpha(theme.palette.primary.main, 0.3)}`,
                 }}
               >
                 <Image
@@ -323,7 +324,7 @@ const Hero: FC<HeroProps> = ({ data }) => {
           <IconButton
             onClick={() => scrollToSection("about")}
             aria-label="Scroll to about section"
-            sx={{ color: "#00d8e9" }}
+            sx={{ color: theme.palette.primary.main }}
           >
             <KeyboardArrowDown fontSize="large" />
           </IconButton>

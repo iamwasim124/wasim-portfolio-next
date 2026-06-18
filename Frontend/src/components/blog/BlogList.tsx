@@ -2,6 +2,7 @@
 
 import NextLink from "next/link";
 import { Box, Container, Typography, Card, Chip, Stack } from "@mui/material";
+import { alpha } from "@mui/material/styles";
 import theme from "@/theme/theme";
 import { blogPosts } from "@/data/blog";
 
@@ -18,9 +19,9 @@ export default function BlogList() {
     >
       <Container maxWidth="md">
         <Typography
-          variant="h1"
+          variant="h2"
+          component="h1"
           sx={{
-            fontSize: "clamp(2.2rem, 5vw, 3.2rem)",
             background: `linear-gradient(135deg, ${C.primary.main}, ${C.secondary.main})`,
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
@@ -31,7 +32,7 @@ export default function BlogList() {
         </Typography>
         <Typography
           variant="body1"
-          sx={{ color: "rgba(255,255,255,0.8)", mb: 6, maxWidth: 640 }}
+          sx={{ color: alpha(C.common.white, 0.8), mb: 6, maxWidth: 640 }}
         >
           Practical guides on hiring freelance React &amp; Next.js developers,
           building fast SEO-friendly websites, and React/Next.js projects.
@@ -47,15 +48,15 @@ export default function BlogList() {
                 display: "block",
                 textDecoration: "none",
                 p: { xs: 3, md: 4 },
-                bgcolor: "rgba(255,255,255,0.05)",
+                bgcolor: alpha(C.common.white, 0.05),
                 backdropFilter: "blur(10px)",
-                border: "1px solid rgba(255,255,255,0.1)",
+                border: `1px solid ${alpha(C.common.white, 0.1)}`,
                 borderRadius: 4,
                 transition: "all .3s ease",
                 "&:hover": {
                   transform: "translateY(-4px)",
                   borderColor: C.primary.main,
-                  boxShadow: "0 10px 40px rgba(0,216,233,.25)",
+                  boxShadow: `0 10px 40px ${alpha(C.primary.main, 0.25)}`,
                 },
               }}
             >
@@ -74,7 +75,7 @@ export default function BlogList() {
                     label={t}
                     size="small"
                     sx={{
-                      bgcolor: "rgba(0,216,233,.15)",
+                      bgcolor: alpha(C.primary.main, 0.15),
                       color: C.text.primary,
                       fontWeight: 600,
                     }}
@@ -82,7 +83,7 @@ export default function BlogList() {
                 ))}
                 <Typography
                   variant="caption"
-                  sx={{ color: "rgba(255,255,255,0.6)", ml: "auto" }}
+                  sx={{ color: alpha(C.common.white, 0.6), ml: "auto" }}
                 >
                   {new Date(post.date).toLocaleDateString("en-US", {
                     year: "numeric",
@@ -93,19 +94,15 @@ export default function BlogList() {
                 </Typography>
               </Box>
               <Typography
-                variant="h2"
+                variant="h5"
                 component="h2"
-                sx={{
-                  fontSize: "clamp(1.25rem, 2.4vw, 1.6rem)",
-                  color: C.text.primary,
-                  mb: 1,
-                }}
+                sx={{ color: C.text.primary, mb: 1 }}
               >
                 {post.title}
               </Typography>
               <Typography
                 variant="body2"
-                sx={{ color: "rgba(255,255,255,0.78)" }}
+                sx={{ color: alpha(C.common.white, 0.78) }}
               >
                 {post.description}
               </Typography>

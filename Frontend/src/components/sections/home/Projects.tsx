@@ -3,6 +3,7 @@
 import { FC } from "react";
 import { Box, Container, Typography, Grid, Card, Chip } from "@mui/material";
 import { Web } from "@mui/icons-material";
+import { alpha } from "@mui/material/styles";
 import theme from "@/theme/theme";
 import Reveal from "@/components/motion/Reveal";
 
@@ -26,7 +27,7 @@ const Projects: FC<Props> = ({ projects }) => {
         pt: { xs: "92px", md: 12 },
         pb: { xs: 9, md: 12 },
         position: "relative",
-        bgcolor: "rgba(0, 0, 0, 0.3)",
+        bgcolor: alpha(theme.palette.common.black, 0.3),
       }}
     >
       <Container maxWidth="xl">
@@ -65,9 +66,9 @@ const Projects: FC<Props> = ({ projects }) => {
                   aria-label={`Open project ${project.name} in a new tab`}
                   sx={{
                     textDecoration: "none",
-                    bgcolor: "rgba(255, 255, 255, 0.05)",
+                    bgcolor: alpha(theme.palette.common.white, 0.05),
                     backdropFilter: "blur(10px)",
-                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                    border: `1px solid ${alpha(theme.palette.common.white, 0.1)}`,
                     borderRadius: 4,
                     p: 3,
                     height: "100%",
@@ -78,8 +79,8 @@ const Projects: FC<Props> = ({ projects }) => {
                       transform: "translateY(-8px)",
                       boxShadow: `0 10px 40px ${
                         index % 2 === 0
-                          ? "rgba(0, 216, 233, 0.3)"
-                          : "rgba(147, 51, 234, 0.3)"
+                          ? alpha(theme.palette.primary.main, 0.3)
+                          : alpha(theme.palette.secondary.main, 0.3)
                       }`,
                       borderColor:
                         index % 2 === 0
@@ -124,8 +125,8 @@ const Projects: FC<Props> = ({ projects }) => {
                         sx={{
                           bgcolor:
                             index % 2 === 0
-                              ? "rgba(0, 216, 233, 0.2)"
-                              : "rgba(147, 51, 234, 0.2)",
+                              ? alpha(theme.palette.primary.main, 0.2)
+                              : alpha(theme.palette.secondary.main, 0.2),
                           color: theme.palette.text.primary,
                           fontWeight: 700,
                           typography: "body1",

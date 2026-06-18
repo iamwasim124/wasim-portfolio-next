@@ -11,6 +11,7 @@ import {
   Card,
 } from "@mui/material";
 import { WorkHistory, EmojiEvents } from "@mui/icons-material";
+import { alpha } from "@mui/material/styles";
 import theme from "@/theme/theme";
 import Reveal from "@/components/motion/Reveal";
 import AutoScroller from "@/components/motion/AutoScroller";
@@ -83,7 +84,7 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
               bottom: 0,
               width: 2,
               display: { xs: "none", md: "block" },
-              bgcolor: "rgba(0, 216, 233, 0.3)",
+              bgcolor: alpha(theme.palette.primary.main, 0.3),
               transform: { md: "translateX(-50%)" },
             }}
           />
@@ -112,7 +113,7 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
                         ? theme.palette.primary.main
                         : theme.palette.secondary.main,
                     transform: { md: "translateX(-50%)" },
-                    boxShadow: `0 0 20px ${index % 2 === 0 ? "rgba(0, 216, 233, 0.5)" : "rgba(147, 51, 234, 0.5)"}`,
+                    boxShadow: `0 0 20px ${index % 2 === 0 ? alpha(theme.palette.primary.main, 0.5) : alpha(theme.palette.secondary.main, 0.5)}`,
                     zIndex: 1,
                   }}
                 />
@@ -129,17 +130,17 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
                       elevation={0}
                       sx={{
                         p: 4,
-                        bgcolor: "rgba(255, 255, 255, 0.05)",
+                        bgcolor: alpha(theme.palette.common.white, 0.05),
                         backdropFilter: "blur(10px)",
                         borderRadius: 4,
-                        border: `1px solid ${index % 2 === 0 ? "rgba(0, 216, 233, 0.3)" : "rgba(147, 51, 234, 0.3)"}`,
+                        border: `1px solid ${index % 2 === 0 ? alpha(theme.palette.primary.main, 0.3) : alpha(theme.palette.secondary.main, 0.3)}`,
                         transition: "all 0.3s ease",
                         "&:hover": {
                           transform: "translateY(-4px)",
                           boxShadow: `0 10px 30px ${
                             index % 2 === 0
-                              ? "rgba(0, 216, 233, 0.2)"
-                              : "rgba(147, 51, 234, 0.2)"
+                              ? alpha(theme.palette.primary.main, 0.2)
+                              : alpha(theme.palette.secondary.main, 0.2)
                           }`,
                         },
                       }}
@@ -167,7 +168,10 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
                           variant="h5"
                           component="h3"
                           sx={{
-                            color: index % 2 === 0 ? "#8ef3ff" : "#e6c3ff",
+                            color:
+                              index % 2 === 0
+                                ? theme.palette.brand.cyanSoft
+                                : theme.palette.brand.purpleSoft,
                           }}
                         >
                           {job.title}
@@ -187,7 +191,7 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
                         {job.period} | {job.location}
                       </Typography>
                       <Divider
-                        sx={{ my: 2, bgcolor: "rgba(255, 255, 255, 0.1)" }}
+                        sx={{ my: 2, bgcolor: alpha(theme.palette.common.white, 0.1) }}
                       />
                       <Box sx={{ textAlign: "left" }}>
                         {job.highlights.map((highlight, hIndex: number) => (
@@ -209,7 +213,7 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
                             <Typography
                               variant="body2"
                               sx={{
-                                color: "rgba(255,255,255,0.9)",
+                                color: alpha(theme.palette.common.white, 0.9),
                               }}
                             >
                               {highlight}
@@ -269,9 +273,9 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
                     height: "auto",
 
                     textDecorationLine: "none",
-                    bgcolor: "rgba(255,255,255,0.05)",
+                    bgcolor: alpha(theme.palette.common.white, 0.05),
                     backdropFilter: "blur(10px)",
-                    border: "1px solid rgba(255,255,255,0.1)",
+                    border: `1px solid ${alpha(theme.palette.common.white, 0.1)}`,
                     borderRadius: 4,
                     p: 3,
                     flexShrink: 0,
@@ -280,7 +284,7 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
                     transition: "all .3s ease",
 
                     "&:hover": {
-                      boxShadow: "0 10px 40px rgba(147,51,234,.3)",
+                      boxShadow: `0 10px 40px ${alpha(theme.palette.secondary.main, 0.3)}`,
                       borderColor: theme.palette.secondary.main,
                     },
                   }}
@@ -288,7 +292,7 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
                   <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
                     <EmojiEvents
                       sx={{
-                        color: "#FFD700",
+                        color: theme.palette.brand.gold,
                         fontSize: 40,
                         mr: 2,
                       }}
@@ -306,7 +310,7 @@ const Experience: FC<Props> = ({ experience, achievements }) => {
                   <Typography
                     variant="body1"
                     sx={{
-                      color: "rgba(255,255,255,0.9)",
+                      color: alpha(theme.palette.common.white, 0.9),
                       mb: 2,
                     }}
                   >

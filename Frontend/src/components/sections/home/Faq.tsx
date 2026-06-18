@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
+import { alpha } from "@mui/material/styles";
 import theme from "@/theme/theme";
 import Reveal from "@/components/motion/Reveal";
 
@@ -32,7 +33,7 @@ const Faq: FC<FaqProps> = ({ items }) => {
         sx={{
           pt: { xs: "92px", md: 12 },
           pb: { xs: 9, md: 12 },
-          bgcolor: "rgba(0,0,0,0.3)",
+          bgcolor: alpha(theme.palette.common.black, 0.3),
         }}
       >
         <Container maxWidth="xl">
@@ -60,7 +61,7 @@ const Faq: FC<FaqProps> = ({ items }) => {
             <Typography
               variant="body1"
               sx={{
-                color: "rgba(255,255,255,0.88)",
+                color: alpha(theme.palette.common.white, 0.88),
                 maxWidth: 720,
                 mx: "auto",
                 marginTop: "16px",
@@ -78,8 +79,8 @@ const Faq: FC<FaqProps> = ({ items }) => {
                   disableGutters
                   elevation={0}
                   sx={{
-                    bgcolor: "rgba(255,255,255,0.05)",
-                    border: "1px solid rgba(255,255,255,0.1)",
+                    bgcolor: alpha(theme.palette.common.white, 0.05),
+                    border: `1px solid ${alpha(theme.palette.common.white, 0.1)}`,
                     borderRadius: "16px !important",
                     "&:before": {
                       display: "none",
@@ -96,7 +97,9 @@ const Faq: FC<FaqProps> = ({ items }) => {
                   </Typography>
                 </AccordionSummary>
                   <AccordionDetails>
-                    <Typography sx={{ color: "rgba(255,255,255,0.88)" }}>
+                    <Typography
+                      sx={{ color: alpha(theme.palette.common.white, 0.88) }}
+                    >
                       {item.answer}
                     </Typography>
                   </AccordionDetails>

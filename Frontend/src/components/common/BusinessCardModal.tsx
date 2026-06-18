@@ -21,6 +21,7 @@ import {
   Download,
 } from "@mui/icons-material";
 import { QRCodeSVG } from "qrcode.react";
+import { alpha } from "@mui/material/styles";
 import Image from "next/image";
 import NextLink from "next/link";
 import theme from "@/theme/theme";
@@ -74,8 +75,8 @@ export default function BusinessCardModal({
     backfaceVisibility: "hidden",
     WebkitBackfaceVisibility: "hidden",
     overflow: "hidden",
-    border: "1px solid rgba(255,255,255,0.12)",
-    boxShadow: "0 24px 70px rgba(0,0,0,0.55)",
+    border: `1px solid ${alpha(C.common.white, 0.12)}`,
+    boxShadow: `0 24px 70px ${alpha(C.common.black, 0.55)}`,
     display: "flex",
   } as const;
 
@@ -102,7 +103,7 @@ export default function BusinessCardModal({
         maxWidth="xs"
         slotProps={{
           backdrop: {
-            sx: { backgroundColor: "rgba(0, 0, 0, 0.8)" },
+            sx: { backgroundColor: alpha(C.common.black, 0.8) },
           },
           paper: {
             sx: {
@@ -122,8 +123,8 @@ export default function BusinessCardModal({
             size="small"
             sx={{
               color: C.text.primary,
-              bgcolor: "rgba(255,255,255,0.08)",
-              "&:hover": { bgcolor: "rgba(255,255,255,0.18)" },
+              bgcolor: alpha(C.common.white, 0.08),
+              "&:hover": { bgcolor: alpha(C.common.white, 0.18) },
             }}
           >
             <Close fontSize="small" />
@@ -198,7 +199,7 @@ export default function BusinessCardModal({
                     position: "absolute",
                     inset: 0,
                     background:
-                      "linear-gradient(180deg, rgba(10,14,26,0.15) 63%, rgba(10,14,26,0.55) 75%, rgba(10,14,26,0.96) 100%)",
+                      `linear-gradient(180deg, ${alpha(C.background.default, 0.15)} 63%, ${alpha(C.background.default, 0.55)} 75%, ${alpha(C.background.default, 0.96)} 100%)`,
                   }}
                 />
 
@@ -281,7 +282,7 @@ export default function BusinessCardModal({
                     right: 12,
                     zIndex: 1,
                     lineHeight: 1,
-                    color: "rgba(255,255,255,0.5)",
+                    color: alpha(C.common.white, 0.5),
                   }}
                 >
                   Tap to flip ⟳
@@ -295,8 +296,7 @@ export default function BusinessCardModal({
                   transform: "rotateY(180deg)",
                   p: 2.5,
                   flexDirection: "column",
-                  background:
-                    "linear-gradient(135deg, #131a30 0%, #0a0e1a 55%, #0b1022 100%)",
+                  background: `linear-gradient(135deg, ${C.surface.dark3} 0%, ${C.background.default} 55%, ${C.surface.dark2} 100%)`,
                   // shows only after the flip passes its midpoint (iOS fix)
                   opacity: flipped ? 1 : 0,
                   transition: "opacity 0s linear 0.4s",
@@ -311,8 +311,7 @@ export default function BusinessCardModal({
                     width: 170,
                     height: 170,
                     borderRadius: "50%",
-                    background:
-                      "radial-gradient(circle, rgba(0,216,233,0.2) 0%, transparent 70%)",
+                    background: `radial-gradient(circle, ${alpha(C.primary.main, 0.2)} 0%, transparent 70%)`,
                   }}
                 />
 
@@ -357,7 +356,7 @@ export default function BusinessCardModal({
                           lineHeight: 1.4,
                           fontWeight: 600,
                           color: C.text.primary,
-                          border: "1px solid rgba(255,255,255,0.12)",
+                          border: `1px solid ${alpha(C.common.white, 0.12)}`,
                         }}
                       >
                         {s}
@@ -466,10 +465,10 @@ export default function BusinessCardModal({
               size="small"
               sx={{
                 color: C.text.primary,
-                borderColor: "rgba(255,255,255,0.3)",
+                borderColor: alpha(C.common.white, 0.3),
                 "&:hover": {
                   borderColor: C.primary.main,
-                  bgcolor: "rgba(0,216,233,0.08)",
+                  bgcolor: alpha(C.primary.main, 0.08),
                 },
               }}
             >
@@ -488,7 +487,7 @@ export default function BusinessCardModal({
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 0.6,
-                color: "rgba(255,255,255,0.75)",
+                color: alpha(C.common.white, 0.75),
                 fontWeight: 600,
                 "&:hover": { color: C.primary.main },
               }}

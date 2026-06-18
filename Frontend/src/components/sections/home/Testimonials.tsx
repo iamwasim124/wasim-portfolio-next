@@ -1,6 +1,7 @@
 "use client";
 
 import { Box, Typography, Card, Container } from "@mui/material";
+import { alpha } from "@mui/material/styles";
 
 import theme from "@/theme/theme";
 import Reveal from "@/components/motion/Reveal";
@@ -52,9 +53,9 @@ const Testimonials = () => {
                   minWidth: 350,
                   maxWidth: 350,
 
-                  bgcolor: "rgba(255,255,255,0.05)",
+                  bgcolor: alpha(theme.palette.common.white, 0.05),
                   backdropFilter: "blur(10px)",
-                  border: "1px solid rgba(255,255,255,0.1)",
+                  border: `1px solid ${alpha(theme.palette.common.white, 0.1)}`,
                   borderRadius: 4,
                   p: 3,
 
@@ -64,7 +65,7 @@ const Testimonials = () => {
                   flexDirection: "column",
 
                   "&:hover": {
-                    boxShadow: "0 10px 40px rgba(147,51,234,.3)",
+                    boxShadow: `0 10px 40px ${alpha(theme.palette.secondary.main, 0.3)}`,
                     borderColor: theme.palette.secondary.main,
                   },
                 }}
@@ -72,7 +73,7 @@ const Testimonials = () => {
                 <Typography
                   variant="body1"
                   sx={{
-                    color: "rgba(255,255,255,0.9)",
+                    color: alpha(theme.palette.common.white, 0.9),
                     mb: 3,
                     fontStyle: "italic",
                   }}
@@ -97,7 +98,7 @@ const Testimonials = () => {
                   <Typography
                     variant="body2"
                     sx={{
-                      color: "rgba(255,255,255,0.7)",
+                      color: alpha(theme.palette.common.white, 0.7),
                     }}
                   >
                     {item.role} • {item.company}

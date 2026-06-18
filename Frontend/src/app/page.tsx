@@ -1,6 +1,7 @@
 "use client";
 
 import { Box, useMediaQuery } from "@mui/material";
+import { alpha } from "@mui/material/styles";
 import theme from "@/theme/theme";
 import Hero from "@/components/sections/home/Hero";
 import About from "@/components/sections/home/About";
@@ -99,9 +100,9 @@ export default function Home() {
   return (
     <Box
       sx={{
-        bgcolor: "#0a0e1a",
+        bgcolor: theme.palette.background.default,
         minHeight: "100vh",
-        color: "#fff",
+        color: theme.palette.common.white,
         overflow: "hidden",
       }}
     >
@@ -136,8 +137,7 @@ export default function Home() {
             height: "62vmax",
             top: "-22vmax",
             left: "-16vmax",
-            background:
-              "radial-gradient(circle, rgba(0,216,233,0.20) 0%, transparent 62%)",
+            background: `radial-gradient(circle, ${alpha(theme.palette.primary.main, 0.2)} 0%, transparent 62%)`,
             animation: isMobile ? "none" : "auroraOne 26s ease-in-out infinite",
           },
           "&::after": {
@@ -145,8 +145,7 @@ export default function Home() {
             height: "66vmax",
             bottom: "-26vmax",
             right: "-18vmax",
-            background:
-              "radial-gradient(circle, rgba(147,51,234,0.18) 0%, transparent 62%)",
+            background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.18)} 0%, transparent 62%)`,
             animation: isMobile ? "none" : "auroraTwo 32s ease-in-out infinite",
           },
           "@keyframes auroraOne": {
@@ -168,8 +167,7 @@ export default function Home() {
             width: "46vmax",
             height: "46vmax",
             borderRadius: "50%",
-            background:
-              "radial-gradient(circle, rgba(59,130,246,0.16) 0%, transparent 60%)",
+            background: `radial-gradient(circle, ${alpha(theme.palette.brand.blue, 0.16)} 0%, transparent 60%)`,
             animation: isMobile ? "none" : "auroraThree 30s ease-in-out infinite",
             "@keyframes auroraThree": {
               "0%, 100%": { transform: "translate(0, 0) scale(1)" },

@@ -10,6 +10,7 @@ import {
   Button,
 } from "@mui/material";
 import { Code, Speed, School } from "@mui/icons-material";
+import { alpha } from "@mui/material/styles";
 import theme from "@/theme/theme";
 import Reveal from "@/components/motion/Reveal";
 
@@ -86,10 +87,10 @@ const About: FC<AboutProps> = ({ data }) => {
                 sx={{
                   p: 4,
 
-                  bgcolor: "rgba(255,255,255,.05)",
+                  bgcolor: alpha(theme.palette.common.white, 0.05),
                   backdropFilter: "blur(10px)",
                   borderRadius: 4,
-                  border: "1px solid rgba(255,255,255,.1)",
+                  border: `1px solid ${alpha(theme.palette.common.white, 0.1)}`,
                   height: "auto",
                   display: "flex",
                   flexDirection: "column",
@@ -123,9 +124,9 @@ const About: FC<AboutProps> = ({ data }) => {
                       ? {}
                       : {
                           WebkitMaskImage:
-                            "linear-gradient(to bottom, #000 70%, transparent 100%)",
+                            `linear-gradient(to bottom, ${theme.palette.common.black} 70%, transparent 100%)`,
                           maskImage:
-                            "linear-gradient(to bottom, #000 70%, transparent 100%)",
+                            `linear-gradient(to bottom, ${theme.palette.common.black} 70%, transparent 100%)`,
                         }),
                     "&::-webkit-scrollbar": {
                       width: 6,
@@ -142,7 +143,7 @@ const About: FC<AboutProps> = ({ data }) => {
                         key={index}
                         variant="body2"
                         sx={{
-                          color: "rgba(255,255,255,0.9)",
+                          color: alpha(theme.palette.common.white, 0.9),
                           mb: 2,
                         }}
                       >
@@ -179,10 +180,10 @@ const About: FC<AboutProps> = ({ data }) => {
                 sx={{
                   p: 4,
                   height: "100%",
-                  bgcolor: "rgba(255,255,255,.05)",
+                  bgcolor: alpha(theme.palette.common.white, 0.05),
                   backdropFilter: "blur(10px)",
                   borderRadius: 4,
-                  border: "1px solid rgba(255,255,255,.1)",
+                  border: `1px solid ${alpha(theme.palette.common.white, 0.1)}`,
                 }}
               >
                 <Box sx={{ display: "flex", mb: 3 }}>
@@ -216,7 +217,7 @@ const About: FC<AboutProps> = ({ data }) => {
                     />
                     <Typography
                       variant="body1"
-                      sx={{ color: "rgba(255,255,255,0.9)" }}
+                      sx={{ color: alpha(theme.palette.common.white, 0.9) }}
                     >
                       {item}
                     </Typography>
@@ -232,10 +233,10 @@ const About: FC<AboutProps> = ({ data }) => {
                 sx={{
                   height: "100%",
                   p: 4,
-                  bgcolor: "rgba(255,255,255,.05)",
+                  bgcolor: alpha(theme.palette.common.white, 0.05),
                   backdropFilter: "blur(10px)",
                   borderRadius: 4,
-                  border: "1px solid rgba(255,255,255,.1)",
+                  border: `1px solid ${alpha(theme.palette.common.white, 0.1)}`,
                 }}
               >
                 <Box sx={{ display: "flex", mb: 2 }}>
@@ -269,7 +270,7 @@ const About: FC<AboutProps> = ({ data }) => {
 
                     <Typography
                       variant="body2"
-                      sx={{ color: "rgba(255,255,255,0.88)" }}
+                      sx={{ color: alpha(theme.palette.common.white, 0.88) }}
                     >
                       {edu.institute} | {edu.year}
                     </Typography>

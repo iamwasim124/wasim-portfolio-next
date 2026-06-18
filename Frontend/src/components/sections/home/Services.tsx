@@ -11,6 +11,7 @@ import {
   Chip,
 } from "@mui/material";
 import { Web, Speed, Code } from "@mui/icons-material";
+import { alpha } from "@mui/material/styles";
 import theme from "@/theme/theme";
 import Reveal from "@/components/motion/Reveal";
 
@@ -79,16 +80,16 @@ const Services: FC<Props> = ({ data }) => {
               <Reveal delay={index * 0.1} sx={{ height: "100%" }}>
                 <Card
                   sx={{
-                    bgcolor: "rgba(255,255,255,.05)",
+                    bgcolor: alpha(theme.palette.common.white, 0.05),
                     backdropFilter: "blur(10px)",
-                    border: "1px solid rgba(255,255,255,.1)",
+                    border: `1px solid ${alpha(theme.palette.common.white, 0.1)}`,
                     borderRadius: 4,
                     height: "100%",
                     transition: "all .3s ease",
                     "&:hover": {
                       transform: "translateY(-10px)",
-                      boxShadow: "0 20px 50px rgba(0,216,233,.3)",
-                      borderColor: "#00d8e9",
+                      boxShadow: `0 20px 50px ${alpha(theme.palette.primary.main, 0.3)}`,
+                      borderColor: theme.palette.primary.main,
                     },
                   }}
                 >
@@ -98,11 +99,11 @@ const Services: FC<Props> = ({ data }) => {
                         width: 48,
                         height: 48,
                         borderRadius: "50%",
-                        bgcolor: "rgba(0,216,233,.15)",
+                        bgcolor: alpha(theme.palette.primary.main, 0.15),
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        color: "#00d8e9",
+                        color: theme.palette.primary.main,
                         mb: 3,
                       }}
                     >
@@ -132,10 +133,10 @@ const Services: FC<Props> = ({ data }) => {
           sx={{
             mt: 5,
             p: 4,
-            bgcolor: "rgba(255,255,255,.05)",
+            bgcolor: alpha(theme.palette.common.white, 0.05),
             backdropFilter: "blur(10px)",
             borderRadius: 4,
-            border: "1px solid rgba(255,255,255,.1)",
+            border: `1px solid ${alpha(theme.palette.common.white, 0.1)}`,
           }}
         >
           <Typography variant="h5" component="h3" mb={3}>
@@ -148,10 +149,10 @@ const Services: FC<Props> = ({ data }) => {
                 key={i}
                 label={item}
                 sx={{
-                  bgcolor: "rgba(255,255,255,.08)",
+                  bgcolor: alpha(theme.palette.common.white, 0.08),
                   color: theme.palette.text.primary,
                   "&:hover": {
-                    bgcolor: "rgba(0,216,233,.2)",
+                    bgcolor: alpha(theme.palette.primary.main, 0.2),
                   },
                   p: "8px",
                   typography: "body1",

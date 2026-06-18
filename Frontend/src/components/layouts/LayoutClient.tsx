@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
+import theme from "@/theme/theme";
 import HeaderComponent from "./Header";
 import FooterComponet from "./Footer";
 
@@ -21,9 +22,9 @@ export default function LayoutClient({
   return (
     <Box
       sx={{
-        bgcolor: "#0a0e1a",
+        bgcolor: theme.palette.background.default,
         minHeight: "100vh",
-        color: "#fff",
+        color: theme.palette.common.white,
         display: "flex",
         flexDirection: "column",
       }}

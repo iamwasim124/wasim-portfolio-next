@@ -19,6 +19,7 @@ import {
 import { AttachFile, Close, Email, Phone, Send } from "@mui/icons-material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { alpha } from "@mui/material/styles";
 import theme from "@/theme/theme";
 import Reveal from "@/components/motion/Reveal";
 
@@ -35,28 +36,28 @@ const Contact: FC = () => {
 
   const textFieldSx = {
     "& .MuiInputLabel-root": {
-      color: "rgba(255,255,255,0.65)",
+      color: alpha(theme.palette.common.white, 0.65),
     },
     "& .MuiOutlinedInput-root": {
       color: theme.palette.text.primary,
       "& fieldset": {
-        borderColor: "rgba(255,255,255,0.25)",
+        borderColor: alpha(theme.palette.common.white, 0.25),
       },
       "&:hover fieldset": {
-        borderColor: "rgba(255,255,255,0.45)",
+        borderColor: alpha(theme.palette.common.white, 0.45),
       },
       "&.Mui-focused fieldset": {
         borderColor: theme.palette.primary.main,
       },
       "& input:-webkit-autofill": {
-        WebkitBoxShadow: "0 0 0 100px rgba(255,255,255,0.02) inset",
+        WebkitBoxShadow: `0 0 0 100px ${alpha(theme.palette.common.white, 0.02)} inset`,
         WebkitTextFillColor: theme.palette.text.primary,
         caretColor: theme.palette.text.primary,
         transition: "background-color 9999s ease-out 0s",
         borderRadius: "inherit",
       },
       "& textarea:-webkit-autofill": {
-        WebkitBoxShadow: "0 0 0 100px rgba(255,255,255,0.02) inset",
+        WebkitBoxShadow: `0 0 0 100px ${alpha(theme.palette.common.white, 0.02)} inset`,
         WebkitTextFillColor: theme.palette.text.primary,
       },
     },
@@ -201,7 +202,7 @@ const Contact: FC = () => {
       sx={{
         pt: { xs: "92px", md: 12 },
         pb: { xs: 9, md: 12 },
-        bgcolor: "rgba(0, 0, 0, 0.3)",
+        bgcolor: alpha(theme.palette.common.black, 0.3),
       }}
     >
       <Container maxWidth="lg">
@@ -242,10 +243,10 @@ const Contact: FC = () => {
             elevation={0}
             sx={{
               p: 4,
-              bgcolor: "rgba(255,255,255,.05)",
+              bgcolor: alpha(theme.palette.common.white, 0.05),
               backdropFilter: "blur(10px)",
               borderRadius: 4,
-              border: "1px solid rgba(255,255,255,.1)",
+              border: `1px solid ${alpha(theme.palette.common.white, 0.1)}`,
             }}
           >
             {submitted ? (
@@ -409,8 +410,8 @@ const Contact: FC = () => {
                           px: 2,
                           py: 1.5,
                           borderRadius: 2,
-                          border: "1px solid rgba(255,255,255,0.25)",
-                          bgcolor: "rgba(255,255,255,0.03)",
+                          border: `1px solid ${alpha(theme.palette.common.white, 0.25)}`,
+                          bgcolor: alpha(theme.palette.common.white, 0.03),
                         }}
                       >
                         <Typography
@@ -441,14 +442,14 @@ const Contact: FC = () => {
                         variant="outlined"
                         startIcon={<AttachFile />}
                         sx={{
-                          borderColor: "rgba(255,255,255,0.25)",
+                          borderColor: alpha(theme.palette.common.white, 0.25),
                           color: theme.palette.text.primary,
                           justifyContent: "flex-start",
                           width: "100%",
                           py: 1.5,
                           "&:hover": {
                             borderColor: theme.palette.primary.main,
-                            bgcolor: "rgba(0,216,233,0.08)",
+                            bgcolor: alpha(theme.palette.primary.main, 0.08),
                           },
                         }}
                       >
@@ -474,8 +475,7 @@ const Contact: FC = () => {
                         color="error"
                         sx={{
                           mt: "3px",
-                          fontSize: "0.75rem",
-                          lineHeight: 1.66,
+                          typography: "caption",
                         }}
                       >
                         {fileError}
@@ -486,7 +486,7 @@ const Contact: FC = () => {
                     {submitError ? (
                       <Typography
                         color="error"
-                        sx={{ mb: 1, fontSize: "0.75rem", lineHeight: 1.66 }}
+                        sx={{ mb: 1, typography: "caption" }}
                       >
                         {submitError}
                       </Typography>
@@ -499,7 +499,7 @@ const Contact: FC = () => {
                       endIcon={<Send />}
                       variant="contained"
                       sx={{
-                        background: "linear-gradient(135deg,#00d8e9,#9333ea)",
+                        background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
                         py: 1.5,
                         fontWeight: 600,
                         "&:hover": {

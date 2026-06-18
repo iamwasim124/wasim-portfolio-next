@@ -2,6 +2,7 @@ import LayoutClient from "@/components/layouts/LayoutClient";
 import Providers from "./providers";
 import { Montserrat } from "next/font/google";
 import type { Metadata, Viewport } from "next";
+import theme from "@/theme/theme";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -89,7 +90,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   colorScheme: "dark",
-  themeColor: "#0a0e1a",
+  themeColor: theme.palette.background.default,
 };
 
 export default function RootLayout({

@@ -10,6 +10,7 @@ import {
   CardContent,
   Chip,
 } from "@mui/material";
+import { alpha } from "@mui/material/styles";
 import theme from "@/theme/theme";
 import Reveal from "@/components/motion/Reveal";
 
@@ -27,7 +28,7 @@ const Skills: FC<SkillsProps> = ({ skills }) => {
         pt: { xs: "92px", md: 12 },
         pb: { xs: 9, md: 12 },
         position: "relative",
-        bgcolor: "rgba(0,0,0,.3)",
+        bgcolor: alpha(theme.palette.common.black, 0.3),
       }}
     >
       <Container maxWidth="xl">
@@ -65,16 +66,18 @@ const Skills: FC<SkillsProps> = ({ skills }) => {
                 <Reveal delay={index * 0.1} sx={{ height: "100%" }}>
                   <Card
                     sx={{
-                      bgcolor: "rgba(255,255,255,.05)",
+                      bgcolor: alpha(theme.palette.common.white, 0.05),
                       backdropFilter: "blur(10px)",
-                      border: "1px solid rgba(255,255,255,.1)",
+                      border: `1px solid ${alpha(theme.palette.common.white, 0.1)}`,
                       borderRadius: 4,
                       height: "100%",
                       transition: "all .3s ease",
                       "&:hover": {
                         transform: "translateY(-8px)",
                         boxShadow: `0 10px 40px ${
-                          isGreen ? "rgba(0,216,233,.3)" : "rgba(147,51,234,.3)"
+                          isGreen
+                            ? alpha(theme.palette.primary.main, 0.3)
+                            : alpha(theme.palette.secondary.main, 0.3)
                         }`,
                         borderColor: isGreen
                           ? theme.palette.primary.main
@@ -88,7 +91,9 @@ const Skills: FC<SkillsProps> = ({ skills }) => {
                         component="h3"
                         sx={{
                           mb: 3,
-                          color: isGreen ? "#8ef3ff" : "#e6c3ff",
+                          color: isGreen
+                            ? theme.palette.brand.cyanSoft
+                            : theme.palette.brand.purpleSoft,
                           textTransform: "capitalize",
                         }}
                       >
@@ -102,15 +107,15 @@ const Skills: FC<SkillsProps> = ({ skills }) => {
                             label={skill}
                             size="medium"
                             sx={{
-                              bgcolor: "rgba(255,255,255,.1)",
+                              bgcolor: alpha(theme.palette.common.white, 0.1),
                               color: theme.palette.text.primary,
                               fontWeight: 500,
                               p: "8px",
                               typography: "body1",
                               "&:hover": {
                                 bgcolor: isGreen
-                                  ? "rgba(0,216,233,.2)"
-                                  : "rgba(147,51,234,.2)",
+                                  ? alpha(theme.palette.primary.main, 0.2)
+                                  : alpha(theme.palette.secondary.main, 0.2),
                               },
                             }}
                           />

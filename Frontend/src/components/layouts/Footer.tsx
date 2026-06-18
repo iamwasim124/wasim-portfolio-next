@@ -13,6 +13,7 @@ import NextLink from "next/link";
 import theme from "@/theme/theme";
 import BusinessCardModal from "@/components/common/BusinessCardModal";
 import { socialLinks as SOCIALS, type SocialIcon } from "@/data/social";
+import { footerLinks } from "@/data/navigation";
 
 // resolve a social icon key to its MUI icon
 const socialIcons: Record<SocialIcon, React.ReactNode> = {
@@ -79,20 +80,38 @@ const FooterComponent = () => {
           <BusinessCardModal />
         </Box>
 
-        {/* Internal links */}
-        <Box sx={{ mb: 2 }}>
-          <Link
-            component={NextLink}
-            href="/blog"
-            underline="none"
-            sx={{
-              color: theme.palette.primary.main,
-              fontWeight: 600,
-              "&:hover": { opacity: 0.85 },
-            }}
-          >
-            Blog
-          </Link>
+        {/* Footer navigation */}
+        <Box
+          component="nav"
+          aria-label="Footer"
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            gap: { xs: 2.5, sm: 4 },
+            mb: 2.5,
+          }}
+        >
+          {footerLinks.map((item) => (
+            <Link
+              key={item.label}
+              component={NextLink}
+              href={item.href}
+              underline="none"
+              sx={{
+                display: "inline-block",
+                fontSize: "1.3rem",
+                fontWeight: 700,
+                background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                transition: "opacity .3s ease",
+                "&:hover": { opacity: 0.8 },
+              }}
+            >
+              {item.label}
+            </Link>
+          ))}
         </Box>
 
         {/* Copyright */}

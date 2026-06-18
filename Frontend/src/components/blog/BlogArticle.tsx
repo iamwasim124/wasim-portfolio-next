@@ -9,8 +9,9 @@ import {
   Stack,
   Link,
   Button,
+  Breadcrumbs,
 } from "@mui/material";
-import { ArrowBack } from "@mui/icons-material";
+import { NavigateNext } from "@mui/icons-material";
 import theme from "@/theme/theme";
 import { getPostBySlug } from "@/data/blog";
 
@@ -26,22 +27,34 @@ export default function BlogArticle({ slug }: { slug: string }) {
       sx={{ pt: { xs: "110px", md: "140px" }, pb: { xs: 9, md: 12 } }}
     >
       <Container maxWidth="md">
-        <Link
-          component={NextLink}
-          href="/blog"
-          underline="none"
+        <Breadcrumbs
+          separator={<NavigateNext fontSize="small" />}
+          aria-label="breadcrumb"
           sx={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 0.5,
-            color: C.primary.main,
-            fontWeight: 600,
             mb: 3,
-            "&:hover": { opacity: 0.85 },
+            color: "rgba(255,255,255,0.4)",
+            "& a": {
+              color: C.primary.main,
+              fontWeight: 600,
+              textDecoration: "none",
+            },
+            "& a:hover": { textDecoration: "underline" },
           }}
         >
-          <ArrowBack fontSize="small" /> All articles
-        </Link>
+          <Link component={NextLink} href="/">
+            Home
+          </Link>
+          <Link component={NextLink} href="/blog">
+            Blog
+          </Link>
+          <Typography
+            component="span"
+            aria-current="page"
+            sx={{ color: "rgba(255,255,255,0.7)", fontWeight: 600 }}
+          >
+            {post.title}
+          </Typography>
+        </Breadcrumbs>
 
         <Stack direction="row" spacing={1} sx={{ mb: 2, flexWrap: "wrap" }}>
           {post.tags.map((t) => (

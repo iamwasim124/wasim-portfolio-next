@@ -18,3 +18,14 @@ export const logoData = {
   text: "Mohammed Wasim",
   src: "/assets/images-videos/logo-transparent.png",
 };
+
+export type FooterLink = {
+  label: string;
+  href: string;
+};
+
+export const footerLinks: FooterLink[] = [
+  { label: "Home", href: "/" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/#contact" },
+];

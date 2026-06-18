@@ -118,40 +118,67 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      {/* Animated Background */}
+      {/* Animated aurora background — drifting brand-colour orbs */}
       <Box
         sx={{
           position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
+          inset: 0,
           zIndex: 0,
-          background: `
-            radial-gradient(circle at 20% 50%, rgba(0, 216, 233, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 80% 80%, rgba(147, 51, 234, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 40% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 40%)
-          `,
-          "&::before": {
+          overflow: "hidden",
+          pointerEvents: "none",
+          "&::before, &::after": {
             content: '""',
             position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundImage: `
-              linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)
-            `,
-            backgroundSize: "50px 50px",
-            animation: isMobile ? "none" : "gridMove 20s linear infinite",
+            borderRadius: "50%",
           },
-          "@keyframes gridMove": {
-            "0%": { transform: "translate(0, 0)" },
-            "100%": { transform: "translate(50px, 50px)" },
+          "&::before": {
+            width: "62vmax",
+            height: "62vmax",
+            top: "-22vmax",
+            left: "-16vmax",
+            background:
+              "radial-gradient(circle, rgba(0,216,233,0.20) 0%, transparent 62%)",
+            animation: isMobile ? "none" : "auroraOne 26s ease-in-out infinite",
+          },
+          "&::after": {
+            width: "66vmax",
+            height: "66vmax",
+            bottom: "-26vmax",
+            right: "-18vmax",
+            background:
+              "radial-gradient(circle, rgba(147,51,234,0.18) 0%, transparent 62%)",
+            animation: isMobile ? "none" : "auroraTwo 32s ease-in-out infinite",
+          },
+          "@keyframes auroraOne": {
+            "0%, 100%": { transform: "translate(0, 0) scale(1)" },
+            "50%": { transform: "translate(18vmax, 12vmax) scale(1.18)" },
+          },
+          "@keyframes auroraTwo": {
+            "0%, 100%": { transform: "translate(0, 0) scale(1)" },
+            "50%": { transform: "translate(-15vmax, -10vmax) scale(1.12)" },
           },
         }}
-      />
+      >
+        {/* third drifting orb */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: "28%",
+            left: "36%",
+            width: "46vmax",
+            height: "46vmax",
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, rgba(59,130,246,0.16) 0%, transparent 60%)",
+            animation: isMobile ? "none" : "auroraThree 30s ease-in-out infinite",
+            "@keyframes auroraThree": {
+              "0%, 100%": { transform: "translate(0, 0) scale(1)" },
+              "33%": { transform: "translate(-12vmax, 9vmax) scale(1.22)" },
+              "66%": { transform: "translate(13vmax, -7vmax) scale(0.92)" },
+            },
+          }}
+        />
+      </Box>
 
       {/* Hero Section */}
       {/* {heroData &&  */}

@@ -12,40 +12,14 @@ import {
 import { QRCodeSVG } from "qrcode.react";
 import { toPng } from "html-to-image";
 import theme from "@/theme/theme";
+import { cardData as CARD, type CardContactIcon } from "@/data/card";
 
-const CARD = {
-  name: "Mohammed Wasim",
-  specialty: "Web Application Specialist",
-  role: "React & Next.js Developer",
-  website: "iamwasim.in",
-  websiteUrl: "https://iamwasim.in",
-  banner: "/assets/images-videos/wasim-3.webp",
-  cta: "Have a project in mind?",
-  ctaSub:
-    "Helping Businesses, Startups & Students Bring Their Ideas to Life Online",
-  services: ["Custom Websites", "Web Applications", "Ongoing Support"],
-  contacts: [
-    {
-      icon: <Language fontSize="small" />,
-      label: "iamwasim.in",
-      href: "https://iamwasim.in",
-    },
-    {
-      icon: <Email fontSize="small" />,
-      label: "iamwasim124@gmail.com",
-      href: "mailto:iamwasim124@gmail.com",
-    },
-    {
-      icon: <Phone fontSize="small" />,
-      label: "+91 8123833968",
-      href: "tel:+918123833968",
-    },
-    {
-      icon: <LinkedIn fontSize="small" />,
-      label: "linkedin.com/in/iamwasim124",
-      href: "https://linkedin.com/in/iamwasim124",
-    },
-  ],
+// resolve a contact icon key to its MUI icon
+const contactIcons: Record<CardContactIcon, ReactNode> = {
+  website: <Language fontSize="small" />,
+  email: <Email fontSize="small" />,
+  phone: <Phone fontSize="small" />,
+  linkedin: <LinkedIn fontSize="small" />,
 };
 
 // colors sourced from the theme palette
@@ -232,6 +206,23 @@ export default function VisitingCardPage() {
                     "linear-gradient(180deg, rgba(10,14,26,0.15) 63%, rgba(10,14,26,0.55) 75%, rgba(10,14,26,0.96) 100%)",
                 }}
               />
+              {/* Logo top-left */}
+              <Box
+                aria-hidden="true"
+                sx={{
+                  position: "absolute",
+                  top: 10,
+                  left: 14,
+                  zIndex: 1,
+                  width: 54,
+                  height: 54,
+                  backgroundImage:
+                    "url(/assets/images-videos/logo-transparent.png)",
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                }}
+              />
               <Box
                 sx={{
                   position: "relative",
@@ -395,7 +386,7 @@ export default function VisitingCardPage() {
                         "& svg": { color: C.primary.main },
                       }}
                     >
-                      {c.icon}
+                      {contactIcons[c.icon]}
                       {c.label}
                     </Link>
                   ))}

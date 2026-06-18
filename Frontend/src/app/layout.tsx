@@ -43,6 +43,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  // Set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION in your env (from Google Search
+  // Console → Settings → Ownership verification → HTML tag) to verify the site.
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
   robots: {
     index: true,
     follow: true,

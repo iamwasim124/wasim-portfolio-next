@@ -2,14 +2,14 @@
 
 import { Box, useMediaQuery } from "@mui/material";
 import theme from "@/theme/theme";
-import Hero from "@/components/sections/HomePage/Hero";
-import About from "@/components/sections/HomePage/About";
-import Skills from "@/components/sections/HomePage/Skills";
-import Experience from "@/components/sections/HomePage/Experience";
-import Projects from "@/components/sections/HomePage/Project";
-import Services from "@/components/sections/HomePage/Services";
-import Contact from "@/components/sections/HomePage/Contact";
-import Faq from "@/components/sections/HomePage/Faq";
+import Hero from "@/components/sections/home/Hero";
+import About from "@/components/sections/home/About";
+import Skills from "@/components/sections/home/Skills";
+import Experience from "@/components/sections/home/Experience";
+import Projects from "@/components/sections/home/Projects";
+import Services from "@/components/sections/home/Services";
+import Contact from "@/components/sections/home/Contact";
+import Faq from "@/components/sections/home/Faq";
 import { heroData } from "@/data/hero";
 import { aboutData } from "@/data/about";
 import { skillsData } from "@/data/skills";
@@ -17,7 +17,7 @@ import { experienceData, achievementsData } from "@/data/experience";
 import { projectsData } from "@/data/projects";
 import { servicesData } from "@/data/services";
 import { faqData } from "@/data/faq";
-import Testimonials from "@/components/sections/HomePage/Testimonials";
+import Testimonials from "@/components/sections/home/Testimonials";
 
 export default function Home() {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));

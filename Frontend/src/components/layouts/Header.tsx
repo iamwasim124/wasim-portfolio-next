@@ -13,21 +13,7 @@ import {
 import { Menu, Close } from "@mui/icons-material";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-
-const HEADER_DATA = {
-  logoText: "Mohammed Wasim",
-  logoSrc: "/assets/images-videos/logo-transparent.png",
-  menu: [
-    { label: "About", id: "about" },
-    { label: "Skills", id: "skills" },
-    { label: "Experience", id: "experience" },
-    { label: "Projects", id: "projects" },
-    { label: "Services", id: "services" },
-    { label: "FAQ", id: "faq" },
-    { label: "Testimonials", id: "testimonials" },
-    { label: "Contact", id: "contact" },
-  ],
-};
+import { navMenu, logoData } from "@/data/navigation";
 
 interface HeaderComponentProps {
   scrollY?: number;
@@ -39,7 +25,7 @@ const HeaderComponent: FC<HeaderComponentProps> = ({ scrollY = 0 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
   const [showLogoImage, setShowLogoImage] = useState(
-    Boolean(HEADER_DATA.logoSrc),
+    Boolean(logoData.src),
   );
   const pathname = usePathname();
   const router = useRouter();
@@ -56,7 +42,7 @@ const HeaderComponent: FC<HeaderComponentProps> = ({ scrollY = 0 }) => {
     }
   };
   useEffect(() => {
-    const sections = HEADER_DATA.menu.map((m) => m.id);
+    const sections = navMenu.map((m) => m.id);
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -76,7 +62,12 @@ const HeaderComponent: FC<HeaderComponentProps> = ({ scrollY = 0 }) => {
       if (el) observer.observe(el);
     });
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      // clear the highlight on route change so it doesn't carry over
+      // (e.g. coming back to home from /blog still showing "Contact")
+      setActiveSection("hero");
+    };
   }, [pathname]);
 
   useEffect(() => {
@@ -124,8 +115,8 @@ const HeaderComponent: FC<HeaderComponentProps> = ({ scrollY = 0 }) => {
               }}
             >
               <Image
-                src={HEADER_DATA.logoSrc}
-                alt={HEADER_DATA.logoText}
+                src={logoData.src}
+                alt={logoData.text}
                 width={180}
                 height={60}
                 priority
@@ -144,15 +135,16 @@ const HeaderComponent: FC<HeaderComponentProps> = ({ scrollY = 0 }) => {
                 WebkitTextFillColor: "transparent",
               }}
             >
-              {HEADER_DATA.logoText}
+              {logoData.text}
             </Typography>
           )}
 
           {/* Desktop Menu */}
           {!isMobile && (
             <Box display="flex" gap={3}>
-              {HEADER_DATA.menu.map((item) => {
-                const isActive = activeSection === item.id;
+              {navMenu.map((item) => {
+                const isActive =
+                  pathname === "/" && activeSection === item.id;
 
                 return (
                   <Typography
@@ -215,7 +207,7 @@ const HeaderComponent: FC<HeaderComponentProps> = ({ scrollY = 0 }) => {
         {mobileMenuOpen && (
           <Fade in>
             <Box mt={3} display="flex" flexDirection="column" gap={2}>
-              {HEADER_DATA.menu.map((item) => (
+              {navMenu.map((item) => (
                 <Typography
                   variant="body1"
                   key={item.id}

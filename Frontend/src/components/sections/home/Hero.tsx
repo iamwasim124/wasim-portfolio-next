@@ -22,7 +22,7 @@ import Image, { type StaticImageData } from "next/image";
 import { FC } from "react";
 import theme from "@/theme/theme";
 import Reveal from "@/components/motion/Reveal";
-import BusinessCardModal from "@/components/layouts/BusinessCardModal";
+import BusinessCardModal from "@/components/common/BusinessCardModal";
 
 interface HeroProps {
   data: {

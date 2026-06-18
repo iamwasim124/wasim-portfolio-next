@@ -24,10 +24,15 @@ export default function LayoutClient({
         bgcolor: "#0a0e1a",
         minHeight: "100vh",
         color: "#fff",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <HeaderComponent scrollY={scrollY} />
-      <Box component="main">{children}</Box>
+      {/* grows to fill the viewport so the footer sits at the page bottom */}
+      <Box component="main" sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
+        {children}
+      </Box>
       <FooterComponet />
     </Box>
   );

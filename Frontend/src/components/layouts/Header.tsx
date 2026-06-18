@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { Menu, Close } from "@mui/icons-material";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
 
 const HEADER_DATA = {
   logoText: "Mohammed Wasim",
@@ -40,10 +41,19 @@ const HeaderComponent: FC<HeaderComponentProps> = ({ scrollY = 0 }) => {
   const [showLogoImage, setShowLogoImage] = useState(
     Boolean(HEADER_DATA.logoSrc),
   );
+  const pathname = usePathname();
+  const router = useRouter();
 
   const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     setMobileMenuOpen(false);
+
+    if (pathname === "/") {
+      // already on the home page → smooth-scroll to the section
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // on another route → go home and jump to that section
+      router.push(`/#${id}`);
+    }
   };
   useEffect(() => {
     const sections = HEADER_DATA.menu.map((m) => m.id);
@@ -67,7 +77,7 @@ const HeaderComponent: FC<HeaderComponentProps> = ({ scrollY = 0 }) => {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     if (!isMobile) {

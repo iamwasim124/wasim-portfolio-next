@@ -145,7 +145,16 @@ export default function BusinessCardModal() {
             }}
           >
             {/* ---------- FRONT: banner image ---------- */}
-            <Box sx={{ ...faceSx, bgcolor: "#0a0e1a" }}>
+            <Box
+              sx={{
+                ...faceSx,
+                bgcolor: "#0a0e1a",
+                // iOS Safari ignores backface-visibility with overflow:hidden,
+                // so also hide the off-face via opacity at the flip midpoint.
+                opacity: flipped ? 0 : 1,
+                transition: "opacity 0s linear 0.4s",
+              }}
+            >
               {/* Banner photo */}
               <Image
                 src={CARD.banner}
@@ -167,7 +176,7 @@ export default function BusinessCardModal() {
                   position: "absolute",
                   inset: 0,
                   background:
-                    "linear-gradient(180deg, rgba(10,14,26,0.15) 0%, rgba(10,14,26,0.55) 75%, rgba(10,14,26,0.96) 100%)",
+                    "linear-gradient(180deg, rgba(10,14,26,0.15) 63%, rgba(10,14,26,0.55) 75%, rgba(10,14,26,0.96) 100%)",
                 }}
               />
 
@@ -259,6 +268,9 @@ export default function BusinessCardModal() {
                 flexDirection: "column",
                 background:
                   "linear-gradient(135deg, #131a30 0%, #0a0e1a 55%, #0b1022 100%)",
+                // shows only after the flip passes its midpoint (iOS fix)
+                opacity: flipped ? 1 : 0,
+                transition: "opacity 0s linear 0.4s",
               }}
             >
               {/* glow accent */}

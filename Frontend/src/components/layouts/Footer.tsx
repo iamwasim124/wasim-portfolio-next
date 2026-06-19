@@ -120,7 +120,7 @@ const FooterComponent = () => {
           variant="body1"
           sx={{ color: theme.palette.text.secondary, mb: 1 }}
         >
-          © 2026 Mohammed Wasim | Frontend Developer
+          © 2026 Mohammed Wasim | React & Next.js Developer
         </Typography>
 
         {/* Tech Stack */}

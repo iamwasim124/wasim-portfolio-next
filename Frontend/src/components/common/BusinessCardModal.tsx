@@ -510,7 +510,7 @@ export default function BusinessCardModal({
                 },
               }}
             >
-              {flipped ? "Show front" : "Contact for projects"}
+              {flipped ? "Front" : "Back"}
             </Button>
           </Box>
 

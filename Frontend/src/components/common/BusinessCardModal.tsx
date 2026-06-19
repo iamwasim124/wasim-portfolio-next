@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Box,
   Dialog,
@@ -21,11 +21,12 @@ import {
   Download,
 } from "@mui/icons-material";
 import { QRCodeSVG } from "qrcode.react";
+import { toPng } from "html-to-image";
 import { alpha } from "@mui/material/styles";
 import Image from "next/image";
-import NextLink from "next/link";
 import theme from "@/theme/theme";
 import { cardData as CARD, type CardContactIcon } from "@/data/card";
+import { CardFront, CardBack } from "@/components/common/CardFaces";
 
 // resolve a contact icon key to its MUI icon
 const contactIcons: Record<CardContactIcon, React.ReactNode> = {
@@ -66,6 +67,34 @@ export default function BusinessCardModal({
   const handleClose = () => {
     setOpen(false);
     setTimeout(() => setFlipped(false), 250);
+  };
+
+  // hidden full-size faces, captured to PNG on download
+  const frontRef = useRef<HTMLDivElement>(null);
+  const backRef = useRef<HTMLDivElement>(null);
+  const [downloading, setDownloading] = useState(false);
+
+  const downloadFace = async (el: HTMLElement | null, filename: string) => {
+    if (!el) return;
+    const dataUrl = await toPng(el, {
+      pixelRatio: 5, // crisp / print-ready
+      cacheBust: true,
+      backgroundColor: C.background.default,
+    });
+    const a = document.createElement("a");
+    a.download = filename;
+    a.href = dataUrl;
+    a.click();
+  };
+
+  const downloadCard = async () => {
+    setDownloading(true);
+    try {
+      await downloadFace(frontRef.current, "mohammed-wasim-card-front.png");
+      await downloadFace(backRef.current, "mohammed-wasim-card-back.png");
+    } finally {
+      setDownloading(false);
+    }
   };
 
   const faceSx = {
@@ -198,8 +227,7 @@ export default function BusinessCardModal({
                   sx={{
                     position: "absolute",
                     inset: 0,
-                    background:
-                      `linear-gradient(180deg, ${alpha(C.background.default, 0.15)} 63%, ${alpha(C.background.default, 0.55)} 75%, ${alpha(C.background.default, 0.96)} 100%)`,
+                    background: `linear-gradient(180deg, ${alpha(C.background.default, 0.15)} 63%, ${alpha(C.background.default, 0.55)} 75%, ${alpha(C.background.default, 0.96)} 100%)`,
                   }}
                 />
 
@@ -476,25 +504,35 @@ export default function BusinessCardModal({
             </Button>
           </Box>
 
-          {/* Download / print the card */}
+          {/* Download front & back as images */}
           <Box sx={{ display: "flex", justifyContent: "center", mt: 1.5 }}>
-            <Link
-              component={NextLink}
-              href="/visiting-card"
-              onClick={handleClose}
-              underline="none"
+            <Button
+              onClick={downloadCard}
+              disabled={downloading}
+              startIcon={<Download fontSize="small" />}
+              size="small"
               sx={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 0.6,
+                textTransform: "none",
                 color: alpha(C.common.white, 0.75),
                 fontWeight: 600,
                 "&:hover": { color: C.primary.main },
               }}
-            >
-              <Download fontSize="small" />
-            </Link>
+            ></Button>
           </Box>
+        </Box>
+
+        {/* Hidden full-size faces used only for image export */}
+        <Box
+          aria-hidden="true"
+          sx={{
+            position: "fixed",
+            left: "-99999px",
+            top: 0,
+            pointerEvents: "none",
+          }}
+        >
+          <CardFront ref={frontRef} />
+          <CardBack ref={backRef} />
         </Box>
       </Dialog>
     </>

@@ -128,7 +128,7 @@ const FooterComponent = () => {
           variant="body1"
           sx={{ color: theme.palette.text.secondary }}
         >
-          Built with React, Next.js & Material-UI
+          Built with passion, powered by React, Next.js & Material-UI
         </Typography>
       </Container>
     </Box>

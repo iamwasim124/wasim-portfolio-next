@@ -173,22 +173,24 @@ const theme = createTheme({
       fontSize: "clamp(0.9rem, 1vw, 1rem)",
       letterSpacing: "0.01em",
     },
+    // body3–5 are fixed (no viewport clamp): they're used for compact,
+    // fixed-size UI like the visiting card, which must not grow on wide screens.
     body3: {
       fontWeight: 400,
       lineHeight: 1.5,
-      fontSize: "clamp(0.7rem, 0.8vw, 0.8rem)",
+      fontSize: "0.75rem",
       letterSpacing: "0.01em",
     },
     body4: {
       fontWeight: 400,
       lineHeight: 1.4,
-      fontSize: "clamp(0.65rem, 0.6vw, 0.73rem)",
+      fontSize: "0.65rem",
       letterSpacing: "0.01em",
     },
     body5: {
       fontWeight: 400,
       lineHeight: 1.3,
-      fontSize: "clamp(0.5rem, 0.5vw, 0.6rem)",
+      fontSize: "0.55rem",
       letterSpacing: "0.01em",
     },
   },

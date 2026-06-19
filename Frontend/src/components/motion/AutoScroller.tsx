@@ -23,6 +23,11 @@ export default function AutoScroller({
 }: AutoScrollerProps) {
   const ref = useRef<HTMLDivElement>(null);
   const hovering = useRef(false);
+  // touch has no "hover", and native scroll handover fires pointercancel — so we
+  // track touch separately and pause while a finger is down (the mobile
+  // equivalent of hovering to read).
+  const touching = useRef(false);
+  const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const drag = useRef({ active: false, startX: 0, startScroll: 0 });
   // float position accumulator — mobile rounds scrollLeft to an integer, so a
   // sub-pixel `scrollLeft += speed` never advances. We track the exact position
@@ -35,8 +40,8 @@ export default function AutoScroller({
     pos.current = el.scrollLeft;
     let raf = 0;
     const step = () => {
-      // pause while the user is hovering (reading) or dragging
-      if (el && !hovering.current && !drag.current.active) {
+      // pause while the user is hovering (reading), touching, or dragging
+      if (el && !hovering.current && !touching.current && !drag.current.active) {
         const half = el.scrollWidth / 2;
         pos.current += speed;
         if (half > 0 && pos.current >= half) pos.current -= half;
@@ -45,8 +50,28 @@ export default function AutoScroller({
       raf = requestAnimationFrame(step);
     };
     raf = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(raf);
+    return () => {
+      cancelAnimationFrame(raf);
+      if (resumeTimer.current) clearTimeout(resumeTimer.current);
+    };
   }, [speed]);
+
+  const onTouchStart = () => {
+    if (resumeTimer.current) clearTimeout(resumeTimer.current);
+    touching.current = true;
+  };
+
+  const onTouchEnd = () => {
+    const el = ref.current;
+    // resume from wherever native scroll/momentum left it, after a short pause
+    // so the strip doesn't immediately slide out from under the finger
+    if (resumeTimer.current) clearTimeout(resumeTimer.current);
+    resumeTimer.current = setTimeout(() => {
+      if (ref.current) pos.current = ref.current.scrollLeft;
+      touching.current = false;
+    }, 1200);
+    if (el) pos.current = el.scrollLeft;
+  };
 
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     const el = ref.current;
@@ -80,6 +105,9 @@ export default function AutoScroller({
       onPointerMove={onPointerMove}
       onPointerUp={endDrag}
       onPointerCancel={endDrag}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+      onTouchCancel={onTouchEnd}
       // hover-pause is mouse-only — a touch must not leave it paused forever
       onPointerEnter={(e) => {
         if (e.pointerType === "mouse") hovering.current = true;

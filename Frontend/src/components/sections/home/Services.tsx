@@ -34,6 +34,59 @@ interface Props {
 
 const icons = [<Web key="web" />, <Code key="code" />, <Speed key="speed" />];
 
+const ServiceCard: FC<{ service: ServiceItem; index: number }> = ({
+  service,
+  index,
+}) => (
+  <Reveal delay={index * 0.1} sx={{ height: "100%" }}>
+    <Card
+      sx={{
+        bgcolor: alpha(theme.palette.common.white, 0.05),
+        backdropFilter: "blur(10px)",
+        border: `1px solid ${alpha(theme.palette.common.white, 0.1)}`,
+        borderRadius: 4,
+        height: "100%",
+        transition: "all .3s ease",
+
+        "&:hover": {
+          transform: "translateY(-10px)",
+          boxShadow: `0 20px 50px ${alpha(theme.palette.primary.main, 0.3)}`,
+          borderColor: theme.palette.primary.main,
+        },
+      }}
+    >
+      <CardContent sx={{ p: 4 }}>
+        <Box
+          sx={{
+            width: 48,
+            height: 48,
+            borderRadius: "50%",
+            bgcolor: alpha(theme.palette.primary.main, 0.15),
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: theme.palette.primary.main,
+            mb: 3,
+          }}
+        >
+          {icons[index % icons.length]}
+        </Box>
+
+        <Typography variant="h6" component="h3" mb={1}>
+          {service.title}
+        </Typography>
+
+        <Typography
+          variant="body2"
+          sx={{ color: theme.palette.text.secondary }}
+        >
+          {service.description}
+        </Typography>
+      </CardContent>
+    </Card>
+  </Reveal>
+);
+
 const Services: FC<Props> = ({ data }) => {
   return (
     <Box
@@ -73,61 +126,16 @@ const Services: FC<Props> = ({ data }) => {
           </Typography>
         </Reveal>
 
-        {/* Services Cards */}
+        {/* Services Cards — 2 per row */}
         <Grid container spacing={3}>
           {data.services.map((service, index: number) => (
-            <Grid key={index} size={{ xs: 12, md: 4 }}>
-              <Reveal delay={index * 0.1} sx={{ height: "100%" }}>
-                <Card
-                  sx={{
-                    bgcolor: alpha(theme.palette.common.white, 0.05),
-                    backdropFilter: "blur(10px)",
-                    border: `1px solid ${alpha(theme.palette.common.white, 0.1)}`,
-                    borderRadius: 4,
-                    height: "100%",
-                    transition: "all .3s ease",
-                    "&:hover": {
-                      transform: "translateY(-10px)",
-                      boxShadow: `0 20px 50px ${alpha(theme.palette.primary.main, 0.3)}`,
-                      borderColor: theme.palette.primary.main,
-                    },
-                  }}
-                >
-                  <CardContent sx={{ p: 4 }}>
-                    <Box
-                      sx={{
-                        width: 48,
-                        height: 48,
-                        borderRadius: "50%",
-                        bgcolor: alpha(theme.palette.primary.main, 0.15),
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: theme.palette.primary.main,
-                        mb: 3,
-                      }}
-                    >
-                      {icons[index % icons.length]}
-                    </Box>
-
-                    <Typography variant="h6" component="h3" mb={1}>
-                      {service.title}
-                    </Typography>
-
-                    <Typography
-                      variant="body2"
-                      sx={{ color: theme.palette.text.secondary }}
-                    >
-                      {service.description}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Reveal>
+            <Grid key={index} size={{ xs: 12, md: 6 }}>
+              <ServiceCard service={service} index={index} />
             </Grid>
           ))}
         </Grid>
 
-        {/* Why Choose */}
+        {/* Why Choose — full width */}
         <Reveal
           delay={0.1}
           sx={{

@@ -39,7 +39,7 @@ export default function BlogList() {
         </Typography>
 
         <Stack spacing={3}>
-          {sorted.map((post) => (
+          {sorted.map((post, index) => (
             <Card
               key={post.slug}
               component={NextLink}
@@ -55,8 +55,13 @@ export default function BlogList() {
                 transition: "all .3s ease",
                 "&:hover": {
                   transform: "translateY(-4px)",
-                  borderColor: C.primary.main,
-                  boxShadow: `0 10px 40px ${alpha(C.primary.main, 0.25)}`,
+                  borderColor:
+                    index % 2 === 0 ? C.primary.main : C.secondary.main,
+                  boxShadow: `0 10px 40px ${
+                    index % 2 === 0
+                      ? alpha(C.primary.main, 0.3)
+                      : alpha(C.secondary.main, 0.3)
+                  }`,
                 },
               }}
             >
@@ -75,7 +80,10 @@ export default function BlogList() {
                     label={t}
                     size="small"
                     sx={{
-                      bgcolor: alpha(C.primary.main, 0.15),
+                      bgcolor:
+                        index % 2 === 0
+                          ? alpha(C.primary.main, 0.2)
+                          : alpha(C.secondary.main, 0.2),
                       color: C.text.primary,
                       fontWeight: 600,
                     }}

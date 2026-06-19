@@ -69,29 +69,39 @@ export default function BusinessCardModal({
     setTimeout(() => setFlipped(false), 250);
   };
 
-  // hidden full-size faces, captured to PNG on download
-  const frontRef = useRef<HTMLDivElement>(null);
-  const backRef = useRef<HTMLDivElement>(null);
+  // hidden node holding BOTH faces — captured as a single PNG on download.
+  // (Mobile browsers block a second programmatic download, so one file only.)
+  const cardRef = useRef<HTMLDivElement>(null);
   const [downloading, setDownloading] = useState(false);
 
-  const downloadFace = async (el: HTMLElement | null, filename: string) => {
-    if (!el) return;
-    const dataUrl = await toPng(el, {
-      pixelRatio: 5, // crisp / print-ready
-      cacheBust: true,
-      backgroundColor: C.background.default,
+  // decode an image up-front so html-to-image can embed it on capture
+  const preload = (src: string) =>
+    new Promise<void>((resolve) => {
+      const img = new window.Image();
+      img.onload = img.onerror = () => resolve();
+      img.src = src;
     });
-    const a = document.createElement("a");
-    a.download = filename;
-    a.href = dataUrl;
-    a.click();
-  };
 
   const downloadCard = async () => {
+    const node = cardRef.current;
+    if (!node) return;
     setDownloading(true);
     try {
-      await downloadFace(frontRef.current, "mohammed-wasim-card-front.png");
-      await downloadFace(backRef.current, "mohammed-wasim-card-back.png");
+      // make sure the banner + logo are decoded before we snapshot the DOM
+      await Promise.all([
+        preload(CARD.banner),
+        preload("/assets/images-videos/logo-transparent.png"),
+      ]);
+      const opts = { pixelRatio: 3, backgroundColor: C.background.default };
+      // Safari / mobile often drop background-images on the first pass — run a
+      // couple of warm-up captures and keep the final, fully-rendered one.
+      await toPng(node, opts);
+      await toPng(node, opts);
+      const dataUrl = await toPng(node, opts);
+      const a = document.createElement("a");
+      a.download = "mohammed-wasim-visiting-card.png";
+      a.href = dataUrl;
+      a.click();
     } finally {
       setDownloading(false);
     }
@@ -504,7 +514,7 @@ export default function BusinessCardModal({
             </Button>
           </Box>
 
-          {/* Download front & back as images */}
+          {/* Download both faces as one image */}
           <Box sx={{ display: "flex", justifyContent: "center", mt: 1.5 }}>
             <Button
               onClick={downloadCard}
@@ -517,11 +527,13 @@ export default function BusinessCardModal({
                 fontWeight: 600,
                 "&:hover": { color: C.primary.main },
               }}
-            ></Button>
+            >
+              {downloading ? "Preparing…" : "Download card"}
+            </Button>
           </Box>
         </Box>
 
-        {/* Hidden full-size faces used only for image export */}
+        {/* Hidden export node — both faces stacked, captured as one image */}
         <Box
           aria-hidden="true"
           sx={{
@@ -531,8 +543,19 @@ export default function BusinessCardModal({
             pointerEvents: "none",
           }}
         >
-          <CardFront ref={frontRef} />
-          <CardBack ref={backRef} />
+          <Box
+            ref={cardRef}
+            sx={{
+              display: "inline-flex",
+              flexDirection: "column",
+              gap: 3,
+              p: 3,
+              bgcolor: C.background.default,
+            }}
+          >
+            <CardFront />
+            <CardBack />
+          </Box>
         </Box>
       </Dialog>
     </>

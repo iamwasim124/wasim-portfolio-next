@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     template: "%s | Mohammed Wasim",
   },
   description:
-    "Mohammed Wasim is a React.js and Next.js freelancer building modern frontend applications, business websites, landing pages, and scalable web experiences.",
+    "Mohammed Wasim is a freelance React.js and Next.js developer in Ballari, Karnataka, building business websites, landing pages, web apps, and college, mini, and final-year projects for students — fast, SEO-friendly, and available remotely across India.",
   keywords: [
     "Mohammed Wasim",
     "iamwasim",
@@ -35,6 +35,22 @@ export const metadata: Metadata = {
     "Next.js developer",
     "TypeScript frontend developer",
     "Portfolio website",
+    // Local (Ballari) targeting
+    "freelancer in Ballari",
+    "web developer in Ballari",
+    "freelance web developer Ballari",
+    "React developer Ballari",
+    "website developer Ballari Karnataka",
+    // Student / academic project targeting
+    "college projects",
+    "good college projects",
+    "mini projects",
+    "miniprojects",
+    "final year projects",
+    "React final year project",
+    "Next.js college project",
+    "web development project for students",
+    "project help for students Ballari",
   ],
   authors: [{ name: "Mohammed Wasim", url: siteUrl }],
   creator: "Mohammed Wasim",
@@ -63,7 +79,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Mohammed Wasim | React & Next.js Freelancer Portfolio",
     description:
-      "Portfolio of Mohammed Wasim, a React.js and Next.js freelancer focused on performance, SEO, scalable UI, and frontend development.",
+      "Freelance React.js & Next.js developer in Ballari, Karnataka — business websites, web apps, and college, mini & final-year projects for students. Fast, SEO-friendly, available across India.",
     url: siteUrl,
     siteName: "Mohammed Wasim Portfolio",
     locale: "en_US",
@@ -81,7 +97,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mohammed Wasim | React & Next.js Freelancer Portfolio",
     description:
-      "React.js and Next.js freelancer portfolio featuring frontend projects, services, and contact details.",
+      "Freelance React.js & Next.js developer in Ballari — websites, web apps, and college, mini & final-year projects for students. Available across India.",
     images: ["/assets/images-videos/wasim-3.webp"],
   },
 };

@@ -4,7 +4,7 @@ export const servicesData = {
   subHeading: "Frontend development services for startups, businesses, and founders",
 
   intro:
-    "As a freelance frontend developer specializing in React.js and Next.js, I help businesses, startups, and founders build fast, modern, scalable, and SEO-friendly digital experiences.",
+    "As a freelance frontend developer specializing in React.js and Next.js, based in Ballari, Karnataka and available remotely across India, I help businesses, startups, founders, and students build fast, modern, scalable, and SEO-friendly digital experiences.",
 
   services: [
     {
@@ -21,6 +21,11 @@ export const servicesData = {
       title: "UI Development",
       description:
         "Pixel-perfect frontend UI development from Figma designs with clean architecture, responsive behavior, and smooth user experiences.",
+    },
+    {
+      title: "College, Mini & Final-Year Projects",
+      description:
+        "Production-quality React and Next.js college, mini, and final-year projects for students in Ballari and across India — with clean code, guidance, and explanations so you can present and defend your work confidently.",
     },
   ],
 

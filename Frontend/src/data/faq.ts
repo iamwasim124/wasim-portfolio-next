@@ -19,4 +19,15 @@ export const faqData = [
     answer:
       "Yes. I can collaborate remotely with clients and teams across different locations, with a focus on clear communication, clean delivery, and reliable frontend execution.",
   },
+  {
+    question:
+      "Do you build college, mini, and final-year projects for students?",
+    answer:
+      "Yes. I help students build production-quality college, mini, and final-year projects using React and Next.js — with clean code, clear explanations, and guidance so you understand and can confidently present what you submit. Good project ideas include dashboards, job boards, e-commerce UIs, and content platforms.",
+  },
+  {
+    question: "Are you available for freelance web development in Ballari?",
+    answer:
+      "Yes. I am based in Ballari, Karnataka and take on freelance React and Next.js work — business websites, landing pages, web apps, and student projects — both locally in Ballari and remotely for clients across India.",
+  },
 ];

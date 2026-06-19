@@ -51,6 +51,8 @@ export default function Home() {
     sameAs: ["https://linkedin.com/in/iamwasim124"],
     address: {
       "@type": "PostalAddress",
+      addressLocality: "Ballari",
+      addressRegion: "Karnataka",
       addressCountry: "IN",
     },
     nationality: "Indian",
@@ -84,6 +86,77 @@ export default function Home() {
     inLanguage: "en",
   };
 
+  // Local + service signal: helps "freelancer / web developer / projects in
+  // Ballari" and "college / mini / final-year project" style searches.
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: "Mohammed Wasim — Freelance React & Next.js Developer",
+    image: "https://iamwasim.in/assets/images-videos/wasim-3.webp",
+    url: "https://iamwasim.in",
+    email: "mailto:iamwasim124@gmail.com",
+    telephone: "+91 8123833968",
+    priceRange: "$$",
+    description:
+      "Freelance React.js and Next.js web developer based in Ballari, Karnataka — building business websites, landing pages, web apps, and college, mini, and final-year projects for students. Available locally in Ballari and remotely across India.",
+    founder: { "@type": "Person", name: "Mohammed Wasim" },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Ballari",
+      addressRegion: "Karnataka",
+      addressCountry: "IN",
+    },
+    areaServed: [
+      { "@type": "City", name: "Ballari" },
+      { "@type": "State", name: "Karnataka" },
+      { "@type": "Country", name: "India" },
+    ],
+    sameAs: ["https://linkedin.com/in/iamwasim124"],
+    knowsAbout: [
+      "React.js",
+      "Next.js",
+      "TypeScript",
+      "Frontend Development",
+      "College and final-year projects",
+      "Mini projects",
+      "SEO",
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Web Development Services",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Business Websites & Landing Pages",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Custom React & Next.js Web Applications",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "College, Mini & Final-Year Projects for Students",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "SEO & Performance Optimization",
+          },
+        },
+      ],
+    },
+  };
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -113,6 +186,10 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
       <script
         type="application/ld+json"

@@ -150,6 +150,55 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "college-mini-final-year-projects-ballari",
+    title:
+      "College, Mini & Final-Year Projects in Ballari (React & Next.js Help)",
+    description:
+      "Need help with a college, mini, or final-year project in Ballari? Here are good project ideas and how to get production-quality React & Next.js code you can present with confidence.",
+    date: "2026-04-12",
+    readingTime: "6 min read",
+    keywords: [
+      "college projects ballari",
+      "mini projects ballari",
+      "final year project ballari",
+      "good college projects",
+      "miniprojects",
+      "web development project for students",
+      "react project help ballari",
+      "freelancer in ballari",
+    ],
+    tags: ["Projects", "Students", "Ballari"],
+    body: [
+      {
+        paragraphs: [
+          "If you are a student in Ballari looking for a good college, mini, or final-year project, the stack you choose matters as much as the idea. I am Mohammed Wasim, a freelance React.js and Next.js developer based in Ballari, Karnataka, and I help students build production-quality projects they can actually understand, present, and defend.",
+          "This guide covers what makes a project stand out, ideas that consistently impress evaluators, and how to get help the right way — whether you are at BITM, a local polytechnic, or any college in and around Ballari.",
+        ],
+      },
+      {
+        heading: "What makes a good college project",
+        paragraphs: [
+          "A good project is not just one that runs — it is one that looks like a real product, uses patterns the industry actually uses, and that you can explain line by line. Evaluators notice the difference between a copied template and a clean, responsive, well-structured application.",
+          "Building with React and Next.js gives you exactly that: component-based architecture, fast page loads, easy deployment behind a single shareable link, and skills that employers genuinely want after you graduate.",
+        ],
+      },
+      {
+        heading: "Good project ideas (mini & final-year)",
+        paragraphs: [
+          "Mini projects: a personal portfolio, an expense or budget tracker, a weather or news dashboard, a to-do or notes app with local storage, or a simple quiz application.",
+          "Final-year projects: a job board with search and filters, a college event or club management dashboard, an e-commerce storefront with cart and checkout UI, a recipe or content platform with search, or a student attendance and result management system. Each demonstrates real-world data flow, routing, and UI state.",
+        ],
+      },
+      {
+        heading: "Getting help the right way in Ballari",
+        paragraphs: [
+          "There is a big difference between getting a project done for you and getting help to build it well. I build the features to a production standard, then walk you through the code and the decisions so you can confidently answer questions during your review.",
+          "Several testimonials on this site are from students whose mini and final-year projects I helped build. If you are in Ballari or anywhere in India and need a hand with a React or Next.js project, reach out through the contact section of this site — tell me your topic and deadline and I will tell you honestly what it takes.",
+        ],
+      },
+    ],
+  },
 ];
 
 export const getPostBySlug = (slug: string) =>

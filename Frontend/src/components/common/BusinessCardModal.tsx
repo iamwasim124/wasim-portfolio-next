@@ -477,7 +477,7 @@ export default function BusinessCardModal({
                         color: C.text.primary,
                       }}
                     >
-                      Scan to visit
+                      Scan Portfolio
                     </Typography>
                   </Box>
                 </Box>
